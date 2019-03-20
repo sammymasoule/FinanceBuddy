@@ -39,5 +39,12 @@ namespace FinanceBuddyWPF {
             }
             
         }
+
+        private void Label_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            CreateUserWindow createUser = new CreateUserWindow();
+            createUser.Show();
+            Close();
+        }
     }
 }

@@ -10,6 +10,7 @@ using System.Windows.Documents;
 namespace FinanceBuddyWPF.Controllers {
     class DatabaseActions {
 
+
         public List<string> GetPersonList() {
             List<string> persons = new List<string>();
             try {
@@ -63,8 +64,6 @@ namespace FinanceBuddyWPF.Controllers {
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
                     sb.Append("SELECT * FROM Person WHERE UserName = '" + username + "'");
-                    //sb.Append("INSERT INTO Person ([LastName], [FirstName], [UserName], [Password])");
-                    //sb.Append("VALUES ('Testson', 'Test', 'test', 'test')");
                     string sql = sb.ToString();
 
                     using (SqlCommand command = new SqlCommand(sql, connection)) {
@@ -87,7 +86,7 @@ namespace FinanceBuddyWPF.Controllers {
             return person;
         }
 
-        public bool createUser(string lastName, string firstName, string userName, string password) {
+        public bool CreateUser(string lastName, string firstName, string userName, string password) {
             try {
                 SqlConnectionStringBuilder builder =
                     new SqlConnectionStringBuilder
@@ -103,6 +102,8 @@ namespace FinanceBuddyWPF.Controllers {
                     StringBuilder sb = new StringBuilder();
                     sb.Append("INSERT INTO Person ([LastName], [FirstName], [UserName], [Password])");
                     sb.Append("VALUES ('" + lastName + "', '" + firstName + "', '" + userName + "', '" + password + "')");
+                    //sb.Append("VALUES ('{0}', '{1}', '{2}', '{3}')", lastName, firstName, userName, password);
+
                     string sql = sb.ToString();
 
                     using (SqlCommand command = new SqlCommand(sql, connection)) {
@@ -136,6 +137,7 @@ namespace FinanceBuddyWPF.Controllers {
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
                     sb.Append("select COUNT(1) from Person where UserName ='" + userName + "' AND Password= '" + password + "'");
+
                     string sql = sb.ToString();
                    
                     using (SqlCommand command = new SqlCommand(sql, connection))

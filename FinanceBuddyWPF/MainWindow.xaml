@@ -14,8 +14,10 @@
             <TextBox  x:Name="UsernameTXT" FontSize="20"/>
             <Label Content="Kodeord:" FontSize="25"></Label>
          <PasswordBox Name="PasswordTXT" FontSize="20"></PasswordBox>
-         <Button Name="LoginButton" Content="Login" FontSize="30" Margin="30 10" Background="Azure"  HorizontalAlignment="Center" Click="LoginButton_Click"></Button>
-    </StackPanel>
+            <Button Name="LoginButton" Content="Login" FontSize="30" Margin="30 10" Background="Azure"  HorizontalAlignment="Center" Click="LoginButton_Click"></Button>
+            <Label Content="Har du ikke en bruger? Klik her" Foreground="Blue"  FontSize="15" HorizontalAlignment="Center" Margin="30 -10" MouseLeftButtonUp="Label_MouseLeftButtonUp">
+            </Label>
+        </StackPanel>
     </Border>
 
 </Window>

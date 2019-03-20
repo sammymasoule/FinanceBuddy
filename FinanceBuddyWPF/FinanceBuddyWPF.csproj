@@ -68,6 +68,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controllers\DatabaseActions.cs" />
+    <Compile Include="CreateUserWindow.xaml.cs">
+      <DependentUpon>CreateUserWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="database_firewall_rules.cs">
       <DependentUpon>FinanceBuddyDB.tt</DependentUpon>
     </Compile>
@@ -82,6 +85,10 @@
     <Compile Include="TransItem.cs">
       <DependentUpon>FinanceBuddyDB.tt</DependentUpon>
     </Compile>
+    <Page Include="CreateUserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

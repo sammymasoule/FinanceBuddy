@@ -6,10 +6,16 @@
         xmlns:local="clr-namespace:FinanceBuddyWPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <ListBox Name="tbSettingText" HorizontalAlignment="Left" Height="229" Margin="72,25,0,0" VerticalAlignment="Top" Width="586"/>
-        <Button Content="AllUsers" HorizontalAlignment="Left" Margin="215,285,0,0" VerticalAlignment="Top" Width="105" Height="39" Click="Button_Click"/>
-        <Button Content="SpecificUser" HorizontalAlignment="Left" Margin="406,285,0,0" VerticalAlignment="Top" Width="130" Height="39" Click="Button_Click_1"/>
+    <Border Background="#2DCEF3">   
+     <StackPanel Margin="25">
+        <Label Content="Login" HorizontalAlignment="Center" FontSize="40"></Label>
+         <Separator></Separator>
+         <Label Content="Brugernavn:" FontSize="25"></Label>
+            <TextBox  x:Name="UsernameTXT" FontSize="20"/>
+            <Label Content="Kodeord:" FontSize="25"></Label>
+         <PasswordBox Name="PasswordTXT" FontSize="20"></PasswordBox>
+         <Button Name="LoginButton" Content="Login" FontSize="30" Margin="30 10" Background="Azure"  HorizontalAlignment="Center" Click="LoginButton_Click"></Button>
+    </StackPanel>
+    </Border>
 
-    </Grid>
 </Window>

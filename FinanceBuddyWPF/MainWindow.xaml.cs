@@ -26,21 +26,18 @@ namespace FinanceBuddyWPF {
 
         DatabaseActions dbActions = new DatabaseActions();
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            tbSettingText.Items.Clear();
-            var persons = dbActions.GetPersonList();
-            foreach (var person in persons)
+
+            if (dbActions.UserLogin(UsernameTXT.Text, PasswordTXT.Password))
             {
-                tbSettingText.Items.Add(person);
+                MessageBox.Show("Det virker!");
             }
-
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            tbSettingText.Items.Clear();
-            tbSettingText.Items.Add(dbActions.GetPerson("nijo"));
+            else
+            {
+                MessageBox.Show("Forkert brugernavn eller kodeord, prøv igen");
+            }
+            
         }
     }
 }

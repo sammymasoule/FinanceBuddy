@@ -4,13 +4,13 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Documents;
 
 namespace FinanceBuddyWPF.Controllers {
     class DatabaseActions {
 
-        public List<string> GetPersonList()
-        {
+        public List<string> GetPersonList() {
             List<string> persons = new List<string>();
             try {
 
@@ -50,11 +50,9 @@ namespace FinanceBuddyWPF.Controllers {
             return persons;
         }
 
-        public string GetPerson(string username)
-        {
+        public string GetPerson(string username) {
             string person = "";
-            try
-            {
+            try {
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
                 builder.DataSource = "samsamjon.database.windows.net";
                 builder.UserID = "samsamjon";
@@ -87,6 +85,74 @@ namespace FinanceBuddyWPF.Controllers {
             }
 
             return person;
+        }
+
+        public bool createUser(string lastName, string firstName, string userName, string password) {
+            try {
+                SqlConnectionStringBuilder builder =
+                    new SqlConnectionStringBuilder
+                    {
+                        DataSource = "samsamjon.database.windows.net",
+                        UserID = "samsamjon",
+                        Password = "Test1234",
+                        InitialCatalog = "samjonDB"
+                    };
+
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString)) {
+                    connection.Open();
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("INSERT INTO Person ([LastName], [FirstName], [UserName], [Password])");
+                    sb.Append("VALUES ('" + lastName + "', '" + firstName + "', '" + userName + "', '" + password + "')");
+                    string sql = sb.ToString();
+
+                    using (SqlCommand command = new SqlCommand(sql, connection)) {
+                        if (command.ExecuteNonQuery() > 0) {
+                            return true;
+                        }
+
+                    }
+                }
+            }
+            catch (SqlException exception) {
+                Console.WriteLine(exception.ToString());
+            }
+
+            return false;
+        }
+
+        public bool UserLogin(string userName, string password)
+        {
+            try {
+                SqlConnectionStringBuilder builder =
+                    new SqlConnectionStringBuilder
+                    {
+                        DataSource = "samsamjon.database.windows.net",
+                        UserID = "samsamjon",
+                        Password = "Test1234",
+                        InitialCatalog = "samjonDB"
+                    };
+
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString)) {
+                    connection.Open();
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("select COUNT(1) from Person where UserName ='" + userName + "' AND Password= '" + password + "'");
+                    string sql = sb.ToString();
+                   
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        int count = Convert.ToInt32(command.ExecuteScalar());
+                        if (count == 1)
+                        {
+                            return true;
+                        }
+
+                    }
+                }
+            }
+            catch (SqlException exception) {
+                Console.WriteLine(exception.ToString());
+            }
+            return false;
         }
     }
 }

@@ -3,10 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FinanceBuddyWPF"
+        xmlns:dv="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+        xmlns:dvc="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
         mc:Ignorable="d"
         Title="OverviewWindow" Height="800" Width="800">
-    <Grid>
+    <Grid Background="#88D1F1">
         <Menu VerticalAlignment="Top" HorizontalAlignment="Left" Background="White">
             <MenuItem>
                 <MenuItem.Header>
@@ -14,28 +15,30 @@
                         <Image Source="/Images/user_icon.png" Height="70" Width="65" Margin="-3,0,0,0"></Image>
                     </StackPanel>
                 </MenuItem.Header>
+                <MenuItem Header="Profil"></MenuItem>
+                <MenuItem Header="Log ud" Click="LogOutMenuItemClick"></MenuItem>
             </MenuItem>
 
         </Menu>
-        <Menu Height="70" VerticalAlignment="Top" Margin="70,0,0,5" HorizontalAlignment="Stretch" Background="White" BorderBrush="Blue" BorderThickness="1">
-            <MenuItem Header="Overblik" VerticalAlignment="Center" Margin="20"></MenuItem>
-            <MenuItem Header="Indkomst" VerticalAlignment="Center" Margin="20"></MenuItem>
-            <MenuItem Header="Udgifter" VerticalAlignment="Center" Margin="20"></MenuItem>
+        <Menu Foreground="White" Height="70" VerticalAlignment="Top" Margin="70,0,0,5" HorizontalAlignment="Stretch" Background="#41AADE" BorderThickness="1">
+            <MenuItem Header="Overblik" VerticalAlignment="Center" Margin="20" BorderBrush="White"></MenuItem>
+            <MenuItem Header="Indkomst" VerticalAlignment="Center" Margin="20" BorderBrush="White"></MenuItem>
+            <MenuItem Header="Udgifter" VerticalAlignment="Center" Margin="20" BorderBrush="White"></MenuItem>
             <Menu.ItemsPanel>
                 <ItemsPanelTemplate>
                     <VirtualizingStackPanel Orientation="Horizontal"></VirtualizingStackPanel>
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
         </Menu>
-        <Menu Width="70" Margin="0,70,5,0" HorizontalAlignment="Left" VerticalAlignment="Stretch"
+        <Menu Width="70" Margin="0,70,5,0" HorizontalAlignment="Left" VerticalAlignment="Stretch" Foreground="White"
 
-              Background="White" BorderBrush="Blue" BorderThickness="1">
+              Background="#1392D3" BorderThickness="1">
 
-            <MenuItem Header="Overblik" HorizontalAlignment="Center" Margin="0,20">
+            <MenuItem Header="Overblik" HorizontalAlignment="Center" Margin="0,20" BorderBrush="White">
 
             </MenuItem>
 
-            <MenuItem Header="Budget" HorizontalAlignment="Center" Margin="0,20">
+            <MenuItem Header="Budget" HorizontalAlignment="Center" Margin="0,20" BorderBrush="White">
 
             </MenuItem>
 
@@ -50,5 +53,9 @@
             </Menu.ItemsPanel>
 
         </Menu>
+        <dvc:Chart Margin="70,70,70,70" Name="BarChart" Title="Indkomst og Udgifter">
+            <dvc:ColumnSeries DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding}">
+            </dvc:ColumnSeries>
+        </dvc:Chart>
     </Grid>
 </Window>

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:dv="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+        xmlns:dv="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"      
         xmlns:dvc="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
         mc:Ignorable="d"
         Title="OverviewWindow" Height="800" Width="800">
@@ -51,11 +51,15 @@
                 </ItemsPanelTemplate>
 
             </Menu.ItemsPanel>
-
         </Menu>
-        <dvc:Chart Margin="70,70,70,70" Name="BarChart" Title="Indkomst og Udgifter">
-            <dvc:ColumnSeries DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding}">
-            </dvc:ColumnSeries>
+        <dvc:Chart  Name="pieChart" Title="Pie Series Demo" 
+
+		VerticalAlignment="top" HorizontalAlignment="Left" Margin="100,100" Height="350" Width="350">
+            <dvc:PieSeries DependentValuePath="Value" 
+
+		IndependentValuePath="Key" ItemsSource="{Binding}" 
+
+		IsSelectionEnabled="True" />
         </dvc:Chart>
     </Grid>
 </Window>

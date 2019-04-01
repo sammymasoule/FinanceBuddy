@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.DataVisualization.Charting;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -20,27 +21,24 @@ namespace FinanceBuddyWPF {
     public partial class OverviewWindow : Window {
         public OverviewWindow() {
             InitializeComponent();
-            ShowChart();
+            LoadChart();
         }
 
         //DatabaseActions dbActions = new DatabaseActions();
-
-        private void ShowChart() {
-            List<KeyValuePair<string, int>> valuelist = new List<KeyValuePair<string, int>>();
-            valuelist.Add(new KeyValuePair<string, int>("Sammy", 60));
-            valuelist.Add(new KeyValuePair<string, int>("Fugl", 40));
-            valuelist.Add(new KeyValuePair<string, int>("Jens", 80));
-            valuelist.Add(new KeyValuePair<string, int>("Dennis", 100));
-            valuelist.Add(new KeyValuePair<string, int>("Flemming", 60));
-
-
-            BarChart.DataContext = valuelist;
+        private void LoadChart() {
+            List<KeyValuePair<string, int>> valueList = new List<KeyValuePair<string, int>>
+            {
+                new KeyValuePair<string, int>("Indkomst", 25000),
+                new KeyValuePair<string, int>("Udgift", 20000)
+            };
+            pieChart.DataContext = valueList;
         }
-
         private void LogOutMenuItemClick(object sender, RoutedEventArgs e) {
+
             MainWindow window = new MainWindow();
             window.Show();
             Close();
         }
     }
+
 }

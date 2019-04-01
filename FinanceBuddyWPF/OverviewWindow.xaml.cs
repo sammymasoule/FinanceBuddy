@@ -33,6 +33,7 @@ namespace FinanceBuddyWPF {
             valuelist.Add(new KeyValuePair<string, int>("Dennis", 100));
             valuelist.Add(new KeyValuePair<string, int>("Flemming", 60));
 
+
             BarChart.DataContext = valuelist;
         }
 

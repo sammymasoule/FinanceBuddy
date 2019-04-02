@@ -21,24 +21,35 @@ namespace FinanceBuddyWPF {
     public partial class OverviewWindow : Window {
         public OverviewWindow() {
             InitializeComponent();
-            LoadChart();
+            LoadPieChart();
         }
 
         private readonly DatabaseActions dbActions = new DatabaseActions();
-        private void LoadChart()
+
+        private void LoadPieChart()
         {
             var userName = ((MainWindow) Application.Current.MainWindow)?.UsernameTXT.Text;
             var income = dbActions.GetIncome(userName);
             var expenses = dbActions.GetExpenses(userName);
-            var totalExpenses = expenses.Sum(x => x);
+            var totalExpenses = expenses.Sum(x => x.Value);
 
             List<KeyValuePair<string, float>> valueList = new List<KeyValuePair<string, float>>
             {
                 new KeyValuePair<string, float>("Indkomst", income),
                 new KeyValuePair<string, float>("Udgift", totalExpenses),
             };
+
             pieChart.DataContext = valueList;
+            LoadBarChart(expenses);
         }
+
+        private void LoadBarChart(List<KeyValuePair<int, float>> list)
+        {
+            var myResults = list.GroupBy(p => p.Key)
+                .ToDictionary(g => g.Key, g => g.Sum(p => p.Value));
+            BarChart.DataContext = myResults;
+        }
+
         private void LogOutMenuItemClick(object sender, RoutedEventArgs e) {
 
             MainWindow window = new MainWindow();

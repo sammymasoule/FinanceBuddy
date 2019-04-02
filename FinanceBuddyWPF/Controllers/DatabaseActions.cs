@@ -232,10 +232,11 @@ namespace FinanceBuddyWPF.Controllers
             return -1;
         }
 
-        public List<float> GetExpenses(string userName)
+        public List<KeyValuePair<int, float>> GetExpenses(string userName)
         {
-            try {
-                List<float> expenses = new List<float>();
+            try
+            {
+                List<KeyValuePair<int, float>> expenses = new List<KeyValuePair<int, float>>();
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
                 builder.DataSource = "samsamjon.database.windows.net";
                 builder.UserID = "samsamjon";
@@ -245,14 +246,14 @@ namespace FinanceBuddyWPF.Controllers
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString)) {
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
-                    sb.Append("select * from TransItem where userName = '" + userName + "' " +
+                    sb.Append("select Category, Amount from TransItem where userName = '" + userName + "' " +
                     "AND Date between '2019-03-01' AND '2019-03-31'");
                     string sql = sb.ToString();
 
                     using (SqlCommand command = new SqlCommand(sql, connection)) {
                         using (SqlDataReader reader = command.ExecuteReader()) {
                             while (reader.Read()) {
-                                expenses.Add(float.Parse(reader["Amount"].ToString()));
+                                expenses.Add(new KeyValuePair<int, float>(reader.GetInt32(0), (float) reader.GetDouble(1)));
                             }
                         }
                     }
@@ -264,7 +265,7 @@ namespace FinanceBuddyWPF.Controllers
                 Console.WriteLine(exception.ToString());
             }
 
-            return new List<float>();
+            return new List<KeyValuePair<int, float>>();
         }
     }
 }

@@ -24,16 +24,18 @@ namespace FinanceBuddyWPF {
             LoadChart();
         }
 
-        DatabaseActions dbActions = new DatabaseActions();
+        private readonly DatabaseActions dbActions = new DatabaseActions();
         private void LoadChart()
         {
             var userName = ((MainWindow) Application.Current.MainWindow)?.UsernameTXT.Text;
-            var amount = dbActions.GetIncome(userName);
+            var income = dbActions.GetIncome(userName);
+            var expenses = dbActions.GetExpenses(userName);
+            var totalExpenses = expenses.Sum(x => x);
 
             List<KeyValuePair<string, float>> valueList = new List<KeyValuePair<string, float>>
             {
-                new KeyValuePair<string, float>("Indkomst", amount),
-                new KeyValuePair<string, float>("Udgift", 20000),
+                new KeyValuePair<string, float>("Indkomst", income),
+                new KeyValuePair<string, float>("Udgift", totalExpenses),
             };
             pieChart.DataContext = valueList;
         }

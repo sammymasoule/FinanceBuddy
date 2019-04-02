@@ -7,13 +7,17 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Documents;
 
-namespace FinanceBuddyWPF.Controllers {
-    class DatabaseActions {
+namespace FinanceBuddyWPF.Controllers
+{
+    class DatabaseActions
+    {
 
 
-        public List<string> GetPersonList() {
+        public List<string> GetPersonList()
+        {
             List<string> persons = new List<string>();
-            try {
+            try
+            {
 
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
                 builder.DataSource = "samsamjon.database.windows.net";
@@ -21,7 +25,8 @@ namespace FinanceBuddyWPF.Controllers {
                 builder.Password = "Test1234";
                 builder.InitialCatalog = "samjonDB";
 
-                using (SqlConnection connection = new SqlConnection(builder.ConnectionString)) {
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
                     sb.Append("SELECT * FROM Person");
@@ -29,9 +34,12 @@ namespace FinanceBuddyWPF.Controllers {
                     //sb.Append("VALUES ('Testson', 'Test', 'test', 'test')");
                     string sql = sb.ToString();
 
-                    using (SqlCommand command = new SqlCommand(sql, connection)) {
-                        using (SqlDataReader reader = command.ExecuteReader()) {
-                            while (reader.Read()) {
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
                                 int id = reader.GetInt32(0);
                                 string LastName = reader.GetString(1);
                                 string FirstName = reader.GetString(2);
@@ -44,31 +52,38 @@ namespace FinanceBuddyWPF.Controllers {
                     }
                 }
             }
-            catch (SqlException exception) {
+            catch (SqlException exception)
+            {
                 Console.WriteLine(exception.ToString());
             }
 
             return persons;
         }
 
-        public string GetPerson(string username) {
+        public string GetPerson(string username)
+        {
             string person = "";
-            try {
+            try
+            {
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
                 builder.DataSource = "samsamjon.database.windows.net";
                 builder.UserID = "samsamjon";
                 builder.Password = "Test1234";
                 builder.InitialCatalog = "samjonDB";
 
-                using (SqlConnection connection = new SqlConnection(builder.ConnectionString)) {
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
                     sb.Append("SELECT * FROM Person WHERE UserName = '" + username + "'");
                     string sql = sb.ToString();
 
-                    using (SqlCommand command = new SqlCommand(sql, connection)) {
-                        using (SqlDataReader reader = command.ExecuteReader()) {
-                            while (reader.Read()) {
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
                                 string LastName = reader.GetString(1);
                                 string FirstName = reader.GetString(2);
                                 string UserName = reader.GetString(3);
@@ -79,15 +94,18 @@ namespace FinanceBuddyWPF.Controllers {
                     }
                 }
             }
-            catch (SqlException exception) {
+            catch (SqlException exception)
+            {
                 Console.WriteLine(exception.ToString());
             }
 
             return person;
         }
 
-        public bool CreateUser(string lastName, string firstName, string userName, string password) {
-            try {
+        public bool CreateUser(string lastName, string firstName, string userName, string password)
+        {
+            try
+            {
                 SqlConnectionStringBuilder builder =
                     new SqlConnectionStringBuilder
                     {
@@ -97,24 +115,29 @@ namespace FinanceBuddyWPF.Controllers {
                         InitialCatalog = "samjonDB"
                     };
 
-                using (SqlConnection connection = new SqlConnection(builder.ConnectionString)) {
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
                     sb.Append("INSERT INTO Person ([LastName], [FirstName], [UserName], [Password])");
-                    sb.Append("VALUES ('" + lastName + "', '" + firstName + "', '" + userName + "', '" + password + "')");
+                    sb.Append(
+                        "VALUES ('" + lastName + "', '" + firstName + "', '" + userName + "', '" + password + "')");
                     //sb.Append("VALUES ('{0}', '{1}', '{2}', '{3}')", lastName, firstName, userName, password);
 
                     string sql = sb.ToString();
 
-                    using (SqlCommand command = new SqlCommand(sql, connection)) {
-                        if (command.ExecuteNonQuery() > 0) {
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        if (command.ExecuteNonQuery() > 0)
+                        {
                             return true;
                         }
 
                     }
                 }
             }
-            catch (SqlException exception) {
+            catch (SqlException exception)
+            {
                 Console.WriteLine(exception.ToString());
             }
 
@@ -123,7 +146,8 @@ namespace FinanceBuddyWPF.Controllers {
 
         public bool UserLogin(string userName, string password)
         {
-            try {
+            try
+            {
                 SqlConnectionStringBuilder builder =
                     new SqlConnectionStringBuilder
                     {
@@ -133,13 +157,15 @@ namespace FinanceBuddyWPF.Controllers {
                         InitialCatalog = "samjonDB"
                     };
 
-                using (SqlConnection connection = new SqlConnection(builder.ConnectionString)) {
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
-                    sb.Append("select COUNT(1) from Person where UserName ='" + userName + "' AND Password= '" + password + "'");
+                    sb.Append("select COUNT(1) from Person where UserName ='" + userName + "' AND Password= '" +
+                              password + "'");
 
                     string sql = sb.ToString();
-                   
+
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         int count = Convert.ToInt32(command.ExecuteScalar());
@@ -151,15 +177,18 @@ namespace FinanceBuddyWPF.Controllers {
                     }
                 }
             }
-            catch (SqlException exception) {
+            catch (SqlException exception)
+            {
                 Console.WriteLine(exception.ToString());
             }
+
             return false;
         }
 
         public float GetIncome(string userName)
         {
-            try {
+            try
+            {
                 float amount;
                 SqlConnectionStringBuilder builder =
                     new SqlConnectionStringBuilder
@@ -170,10 +199,12 @@ namespace FinanceBuddyWPF.Controllers {
                         InitialCatalog = "samjonDB"
                     };
 
-                using (SqlConnection connection = new SqlConnection(builder.ConnectionString)) {
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
-                    sb.Append("select SUM(Amount) from Income where userName = '" + userName + "'" + "AND Date between '2019-03-01' AND '2019-03-31'");
+                    sb.Append("select SUM(Amount) from Income where userName = '" + userName + "'" +
+                              "AND Date between '2019-03-01' AND '2019-03-31'");
                     string sql = sb.ToString();
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
@@ -187,16 +218,53 @@ namespace FinanceBuddyWPF.Controllers {
                         {
                             return 0;
                         }
-                        
+
                     }
                 }
+
                 return amount;
+            }
+            catch (SqlException exception)
+            {
+                Console.WriteLine(exception.ToString());
+            }
+
+            return -1;
+        }
+
+        public List<float> GetExpenses(string userName)
+        {
+            try {
+                List<float> expenses = new List<float>();
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+                builder.DataSource = "samsamjon.database.windows.net";
+                builder.UserID = "samsamjon";
+                builder.Password = "Test1234";
+                builder.InitialCatalog = "samjonDB";
+
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString)) {
+                    connection.Open();
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("select * from TransItem where userName = '" + userName + "' " +
+                    "AND Date between '2019-03-01' AND '2019-03-31'");
+                    string sql = sb.ToString();
+
+                    using (SqlCommand command = new SqlCommand(sql, connection)) {
+                        using (SqlDataReader reader = command.ExecuteReader()) {
+                            while (reader.Read()) {
+                                expenses.Add(float.Parse(reader["Amount"].ToString()));
+                            }
+                        }
+                    }
+                }
+
+                return expenses;
             }
             catch (SqlException exception) {
                 Console.WriteLine(exception.ToString());
             }
 
-            return -1;
+            return new List<float>();
         }
     }
 }

@@ -23,13 +23,16 @@ namespace FinanceBuddyWPF {
         public MainWindow() {
             InitializeComponent();
             
+            
         }
        
         private readonly DatabaseActions dbActions = new DatabaseActions();
+        public static string username;
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             if (dbActions.UserLogin(UsernameTXT.Text, PasswordTXT.Password))
             {
+                username = UsernameTXT.Text;
                 
                 OverviewWindow ow = new OverviewWindow();
                 ow.Show();

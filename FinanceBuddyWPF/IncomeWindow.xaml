@@ -58,7 +58,8 @@
             <Label Content="Indtjening:" FontSize="25"></Label>
             <TextBox  x:Name="IndtjeningTXT" FontSize="25"/>
             <Label Content="Dato:" FontSize="25"></Label>
-            <DatePicker Height="25" HorizontalAlignment="Left" Width="150"></DatePicker>
+            <DatePicker Name="dateTimePicker" Height="25" HorizontalAlignment="Left" Width="150" SelectedDateChanged="DatePicker_SelectedDateChanged">
+            </DatePicker>
             <Label Content="Beskrivelse:" FontSize="25" ></Label>
             <TextBox  x:Name="BeskrivelseTXT" FontSize="25"/>
             <Button Name="TilfoejButton" Content="Tilføj" FontSize="30" Margin="30 10" Background="Azure"  HorizontalAlignment="Center" Click="Income_Click"></Button>

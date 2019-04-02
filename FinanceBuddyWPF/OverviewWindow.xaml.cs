@@ -27,6 +27,7 @@ namespace FinanceBuddyWPF {
         DatabaseActions dbActions = new DatabaseActions();
         private void LoadChart()
         {
+           
             var userName = ((MainWindow) Application.Current.MainWindow)?.UsernameTXT.Text;
             var amount = dbActions.GetIncome(userName);
 
@@ -43,7 +44,14 @@ namespace FinanceBuddyWPF {
             window.Show();
             Close();
         }
-        
+
+        private void IndkomstItemClick(object sender, RoutedEventArgs e)
+        {
+
+            IncomeWindow window = new IncomeWindow();
+            window.Show();
+            Close();
+        }
     }
 
 }

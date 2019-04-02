@@ -51,6 +51,7 @@ namespace FinanceBuddyWPF.Controllers {
             return persons;
         }
 
+
         public string GetPerson(string username) {
             string person = "";
             try {
@@ -85,6 +86,47 @@ namespace FinanceBuddyWPF.Controllers {
 
             return person;
         }
+        public bool CreateIncome(float amount, String date, string userName, string description)
+        {
+            try
+            {
+                SqlConnectionStringBuilder builder =
+                    new SqlConnectionStringBuilder
+                    {
+                        DataSource = "samsamjon.database.windows.net",
+                        UserID = "samsamjon",
+                        Password = "Test1234",
+                        InitialCatalog = "samjonDB"
+                    };
+
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    connection.Open();
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("INSERT INTO Income ([Amount], [Date], [userName], [Description])");
+                    sb.Append("VALUES ('" + amount + "', '" + date + "', '" + userName +"', '" + description + "')");
+                    //sb.Append("VALUES ('{0}', '{1}', '{2}', '{3}')", lastName, firstName, userName, password);
+
+                    string sql = sb.ToString();
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        if (command.ExecuteNonQuery() > 0)
+                        {
+                            return true;
+                        }
+
+                    }
+                }
+            }
+            catch (SqlException exception)
+            {
+                Console.WriteLine(exception.ToString());
+            }
+
+            return false;
+        }
+
 
         public bool CreateUser(string lastName, string firstName, string userName, string password) {
             try {

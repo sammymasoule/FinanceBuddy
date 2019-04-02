@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinanceBuddyWPF.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,16 +23,46 @@ namespace FinanceBuddyWPF
         public IncomeWindow()
         {
             InitializeComponent();
+            
+           
         }
+        string dato;
+        
+        DatabaseActions dbActions = new DatabaseActions();
+        string tmp = MainWindow.username;
+        
+        //string userName = ((MainWindow)Application.Current.MainWindow)?.UsernameTXT.Text;
 
         private void Income_Click(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show(tmp);
+            if (IndtjeningTXT != null && dato != null) {
+                dbActions.CreateIncome(float.Parse(IndtjeningTXT.Text), dato, tmp, BeskrivelseTXT.Text);
+            }
 
         }
 
         private void LogOutMenuItemClick(object sender, RoutedEventArgs e)
         {
 
+            MainWindow window = new MainWindow();
+            window.Show();
+            Close();
+        }
+
+        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var picker = sender as DatePicker;
+            DateTime? date = picker.SelectedDate;
+
+
+            if (date == null)
+            {
+                MessageBox.Show("Ingen dato valgt");
+            }
+            else
+                dato = date.Value.ToString("yyyy-MM-dd");
+          
         }
     }
 }

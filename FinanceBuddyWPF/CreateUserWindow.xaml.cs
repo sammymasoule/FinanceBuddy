@@ -27,6 +27,7 @@ namespace FinanceBuddyWPF {
             {
                 if (dbActions.CreateUser(LastNameTXT.Text, FirstNameTXT.Text, UserNameTXT.Text, PasswordTXT.Password)) 
                 {
+                    //dbActions.UserLogin(UserNameTXT.Text, PasswordTXT.Password)
                     MainWindow main = new MainWindow();
                     main.Show();
                     Close();

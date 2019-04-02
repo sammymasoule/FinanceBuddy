@@ -21,6 +21,7 @@ namespace FinanceBuddyWPF {
     public partial class OverviewWindow : Window {
         public OverviewWindow() {
             InitializeComponent();
+            WindowState = WindowState.Maximized;
             LoadPieChart();
         }
 

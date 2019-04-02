@@ -107,6 +107,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FinanceBuddyDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="IncomeWindow.xaml.cs">
+      <DependentUpon>IncomeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="OverviewWindow.xaml.cs">
       <DependentUpon>OverviewWindow.xaml</DependentUpon>
     </Compile>
@@ -117,6 +120,10 @@
       <DependentUpon>FinanceBuddyDB.tt</DependentUpon>
     </Compile>
     <Page Include="CreateUserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="IncomeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

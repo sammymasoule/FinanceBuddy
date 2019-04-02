@@ -29,7 +29,8 @@ namespace FinanceBuddyWPF {
         private readonly DatabaseActions dbActions = new DatabaseActions();
         public static string username;
         private void LoginButton_Click(object sender, RoutedEventArgs e)
-        {
+        { 
+            
             if (dbActions.UserLogin(UsernameTXT.Text, PasswordTXT.Password))
             {
                 username = UsernameTXT.Text;
@@ -39,9 +40,10 @@ namespace FinanceBuddyWPF {
                 Close();
             }
             else
-            {
+            { 
+                Fejl.Content = "Brugernavn eller password er forkert";
+                Fejl.Visibility = Visibility.Visible;
                 
-                MessageBox.Show("Forkert brugernavn eller kodeord, prøv igen");
             }
             
         }

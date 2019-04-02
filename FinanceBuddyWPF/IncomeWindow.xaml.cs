@@ -29,16 +29,44 @@ namespace FinanceBuddyWPF
         string dato;
         
         DatabaseActions dbActions = new DatabaseActions();
-        string tmp = MainWindow.username;
+        string userName = MainWindow.username;
         
         //string userName = ((MainWindow)Application.Current.MainWindow)?.UsernameTXT.Text;
 
         private void Income_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(tmp);
-            if (IndtjeningTXT != null && dato != null) {
-                dbActions.CreateIncome(float.Parse(IndtjeningTXT.Text), dato, tmp, BeskrivelseTXT.Text);
+            float amount = 0;
+            bool check_amount = true;
+            bool check_dato = true;
+            if(!float.TryParse(IndtjeningTXT.Text, out amount))
+            {
+                check_amount = false;
+                IndtejningFejl.Visibility = Visibility.Visible;
+                
             }
+            if (dato == null)
+            {
+                check_dato = false;
+                DatoFejl.Visibility = Visibility.Visible;
+
+            }
+            if(check_amount && check_dato)
+            {
+                if (dbActions.CreateIncome(amount, dato, userName, BeskrivelseTXT.Text))
+                {
+                    MessageBox.Show("Sucess");
+                    IndtejningFejl.Visibility = Visibility.Hidden;
+                    DatoFejl.Visibility = Visibility.Hidden;
+
+                    IndtjeningTXT.Text = null;
+                    dato = null;
+                    dateTimePicker.SelectedDate = null;
+                    BeskrivelseTXT.Text = "";
+                }
+
+            }
+
+
 
         }
 
@@ -56,13 +84,20 @@ namespace FinanceBuddyWPF
             DateTime? date = picker.SelectedDate;
 
 
-            if (date == null)
+            if (date != null)
             {
-                MessageBox.Show("Ingen dato valgt");
-            }
-            else
                 dato = date.Value.ToString("yyyy-MM-dd");
+            }
+            
+                
           
+        }
+
+        private void Overblik_click(object sender, RoutedEventArgs e)
+        {
+            OverviewWindow window = new OverviewWindow();
+            window.Show();
+            Close();
         }
     }
 }

@@ -14,6 +14,7 @@
             <TextBox  x:Name="UsernameTXT" FontSize="20"/>
             <Label Content="Kodeord:" FontSize="25"></Label>
          <PasswordBox Name="PasswordTXT" FontSize="20" KeyDown="PasswordTXT_OnKeyDown"></PasswordBox>
+            <Label Name="Fejl" Content="Forkert brugernavn eller kodeord" FontSize="20" Foreground="Red" Visibility="Hidden"></Label>
             <Button Name="LoginButton" Content="Login" FontSize="30" Margin="30 10" Background="Azure"  HorizontalAlignment="Center" Click="LoginButton_Click"></Button>
             <Label Content="Har du ikke en bruger? Klik her" Foreground="Blue"  FontSize="15" HorizontalAlignment="Center" Margin="30 -10" MouseLeftButtonUp="Label_MouseLeftButtonUp">
             </Label>

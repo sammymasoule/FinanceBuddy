@@ -21,7 +21,7 @@
 
         </Menu>
         <Menu Foreground="White" Height="70" VerticalAlignment="Top" Margin="70,0,0,5" HorizontalAlignment="Stretch" Background="#41AADE" BorderThickness="1">
-            <MenuItem Header="Overblik" VerticalAlignment="Center" Margin="20" BorderBrush="White"></MenuItem>
+            <MenuItem Header="Overblik" VerticalAlignment="Center" Margin="20" BorderBrush="White" Click="Overblik_click"></MenuItem>
             <MenuItem Header="Indkomst" VerticalAlignment="Center" Margin="20" BorderBrush="White"></MenuItem>
             <MenuItem Header="Udgifter" VerticalAlignment="Center" Margin="20" BorderBrush="White"></MenuItem>
             <Menu.ItemsPanel>
@@ -57,11 +57,14 @@
             <Separator></Separator>
             <Label Content="Indtjening:" FontSize="25"></Label>
             <TextBox  x:Name="IndtjeningTXT" FontSize="25"/>
+            <Label Name="IndtejningFejl" Content="Indtast venligst et tal" FontSize="20" Foreground="Red" Visibility="Hidden"></Label>
             <Label Content="Dato:" FontSize="25"></Label>
             <DatePicker Name="dateTimePicker" Height="25" HorizontalAlignment="Left" Width="150" SelectedDateChanged="DatePicker_SelectedDateChanged">
             </DatePicker>
+            <Label Name="DatoFejl" Content="Vælg venligst en dato" FontSize="20" Foreground="Red" Visibility="Hidden"></Label>
             <Label Content="Beskrivelse:" FontSize="25" ></Label>
             <TextBox  x:Name="BeskrivelseTXT" FontSize="25"/>
+            <Label Name="BeskrivelseFejl" Content="Indtast venligst en beskrivelse" FontSize="20" Foreground="Red" Visibility="Hidden"></Label>
             <Button Name="TilfoejButton" Content="Tilføj" FontSize="30" Margin="30 10" Background="Azure"  HorizontalAlignment="Center" Click="Income_Click"></Button>
          
         

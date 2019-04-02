@@ -156,5 +156,47 @@ namespace FinanceBuddyWPF.Controllers {
             }
             return false;
         }
+
+        public float GetIncome(string userName)
+        {
+            try {
+                float amount;
+                SqlConnectionStringBuilder builder =
+                    new SqlConnectionStringBuilder
+                    {
+                        DataSource = "samsamjon.database.windows.net",
+                        UserID = "samsamjon",
+                        Password = "Test1234",
+                        InitialCatalog = "samjonDB"
+                    };
+
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString)) {
+                    connection.Open();
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("select SUM(Amount) from Income where userName = '" + userName + "'" + "AND Date between '2019-03-01' AND '2019-03-31'");
+                    string sql = sb.ToString();
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        var value = command.ExecuteScalar();
+                        if (value != null)
+                        {
+                            amount = float.Parse(value.ToString());
+                        }
+                        else
+                        {
+                            return 0;
+                        }
+                        
+                    }
+                }
+                return amount;
+            }
+            catch (SqlException exception) {
+                Console.WriteLine(exception.ToString());
+            }
+
+            return -1;
+        }
     }
 }

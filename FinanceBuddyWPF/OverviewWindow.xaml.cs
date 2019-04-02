@@ -24,12 +24,16 @@ namespace FinanceBuddyWPF {
             LoadChart();
         }
 
-        //DatabaseActions dbActions = new DatabaseActions();
-        private void LoadChart() {
-            List<KeyValuePair<string, int>> valueList = new List<KeyValuePair<string, int>>
+        DatabaseActions dbActions = new DatabaseActions();
+        private void LoadChart()
+        {
+            var userName = ((MainWindow) Application.Current.MainWindow)?.UsernameTXT.Text;
+            var amount = dbActions.GetIncome(userName);
+
+            List<KeyValuePair<string, float>> valueList = new List<KeyValuePair<string, float>>
             {
-                new KeyValuePair<string, int>("Indkomst", 25000),
-                new KeyValuePair<string, int>("Udgift", 20000)
+                new KeyValuePair<string, float>("Indkomst", amount),
+                new KeyValuePair<string, float>("Udgift", 20000),
             };
             pieChart.DataContext = valueList;
         }
@@ -39,6 +43,7 @@ namespace FinanceBuddyWPF {
             window.Show();
             Close();
         }
+        
     }
 
 }

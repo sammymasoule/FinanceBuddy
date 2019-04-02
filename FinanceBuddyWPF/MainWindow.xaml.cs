@@ -22,20 +22,22 @@ namespace FinanceBuddyWPF {
     public partial class MainWindow : Window {
         public MainWindow() {
             InitializeComponent();
+            
         }
-
-        DatabaseActions dbActions = new DatabaseActions();
+       
+        private readonly DatabaseActions dbActions = new DatabaseActions();
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-
             if (dbActions.UserLogin(UsernameTXT.Text, PasswordTXT.Password))
             {
+                
                 OverviewWindow ow = new OverviewWindow();
                 ow.Show();
                 Close();
             }
             else
             {
+                
                 MessageBox.Show("Forkert brugernavn eller kodeord, prøv igen");
             }
             

@@ -210,7 +210,7 @@ namespace FinanceBuddyWPF.Controllers
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         var value = command.ExecuteScalar();
-                        if (value != null)
+                        if (!String.IsNullOrEmpty(value.ToString()))
                         {
                             amount = float.Parse(value.ToString());
                         }
@@ -218,7 +218,6 @@ namespace FinanceBuddyWPF.Controllers
                         {
                             return 0;
                         }
-
                     }
                 }
 

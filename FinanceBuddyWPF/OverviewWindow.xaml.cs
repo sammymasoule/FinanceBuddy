@@ -44,19 +44,11 @@ namespace FinanceBuddyWPF {
             LoadBarChart(expenses);
         }
 
-        private void LoadBarChart(List<KeyValuePair<int, float>> list)
+        private void LoadBarChart(List<KeyValuePair<string, float>> list)
         {
             List<KeyValuePair<string, float>> valuelist = new List<KeyValuePair<string, float>>();
             var myResults = list.GroupBy(p => p.Key)
                 .ToDictionary(g => g.Key, g => g.Sum(p => p.Value));
-
-            foreach (var element in myResults)
-            {
-                if (element.Key == 1)
-                {
-
-                }
-            }
 
             BarChart.DataContext = myResults;
         }
@@ -68,7 +60,14 @@ namespace FinanceBuddyWPF {
             window.Show();
             Close();
         }
-        
+
+        private void IndkomstItemClick(object sender, RoutedEventArgs e)
+        {
+
+            IncomeWindow window = new IncomeWindow();
+            window.Show();
+            Close();
+        }
     }
 
 }

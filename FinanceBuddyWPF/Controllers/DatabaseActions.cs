@@ -60,8 +60,8 @@ namespace FinanceBuddyWPF.Controllers
             return persons;
         }
 
-        public string GetPerson(string username)
-        {
+
+        public string GetPerson(string username) {
             string person = "";
             try
             {
@@ -101,11 +101,50 @@ namespace FinanceBuddyWPF.Controllers
 
             return person;
         }
-
-        public bool CreateUser(string lastName, string firstName, string userName, string password)
+        public bool CreateIncome(float amount, String date, string userName, string description)
         {
             try
             {
+                SqlConnectionStringBuilder builder =
+                    new SqlConnectionStringBuilder
+                    {
+                        DataSource = "samsamjon.database.windows.net",
+                        UserID = "samsamjon",
+                        Password = "Test1234",
+                        InitialCatalog = "samjonDB"
+                    };
+
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    connection.Open();
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("INSERT INTO Income ([Amount], [Date], [userName], [Description])");
+                    sb.Append("VALUES ('" + amount + "', '" + date + "', '" + userName +"', '" + description + "')");
+                    //sb.Append("VALUES ('{0}', '{1}', '{2}', '{3}')", lastName, firstName, userName, password);
+
+                    string sql = sb.ToString();
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        if (command.ExecuteNonQuery() > 0)
+                        {
+                            return true;
+                        }
+
+                    }
+                }
+            }
+            catch (SqlException exception)
+            {
+                Console.WriteLine(exception.ToString());
+            }
+
+            return false;
+        }
+
+
+        public bool CreateUser(string lastName, string firstName, string userName, string password) {
+            try {
                 SqlConnectionStringBuilder builder =
                     new SqlConnectionStringBuilder
                     {
@@ -231,11 +270,11 @@ namespace FinanceBuddyWPF.Controllers
             return -1;
         }
 
-        public List<KeyValuePair<int, float>> GetExpenses(string userName)
+        public List<KeyValuePair<string, float>> GetExpenses(string userName)
         {
             try
             {
-                List<KeyValuePair<int, float>> expenses = new List<KeyValuePair<int, float>>();
+                List<KeyValuePair<string, float>> expenses = new List<KeyValuePair<string, float>>();
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
                 builder.DataSource = "samsamjon.database.windows.net";
                 builder.UserID = "samsamjon";
@@ -246,13 +285,13 @@ namespace FinanceBuddyWPF.Controllers
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
                     sb.Append("select Category, Amount from TransItem where userName = '" + userName + "' " +
-                    "AND Date between '2019-03-01' AND '2019-03-31'");
+                    " AND Date between '2019-03-01' AND '2019-03-31'");
                     string sql = sb.ToString();
 
                     using (SqlCommand command = new SqlCommand(sql, connection)) {
                         using (SqlDataReader reader = command.ExecuteReader()) {
                             while (reader.Read()) {
-                                expenses.Add(new KeyValuePair<int, float>(reader.GetInt32(0), (float) reader.GetDouble(1)));
+                                expenses.Add(new KeyValuePair<string, float>(reader.GetString(0), (float)reader.GetDouble(1)));
                             }
                         }
                     }
@@ -264,7 +303,7 @@ namespace FinanceBuddyWPF.Controllers
                 Console.WriteLine(exception.ToString());
             }
 
-            return new List<KeyValuePair<int, float>>();
+            return new List<KeyValuePair<string, float>>();
         }
     }
 }

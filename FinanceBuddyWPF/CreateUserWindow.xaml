@@ -12,14 +12,19 @@
             <Separator></Separator>
             <Label Content="Fornavn:" FontSize="20"></Label>
             <TextBox  x:Name="FirstNameTXT" FontSize="20"/>
+            <Label Name="FirstNameError" Content="Indtast venligst dit fornavn" FontSize="15" Foreground="Red" Visibility="Hidden"></Label>
             <Label Content="Efternavn:" FontSize="20"></Label>
             <TextBox Name="LastNameTXT" FontSize="20"></TextBox>
+            <Label Name="LastNameError" Content="Indtast venligst dit fornavn" FontSize="15" Foreground="Red" Visibility="Hidden"></Label>
             <Label Content="Brugernavn:" FontSize="20"></Label>
             <TextBox Name="UserNameTXT" FontSize="20"></TextBox>
+            <Label Name="userNameError" Content="Brugernavnet eksisterer allerede" FontSize="15" Foreground="Red" Visibility="Hidden"></Label>
             <Label Content="Kodeord:" FontSize="20"></Label>
             <PasswordBox Name="PasswordTXT" FontSize="20"></PasswordBox>
+            <Label Name="passwordError" FontSize="15" Foreground="Red" Visibility="Hidden"></Label>
             <Label Content="Indtast kodeord igen:" FontSize="20"></Label>
             <PasswordBox Name="PasswordConfTXT" FontSize="20"></PasswordBox>
+            <Label Name="passwordCheckError" FontSize="15" Foreground="Red" Visibility="Hidden"></Label>
             <Button Name="CreateUserButton" Content="Opret bruger" FontSize="30" Margin="30 10" Background="Azure"  HorizontalAlignment="Center" Click="LoginButton_Click"></Button>
         </StackPanel>
     </Border>

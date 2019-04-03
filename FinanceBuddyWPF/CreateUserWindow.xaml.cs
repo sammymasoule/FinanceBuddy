@@ -22,29 +22,92 @@ namespace FinanceBuddyWPF {
             InitializeComponent();
             WindowState = WindowState.Maximized;
         }
+        Boolean firstName = false;
+        Boolean lastName = false;
+        Boolean userNameBool = false;
+        Boolean passwordBool = false;
         DatabaseActions dbActions = new DatabaseActions();
-        private void LoginButton_Click(object sender, RoutedEventArgs e) {
-            if (PasswordTXT.Password.Equals(PasswordConfTXT.Password))
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        {   
+            FirstNameTXT.BorderBrush = new SolidColorBrush(Colors.Gray);
+            LastNameTXT.BorderBrush = new SolidColorBrush(Colors.Gray);
+            UserNameTXT.BorderBrush = new SolidColorBrush(Colors.Gray);
+            PasswordTXT.BorderBrush = new SolidColorBrush(Colors.Gray);
+            PasswordConfTXT.BorderBrush = new SolidColorBrush(Colors.Gray);
+
+            if (!String.IsNullOrEmpty(LastNameTXT.Text))
             {
-                if (dbActions.CreateUser(LastNameTXT.Text, FirstNameTXT.Text, UserNameTXT.Text, PasswordTXT.Password)) 
-                {
-                    //dbActions.UserLogin(UserNameTXT.Text, PasswordTXT.Password)
-                    MainWindow main = new MainWindow();
-                    main.Show();
-                    Close();
-                }
-                else
-                {
-                    MessageBox.Show("Brugernavn er allerede i brug.");
-                }
-                
+                firstName = true;
             }
             else
             {
-                MessageBox.Show("Kodeordene stemmer ikke overens.");
+                FirstNameError.Content = "Indtast venligst dit fornavn";
+                FirstNameError.Visibility = Visibility.Visible;
+                FirstNameTXT.BorderBrush = new SolidColorBrush(Colors.Red);
+               
             }
+            if (!String.IsNullOrEmpty(FirstNameTXT.Text))
+            {
+                lastName = true;
+            }
+            else
+            {
+                LastNameError.Content = "Indtast venligst dit efternavn";
+                LastNameError.Visibility = Visibility.Visible;
+                LastNameTXT.BorderBrush = new SolidColorBrush(Colors.Red);
+                
+            }
+            if (!String.IsNullOrEmpty(UserNameTXT.Text))
+            {
+                userNameBool = true;
+            }
+            else
+            {
+                userNameError.Content = "Indtast venligst et brugernavn";
+                userNameError.Visibility = Visibility.Visible;
+                UserNameTXT.BorderBrush = new SolidColorBrush(Colors.Red);
+                
+            }
+            if (!String.IsNullOrEmpty(PasswordTXT.Password))
+            {
+                passwordBool = true;
+            }
+            else
+            {
+                passwordError.Content = "Indtast venligst et password";
+                passwordError.Visibility = Visibility.Visible;
+                PasswordTXT.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+            if (PasswordTXT.Password.Equals(PasswordConfTXT.Password))
+            {
+                if (firstName && lastName && userNameBool && passwordBool)
+                {
+                    if (dbActions.CreateUser(LastNameTXT.Text, FirstNameTXT.Text, UserNameTXT.Text, PasswordTXT.Password))
+                    {
+                        //dbActions.UserLogin(UserNameTXT.Text, PasswordTXT.Password)
+                        userNameError.Visibility = Visibility.Hidden;
+                        passwordError.Visibility = Visibility.Hidden;
+                        MainWindow main = new MainWindow();
+                        main.Show();
+                        Close();
+                    }
+                    else
+                    {
+                        userNameError.Content = "Brugernavnet eksisterer allerede";
+                        userNameError.Visibility = Visibility.Visible;
+                        UserNameTXT.BorderBrush = new SolidColorBrush(Colors.Red);
 
-            
+                    }
+                }
+
+            }
+            else
+            {
+                passwordCheckError.Content = "Kodeordene stemmer ikke overens";
+                passwordCheckError.Visibility = Visibility.Visible;
+                PasswordConfTXT.BorderBrush = new SolidColorBrush(Colors.Red);
+                
+            }
         }
     }
 }

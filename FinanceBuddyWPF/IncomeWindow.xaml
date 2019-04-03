@@ -56,14 +56,14 @@
             <Label Content="Indtast en ny indkomst" HorizontalAlignment="Center" FontSize="30"></Label>
             <Separator></Separator>
             <Label Content="Indtjening:" FontSize="25"></Label>
-            <TextBox  x:Name="IndtjeningTXT" FontSize="25"/>
+            <TextBox  x:Name="IndtjeningTXT" FontSize="25" BorderBrush="Gray"/>
             <Label Name="IndtejningFejl" Content="Indtast venligst et tal" FontSize="20" Foreground="Red" Visibility="Hidden"></Label>
             <Label Content="Dato:" FontSize="25"></Label>
             <DatePicker Name="dateTimePicker" Height="25" HorizontalAlignment="Left" Width="150" SelectedDateChanged="DatePicker_SelectedDateChanged">
             </DatePicker>
             <Label Name="DatoFejl" Content="Vælg venligst en dato" FontSize="20" Foreground="Red" Visibility="Hidden"></Label>
             <Label Content="Beskrivelse:" FontSize="25" ></Label>
-            <TextBox  x:Name="BeskrivelseTXT" FontSize="25"/>
+            <TextBox  x:Name="BeskrivelseTXT" FontSize="25" BorderBrush="Gray"/>
             <Label Name="BeskrivelseFejl" Content="Indtast venligst en beskrivelse" FontSize="20" Foreground="Red" Visibility="Hidden"></Label>
             <Button Name="TilfoejButton" Content="Tilføj" FontSize="30" Margin="30 10" Background="Azure"  HorizontalAlignment="Center" Click="Income_Click"></Button>
          

@@ -34,7 +34,8 @@ namespace FinanceBuddyWPF {
             if (dbActions.UserLogin(UsernameTXT.Text, PasswordTXT.Password))
             {
                 username = UsernameTXT.Text;
-                
+                UsernameTXT.BorderBrush = new SolidColorBrush(Colors.Gray);
+                PasswordTXT.BorderBrush = new SolidColorBrush(Colors.Gray);
                 OverviewWindow ow = new OverviewWindow();
                 ow.Show();
                 Close();
@@ -43,6 +44,9 @@ namespace FinanceBuddyWPF {
             { 
                 Fejl.Content = "Brugernavn eller password er forkert";
                 Fejl.Visibility = Visibility.Visible;
+                UsernameTXT.BorderBrush = new SolidColorBrush(Colors.Red);
+                PasswordTXT.BorderBrush = new SolidColorBrush(Colors.Red);
+              
                 
             }
             

@@ -42,12 +42,14 @@ namespace FinanceBuddyWPF
             {
                 check_amount = false;
                 IndtejningFejl.Visibility = Visibility.Visible;
+                IndtjeningTXT.BorderBrush = new SolidColorBrush(Colors.Red);
                 
             }
-            if (dato == null)
+            if (String.IsNullOrEmpty(dato))
             {
                 check_dato = false;
                 DatoFejl.Visibility = Visibility.Visible;
+               
 
             }
             if(check_amount && check_dato)
@@ -62,6 +64,8 @@ namespace FinanceBuddyWPF
                     dato = null;
                     dateTimePicker.SelectedDate = null;
                     BeskrivelseTXT.Text = "";
+                    IndtjeningTXT.BorderBrush = new SolidColorBrush(Colors.Gray);
+                    
                 }
 
             }

@@ -23,12 +23,13 @@ namespace FinanceBuddyWPF {
             InitializeComponent();
             LoadChart();
         }
-
+        String userName = MainWindow.username;
         DatabaseActions dbActions = new DatabaseActions();
         private void LoadChart()
         {
+
+            
            
-            var userName = ((MainWindow) Application.Current.MainWindow)?.UsernameTXT.Text;
             var amount = dbActions.GetIncome(userName);
 
             List<KeyValuePair<string, float>> valueList = new List<KeyValuePair<string, float>>
@@ -39,8 +40,9 @@ namespace FinanceBuddyWPF {
             pieChart.DataContext = valueList;
         }
         private void LogOutMenuItemClick(object sender, RoutedEventArgs e) {
-
+            MainWindow.username = null;
             MainWindow window = new MainWindow();
+
             window.Show();
             Close();
         }

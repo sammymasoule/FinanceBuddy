@@ -204,7 +204,7 @@ namespace FinanceBuddyWPF.Controllers
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
                     sb.Append("select SUM(Amount) from Income where userName = '" + userName + "'" +
-                              "AND Date between '2019-03-01' AND '2019-03-31'");
+                              " AND Date between '2019-03-01' AND '2019-03-31'");
                     string sql = sb.ToString();
 
                     using (SqlCommand command = new SqlCommand(sql, connection))

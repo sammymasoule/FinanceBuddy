@@ -29,7 +29,7 @@ namespace FinanceBuddyWPF {
 
         private void LoadPieChart()
         {
-            var userName = ((MainWindow) Application.Current.MainWindow)?.UsernameTXT.Text;
+            string userName = MainWindow.username;
             var income = dbActions.GetIncome(userName);
             var expenses = dbActions.GetExpenses(userName);
             var totalExpenses = expenses.Sum(x => x.Value);

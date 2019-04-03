@@ -54,16 +54,21 @@
         </Menu>
         <dvc:Chart  Name="pieChart" BorderThickness="0" 
 
-		VerticalAlignment="top" HorizontalAlignment="Left" Margin="75,75,0,0" Height="350" Width="350">
+        VerticalAlignment="top" HorizontalAlignment="Left" Margin="75,75,0,0" Height="350" Width="350">
             <dvc:PieSeries DependentValuePath="Value" 
 
-		IndependentValuePath="Key" ItemsSource="{Binding}" 
+        IndependentValuePath="Key" ItemsSource="{Binding}" 
 
-		IsSelectionEnabled="True" />
+        IsSelectionEnabled="True" />
         </dvc:Chart>
-        <dvc:Chart Margin="75,0,0,0" Width="600" Height="370" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="BarChart" Title="Udgifter" BorderThickness="0">
-            <dvc:ColumnSeries DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding}">
+        <dvc:Chart Margin="75,0,0,0.4" Width="600" Height="370" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="BarChart" Title="Udgifter" BorderThickness="0">
+            <dvc:ColumnSeries Name="Series"  Title="Marts" DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding}">
             </dvc:ColumnSeries>
         </dvc:Chart>
+        <DatePicker Name="DateFrom" HorizontalAlignment="Left" Margin="573,469,0,0" VerticalAlignment="Top"/>
+        <Label Content="Fra" HorizontalAlignment="Left" Margin="595,438,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.583,-0.875"/>
+        <Label Content="Til" HorizontalAlignment="Left" Margin="595,498,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.111,-0.823"/>
+        <DatePicker Name="DateTo" HorizontalAlignment="Left" Margin="573,524,0,0" VerticalAlignment="Top"/>
+        <Button Content="Vælg" HorizontalAlignment="Left" Margin="573,553,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
     </Grid>
 </Window>

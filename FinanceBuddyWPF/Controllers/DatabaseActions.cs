@@ -224,7 +224,7 @@ namespace FinanceBuddyWPF.Controllers
             return false;
         }
 
-        public float GetIncome(string userName)
+        public float GetIncome(string userName, string firstDay, string lastDay)
         {
             try
             {
@@ -243,7 +243,7 @@ namespace FinanceBuddyWPF.Controllers
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
                     sb.Append("select SUM(Amount) from Income where userName = '" + userName + "'" +
-                              " AND Date between '2019-03-01' AND '2019-03-31'");
+                              " AND Date between '" +firstDay +"' AND '" + lastDay +  "'");
                     string sql = sb.ToString();
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
@@ -270,7 +270,7 @@ namespace FinanceBuddyWPF.Controllers
             return -1;
         }
 
-        public List<KeyValuePair<string, float>> GetExpenses(string userName)
+        public List<KeyValuePair<string, float>> GetExpenses(string userName, string firstDay, string lastDay)
         {
             try
             {
@@ -285,7 +285,7 @@ namespace FinanceBuddyWPF.Controllers
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
                     sb.Append("select Category, Amount from TransItem where userName = '" + userName + "' " +
-                    " AND Date between '2019-03-01' AND '2019-03-31'");
+                    " AND Date between '" + firstDay +"' AND '" +lastDay + "'");
                     string sql = sb.ToString();
 
                     using (SqlCommand command = new SqlCommand(sql, connection)) {

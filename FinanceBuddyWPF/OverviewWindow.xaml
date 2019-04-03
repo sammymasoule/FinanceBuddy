@@ -52,14 +52,18 @@
 
             </Menu.ItemsPanel>
         </Menu>
-        <dvc:Chart  Name="pieChart" Title="Pie Series Demo" 
+        <dvc:Chart  Name="pieChart" 
 
-		VerticalAlignment="top" HorizontalAlignment="Left" Margin="100,100" Height="350" Width="350">
+		VerticalAlignment="top" HorizontalAlignment="Left" Margin="75,75,0,0" Height="350" Width="350">
             <dvc:PieSeries DependentValuePath="Value" 
 
 		IndependentValuePath="Key" ItemsSource="{Binding}" 
 
 		IsSelectionEnabled="True" />
+        </dvc:Chart>
+        <dvc:Chart Margin="75,435,66.6,10" Name="BarChart" Title="Indkomst og Udgifter">
+            <dvc:ColumnSeries DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding}" Margin="0,-31,0.4,0.4">
+            </dvc:ColumnSeries>
         </dvc:Chart>
     </Grid>
 </Window>

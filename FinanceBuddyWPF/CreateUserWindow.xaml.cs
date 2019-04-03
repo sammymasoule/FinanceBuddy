@@ -20,6 +20,7 @@ namespace FinanceBuddyWPF {
     public partial class CreateUserWindow : Window {
         public CreateUserWindow() {
             InitializeComponent();
+            WindowState = WindowState.Maximized;
         }
         DatabaseActions dbActions = new DatabaseActions();
         private void LoginButton_Click(object sender, RoutedEventArgs e) {

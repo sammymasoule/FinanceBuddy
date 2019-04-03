@@ -20,17 +20,19 @@ namespace FinanceBuddyWPF {
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
-        public MainWindow() {
+        public MainWindow()
+        {
             InitializeComponent();
-            
+            WindowState = WindowState.Maximized;
         }
        
         private readonly DatabaseActions dbActions = new DatabaseActions();
+        public static string username;
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
+            username = UsernameTXT.Text;
             if (dbActions.UserLogin(UsernameTXT.Text, PasswordTXT.Password))
             {
-                
                 OverviewWindow ow = new OverviewWindow();
                 ow.Show();
                 Close();

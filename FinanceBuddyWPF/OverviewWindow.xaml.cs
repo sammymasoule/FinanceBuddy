@@ -21,24 +21,49 @@ namespace FinanceBuddyWPF {
     public partial class OverviewWindow : Window {
         public OverviewWindow() {
             InitializeComponent();
-            LoadChart();
+            WindowState = WindowState.Maximized;
+            LoadPieChart();
         }
 
-        DatabaseActions dbActions = new DatabaseActions();
-        private void LoadChart()
+        private readonly DatabaseActions dbActions = new DatabaseActions();
+        string userName = MainWindow.username;
+
+        private void LoadPieChart()
         {
-            var userName = ((MainWindow) Application.Current.MainWindow)?.UsernameTXT.Text;
-            var amount = dbActions.GetIncome(userName);
+            var income = dbActions.GetIncome(userName);
+            var expenses = dbActions.GetExpenses(userName);
+            var totalExpenses = expenses.Sum(x => x.Value);
 
             List<KeyValuePair<string, float>> valueList = new List<KeyValuePair<string, float>>
             {
-                new KeyValuePair<string, float>("Indkomst", amount),
-                new KeyValuePair<string, float>("Udgift", 20000),
+                new KeyValuePair<string, float>("Indkomst", income),
+                new KeyValuePair<string, float>("Udgift", totalExpenses),
             };
-            pieChart.DataContext = valueList;
-        }
-        private void LogOutMenuItemClick(object sender, RoutedEventArgs e) {
 
+            pieChart.DataContext = valueList;
+            LoadBarChart(expenses);
+        }
+
+        private void LoadBarChart(List<KeyValuePair<int, float>> list)
+        {
+            List<KeyValuePair<string, float>> valuelist = new List<KeyValuePair<string, float>>();
+            var myResults = list.GroupBy(p => p.Key)
+                .ToDictionary(g => g.Key, g => g.Sum(p => p.Value));
+
+            foreach (var element in myResults)
+            {
+                if (element.Key == 1)
+                {
+
+                }
+            }
+
+            BarChart.DataContext = myResults;
+        }
+
+        private void LogOutMenuItemClick(object sender, RoutedEventArgs e)
+        {
+            MainWindow.username = null;
             MainWindow window = new MainWindow();
             window.Show();
             Close();

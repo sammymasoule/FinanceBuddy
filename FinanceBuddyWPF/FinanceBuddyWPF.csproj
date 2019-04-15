@@ -111,6 +111,9 @@
     <Compile Include="IncomeWindow.xaml.cs">
       <DependentUpon>IncomeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="OutcomeWindow.xaml.cs">
+      <DependentUpon>OutcomeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="OverviewWindow.xaml.cs">
       <DependentUpon>OverviewWindow.xaml</DependentUpon>
     </Compile>
@@ -150,6 +153,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="OutcomeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="OverviewWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

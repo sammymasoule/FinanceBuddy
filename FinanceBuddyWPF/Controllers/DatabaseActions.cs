@@ -305,5 +305,41 @@ namespace FinanceBuddyWPF.Controllers
 
             return new List<KeyValuePair<string, float>>();
         }
+
+
+        public bool CreateExpense(string category, string description, string date, string userName, float amount) {
+            try {
+                SqlConnectionStringBuilder builder =
+                    new SqlConnectionStringBuilder
+                    {
+                        DataSource = "samsamjon.database.windows.net",
+                        UserID = "samsamjon",
+                        Password = "Test1234",
+                        InitialCatalog = "samjonDB"
+                    };
+
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString)) {
+                    connection.Open();
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("INSERT INTO TransItem ([Category], [Description], [Date], [userName], [Amount])");
+                    sb.Append("VALUES ('" + category + "', '" + description+ "', '" + date + "', '" + userName+ "', '" + amount + "')");
+                    //sb.Append("VALUES ('{0}', '{1}', '{2}', '{3}')", lastName, firstName, userName, password);
+
+                    string sql = sb.ToString();
+
+                    using (SqlCommand command = new SqlCommand(sql, connection)) {
+                        if (command.ExecuteNonQuery() > 0) {
+                            return true;
+                        }
+
+                    }
+                }
+            }
+            catch (SqlException exception) {
+                Console.WriteLine(exception.ToString());
+            }
+
+            return false;
+        }
     }
 }

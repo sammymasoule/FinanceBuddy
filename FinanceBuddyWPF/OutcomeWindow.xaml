@@ -20,7 +20,7 @@
         </Menu>
         <Menu Foreground="White" Height="70" VerticalAlignment="Top" Margin="70,0,0,5" HorizontalAlignment="Stretch" Background="#41AADE" BorderThickness="1">
             <MenuItem Header="Overblik" VerticalAlignment="Center" Margin="20" BorderBrush="White" Click="Overblik_click"></MenuItem>
-            <MenuItem Header="Indkomst" VerticalAlignment="Center" Margin="20" BorderBrush="White"></MenuItem>
+            <MenuItem Header="Indkomst" VerticalAlignment="Center" Margin="20" BorderBrush="White" Click="Indkomst_click"></MenuItem>
             <MenuItem Header="Udgifter" VerticalAlignment="Center" Margin="20" BorderBrush="White"></MenuItem>
             <Menu.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -51,7 +51,7 @@
             </Menu.ItemsPanel>
         </Menu>
         <StackPanel Margin="100,70,100,100">
-            <Label Content="Indtast en ny indkomst" HorizontalAlignment="Center" FontSize="30"></Label>
+            <Label Content="Indtast en ny udgift" HorizontalAlignment="Center" FontSize="30"></Label>
             <Separator></Separator>
             <Label Content="Udgiftsbeløb:" FontSize="25"></Label>
             <TextBox  x:Name="ExpenseTxt" FontSize="25" BorderBrush="Gray"/>
@@ -64,13 +64,13 @@
             </DatePicker>
             <Label Name="DateError" Content="Vælg venligst en dato" FontSize="20" Foreground="Red" Visibility="Hidden"></Label>
             <Label Content="Kategori:" FontSize="25" ></Label>
-            <ComboBox x:Name="CategoryComboBox" FontSize="25" BorderBrush="Gray">
-                <ComboBoxItem Content="Bolig"></ComboBoxItem>
-                <ComboBoxItem Content="Regninger"></ComboBoxItem>
-                <ComboBoxItem Content="?"></ComboBoxItem>
-                <ComboBoxItem Content="?"></ComboBoxItem>
-                <ComboBoxItem Content="?"></ComboBoxItem>
-                <ComboBoxItem Content="?"></ComboBoxItem>
+            <ComboBox x:Name="CategoryComboBox" FontSize="25" BorderBrush="Gray" Margin="2,0,-2.4,0">
+                <ComboBoxItem Content="Lån &amp; Regninger"></ComboBoxItem>
+                <ComboBoxItem Content="Husholdning"></ComboBoxItem>
+                <ComboBoxItem Content="Indkøb"></ComboBoxItem>
+                <ComboBoxItem Content="Forbrug"></ComboBoxItem>
+                <ComboBoxItem Content="Transport"></ComboBoxItem>
+                <ComboBoxItem Content="Opsparing"></ComboBoxItem>
             </ComboBox>
             <Label Name="CategoryError" Content="Vælg venligst en Kategori" FontSize="20" Foreground="Red" Visibility="Hidden"></Label>
             <Button Name="TilfoejButton" Content="Tilføj" FontSize="30" Margin="30 10" Background="Azure"  HorizontalAlignment="Center" Click="Expense_Click"></Button>

@@ -23,8 +23,9 @@ namespace FinanceBuddyWPF
         public IncomeWindow()
         {
             InitializeComponent();
-            
-           
+            WindowState = WindowState.Maximized;
+
+
         }
         string dato;
         
@@ -56,7 +57,7 @@ namespace FinanceBuddyWPF
             {
                 if (dbActions.CreateIncome(amount, dato, userName, BeskrivelseTXT.Text))
                 {
-                    MessageBox.Show("Sucess");
+                    MessageBox.Show("Din indkomst er blevet oprettet");
                     IndtejningFejl.Visibility = Visibility.Hidden;
                     DatoFejl.Visibility = Visibility.Hidden;
 

@@ -113,6 +113,11 @@ namespace FinanceBuddyWPF {
             }
         }
 
+        private void OutcomeWindow(object sender, RoutedEventArgs e) {
+            OutcomeWindow window = new OutcomeWindow();
+            window.Show();
+            Close();
         }
+    }
     }
 

@@ -20,6 +20,7 @@ namespace FinanceBuddyWPF {
     public partial class OutcomeWindow : Window {
         public OutcomeWindow() {
             InitializeComponent();
+            WindowState = WindowState.Maximized;
         }
 
         DatabaseActions dbActions = new DatabaseActions();
@@ -63,8 +64,9 @@ namespace FinanceBuddyWPF {
                 CategoryError.Visibility = Visibility.Visible;
             }
             if (checkAmount && checkDate && checkCategory) {
-                if (dbActions.CreateExpense(CategoryComboBox.SelectedItem.ToString(), DescriptionTxt.Text, date, userName, amount)) {
-                    MessageBox.Show("Sucess");
+                if (dbActions.CreateExpense(CategoryComboBox.Text, DescriptionTxt.Text, date, userName, amount)) {
+                    MessageBox.Show("Din udgift er oprettet");
+                    CategoryComboBox.Text = null;
                     ExpenseError.Visibility = Visibility.Hidden;
                     DateError.Visibility = Visibility.Hidden;
 
@@ -87,6 +89,12 @@ namespace FinanceBuddyWPF {
 
         private void LogOutMenuItemClick(object sender, RoutedEventArgs e) {
             MainWindow window = new MainWindow();
+            window.Show();
+            Close();
+        }
+
+        private void Indkomst_click(object sender, RoutedEventArgs e) {
+            IncomeWindow window = new IncomeWindow();
             window.Show();
             Close();
         }

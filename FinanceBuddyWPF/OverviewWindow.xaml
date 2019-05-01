@@ -23,7 +23,7 @@
         <Menu Foreground="White" Height="70" VerticalAlignment="Top" Margin="70,0,0,5" HorizontalAlignment="Stretch" Background="#41AADE" BorderThickness="1">
             <MenuItem Header="Overblik" VerticalAlignment="Center" Margin="20" BorderBrush="White"></MenuItem>
             <MenuItem Header="Indkomst" VerticalAlignment="Center" Margin="20" BorderBrush="White" Click="IndkomstItemClick"></MenuItem>
-            <MenuItem Header="Udgifter" VerticalAlignment="Center" Margin="20" BorderBrush="White"></MenuItem>
+            <MenuItem Header="Udgifter" VerticalAlignment="Center" Margin="20" BorderBrush="White" Click="OutcomeWindow"></MenuItem>
             <Menu.ItemsPanel>
                 <ItemsPanelTemplate>
                     <VirtualizingStackPanel Orientation="Horizontal"></VirtualizingStackPanel>

@@ -331,7 +331,6 @@ namespace FinanceBuddyWPF.Controllers
                         if (command.ExecuteNonQuery() > 0) {
                             return true;
                         }
-
                     }
                 }
             }

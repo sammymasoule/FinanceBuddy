@@ -38,7 +38,7 @@
 
             </MenuItem>
 
-            <MenuItem Header="Budget" HorizontalAlignment="Center" Margin="0,20" BorderBrush="White">
+            <MenuItem Header="Budget" HorizontalAlignment="Center" Margin="0,20" BorderBrush="White" Click="Budget_click">
 
             </MenuItem>
 

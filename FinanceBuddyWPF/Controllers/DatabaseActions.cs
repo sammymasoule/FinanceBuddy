@@ -340,5 +340,39 @@ namespace FinanceBuddyWPF.Controllers
 
             return false;
         }
+
+        public bool CreateBudget(string username, float LoanLimit, float houseHoldLimit, float consumptionLimit, float transportLimit, float savingsLimit) {
+            try {
+                SqlConnectionStringBuilder builder =
+                    new SqlConnectionStringBuilder
+                    {
+                        DataSource = "samsamjon.database.windows.net",
+                        UserID = "samsamjon",
+                        Password = "Test1234",
+                        InitialCatalog = "samjonDB"
+                    };
+
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString)) {
+                    connection.Open();
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("INSERT INTO Budget ([userName], [LoanLimit], [HouseHoldLimit], [ConsumptionLimit], [TransportationLimit], [SavingsLimit])");
+                    sb.Append(" VALUES ('"  + username + "', '" + LoanLimit + "', '" + houseHoldLimit+ "', '" + consumptionLimit+ "', '" + transportLimit+ "', '" + savingsLimit+ "')");
+                    //sb.Append("VALUES ('{0}', '{1}', '{2}', '{3}')", lastName, firstName, userName, password);
+
+                    string sql = sb.ToString();
+
+                    using (SqlCommand command = new SqlCommand(sql, connection)) {
+                        if (command.ExecuteNonQuery() > 0) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            catch (SqlException exception) {
+                Console.WriteLine(exception.ToString());
+            }
+
+            return false;
+        }
     }
 }

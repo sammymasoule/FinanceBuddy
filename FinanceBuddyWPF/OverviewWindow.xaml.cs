@@ -118,6 +118,12 @@ namespace FinanceBuddyWPF {
             window.Show();
             Close();
         }
+
+        private void Budget_click(object sender, RoutedEventArgs e) {
+            BudgetWindow window = new BudgetWindow();
+            window.Show();
+            Close();
+        }
     }
     }
 

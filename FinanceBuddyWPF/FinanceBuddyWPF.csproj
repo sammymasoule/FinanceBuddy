@@ -199,6 +199,7 @@
       <DependentUpon>FinanceBuddyDB.edmx</DependentUpon>
       <LastGenOutput>FinanceBuddyDB.cs</LastGenOutput>
     </Content>
+    <Resource Include="Images\backarrow.png" />
     <Resource Include="Images\user_icon.png" />
   </ItemGroup>
   <ItemGroup>

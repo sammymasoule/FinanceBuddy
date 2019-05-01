@@ -8,6 +8,24 @@
         mc:Ignorable="d"
         Title="OverviewWindow" Height="800" Width="800">
     <Grid Background="#88D1F1">
+        <StackPanel Background="#1392D3" VerticalAlignment="Stretch" Margin="0,70,0,0" HorizontalAlignment="Right"  Width="140">
+            <TextBlock Margin="5" TextWrapping="Wrap" Foreground="White" FontSize="15">
+                Sammenlign dit forbrug med andres
+            </TextBlock>
+            <TextBlock Margin="10" TextWrapping="Wrap" Foreground="White">
+                Nedenfor kan en kategori vælges, derefter vises en sammenligning mellem dit forbrug og andre brugere 
+            </TextBlock>
+            <ComboBox Margin="5">
+                <ComboBoxItem IsSelected="True">Bolig</ComboBoxItem>
+                <ComboBoxItem>Husholdning</ComboBoxItem>
+                <ComboBoxItem>Personlig pleje</ComboBoxItem>
+                <ComboBoxItem>Underholdning</ComboBoxItem>
+                
+            </ComboBox>
+            <dvc:Chart  Name="pieChart2" BorderThickness="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,50,0,0" Height="100" Width="100">
+                <dvc:PieSeries DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding}" IsSelectionEnabled="True" />
+            </dvc:Chart>
+        </StackPanel>
         <Menu VerticalAlignment="Top" HorizontalAlignment="Left" Background="White">
             <MenuItem>
                 <MenuItem.Header>

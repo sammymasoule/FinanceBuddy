@@ -109,5 +109,12 @@ namespace FinanceBuddyWPF {
                 
             }
         }
+
+        private void BackButton(object sender, RoutedEventArgs e)
+        {
+            MainWindow main = new MainWindow();
+            main.Show();
+            Close();
+        }
     }
 }

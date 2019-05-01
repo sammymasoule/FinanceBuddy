@@ -22,8 +22,8 @@
         </Menu>
         <Menu Foreground="White" Height="70" VerticalAlignment="Top" Margin="70,0,0,5" HorizontalAlignment="Stretch" Background="#41AADE" BorderThickness="1">
             <MenuItem Header="Budget" VerticalAlignment="Center" Margin="20" BorderBrush="White"></MenuItem>
-            <MenuItem Header="Opret Budget" VerticalAlignment="Center" Margin="20" BorderBrush="White" Click="OpretBudget_Click"></MenuItem>
-            <MenuItem Header="Ændr Budget" VerticalAlignment="Center" Margin="20" BorderBrush="White"></MenuItem>
+            <MenuItem Header="Opret Budget" VerticalAlignment="Center" Margin="20" BorderBrush="White" Click="CreateBudget_Click"></MenuItem>
+            <MenuItem Header="Ændr Budget" VerticalAlignment="Center" Margin="20" BorderBrush="White" Click="UpdateBudget_Click"></MenuItem>
             <Menu.ItemsPanel>
                 <ItemsPanelTemplate>
                     <VirtualizingStackPanel Orientation="Horizontal"></VirtualizingStackPanel>

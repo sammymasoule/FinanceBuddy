@@ -371,7 +371,77 @@ namespace FinanceBuddyWPF.Controllers
             catch (SqlException exception) {
                 Console.WriteLine(exception.ToString());
             }
+            return false;
+        }
 
+        public List<float> GetBudgetLimits(string userName) {
+            try {
+                List<float> limits = new List<float>();
+                SqlConnectionStringBuilder builder =
+                    new SqlConnectionStringBuilder
+                    {
+                        DataSource = "samsamjon.database.windows.net",
+                        UserID = "samsamjon",
+                        Password = "Test1234",
+                        InitialCatalog = "samjonDB"
+                    };
+
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString)) {
+                    connection.Open();
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("select LoanLimit, HouseHoldLimit, ConsumptionLimit, TransportationLimit, SavingsLimit from Budget where userName = '" + userName +"'");
+                    string sql = sb.ToString();
+
+                    using (SqlCommand command = new SqlCommand(sql, connection)) {
+                        using (SqlDataReader reader = command.ExecuteReader()) {
+                            while (reader.Read()) {
+                                limits.Add(float.Parse(reader["LoanLimit"].ToString()));
+                                limits.Add(float.Parse(reader["HouseHoldLimit"].ToString()));
+                                limits.Add(float.Parse(reader["ConsumptionLimit"].ToString()));
+                                limits.Add(float.Parse(reader["TransportationLimit"].ToString()));
+                                limits.Add(float.Parse(reader["SavingsLimit"].ToString()));
+                            }
+                        }
+                    }
+                }
+
+                return limits;
+            }
+            catch (SqlException exception) {
+                Console.WriteLine(exception.ToString());
+            }
+
+            return null;
+        }
+        public bool UpdateBudget(string username, float LoanLimit, float houseHoldLimit, float consumptionLimit, float transportLimit, float savingsLimit) {
+            try {
+                SqlConnectionStringBuilder builder =
+                    new SqlConnectionStringBuilder
+                    {
+                        DataSource = "samsamjon.database.windows.net",
+                        UserID = "samsamjon",
+                        Password = "Test1234",
+                        InitialCatalog = "samjonDB"
+                    };
+
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString)) {
+                    connection.Open();
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("Update Budget set LoanLimit =" + LoanLimit + ", HouseHoldLimit = " + houseHoldLimit + ", ConsumptionLimit= " + consumptionLimit + ", TransportationLimit= "+ transportLimit + ", SavingsLimit=" + savingsLimit + " where username='" + username + "'");
+                    //sb.Append("VALUES ('{0}', '{1}', '{2}', '{3}')", lastName, firstName, userName, password);
+
+                    string sql = sb.ToString();
+
+                    using (SqlCommand command = new SqlCommand(sql, connection)) {
+                        if (command.ExecuteNonQuery() > 0) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            catch (SqlException exception) {
+                Console.WriteLine(exception.ToString());
+            }
             return false;
         }
     }

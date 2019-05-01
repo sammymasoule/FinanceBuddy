@@ -1,0 +1,100 @@
+﻿<Window x:Class="FinanceBuddyWPF.UpdateBudgetWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dv="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"      
+        xmlns:dvc="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+        mc:Ignorable="d"
+        Title="UpdateBudgetWindow" Height="800" Width="800">
+    <Grid Background="#88D1F1">
+        <Menu VerticalAlignment="Top" HorizontalAlignment="Left" Background="White">
+            <MenuItem>
+                <MenuItem.Header>
+                    <StackPanel>
+                        <Image Source="/Images/user_icon.png" Height="70" Width="65" Margin="-3,0,0,0"></Image>
+                    </StackPanel>
+                </MenuItem.Header>
+                <MenuItem Header="Profil"></MenuItem>
+                <MenuItem Header="Log ud" Click="Logout_click"></MenuItem>
+            </MenuItem>
+
+        </Menu>
+        <Menu Foreground="White" Height="70" VerticalAlignment="Top" Margin="70,0,0,5" HorizontalAlignment="Stretch" Background="#41AADE" BorderThickness="1">
+            <MenuItem Header="Budget" VerticalAlignment="Center" Margin="20" BorderBrush="White" Click="BudgetWindow_click"></MenuItem>
+            <MenuItem Header="Opret Budget" VerticalAlignment="Center" Margin="20" BorderBrush="White"></MenuItem>
+            <MenuItem Header="Ændr Budget" VerticalAlignment="Center" Margin="20" BorderBrush="White"></MenuItem>
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Horizontal"></VirtualizingStackPanel>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+        </Menu>
+        <Menu Width="70" Margin="0,70,5,0" HorizontalAlignment="Left" VerticalAlignment="Stretch" Foreground="White" Background="#1392D3" BorderThickness="1">
+
+            <MenuItem Header="Overblik" HorizontalAlignment="Center" Margin="0,20" BorderBrush="White">
+
+            </MenuItem>
+
+            <MenuItem Header="Budget" HorizontalAlignment="Center" Margin="0,20" BorderBrush="White">
+
+            </MenuItem>
+
+            <Menu.ItemsPanel>
+
+                <ItemsPanelTemplate>
+
+                    <VirtualizingStackPanel Orientation="Vertical"/>
+
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+        </Menu>
+        <StackPanel Margin="100,70,100,20">
+            <Label Content="Opdater/slet dit budget" HorizontalAlignment="Center" FontSize="30"></Label>
+            <Separator></Separator>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Lån &amp; Regninger:" FontSize="25" Width="200"></Label>
+                <Label Margin="10,0,-10,0" VerticalAlignment="Center" Content="Nyt:" FontSize="15"></Label>
+                <TextBox  x:Name="NewLoanTxt" FontSize="25" Margin="20,0,20,0" BorderBrush="Gray" Width="100"/>
+                <Label Margin="0,0,0,0" VerticalAlignment="Center" Content="Nuværende:" FontSize="15"></Label>
+                <TextBox IsReadOnly="True" x:Name="OldLoanTxt" FontSize="25" BorderBrush="Gray" Width="100"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <Label Content="Husholdning:" FontSize="25" Width="200"></Label>
+                <Label Margin="10,0,-10,0" VerticalAlignment="Center" Content="Nyt:" FontSize="15"></Label>
+                <TextBox  x:Name="NewHouseholdTxt" FontSize="25" Margin="20,0,20,0" BorderBrush="Gray" Width="100"/>
+                <Label Margin="0,0,0,0" VerticalAlignment="Center" Content="Nuværende:" FontSize="15"></Label>
+                <TextBox IsReadOnly="True" x:Name="OldHouseholdTxt" FontSize="25" BorderBrush="Gray" Width="100"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <Label Content="Forbrug:" FontSize="25" Width="200"></Label>
+                <Label Margin="10,0,-10,0" VerticalAlignment="Center" Content="Nyt:" FontSize="15"></Label>
+                <TextBox  x:Name="NewConsumptionTxt" FontSize="25" Margin="20,0,20,0" BorderBrush="Gray" Width="100"/>
+                <Label Margin="0,0,0,0" VerticalAlignment="Center" Content="Nuværende:" FontSize="15"></Label>
+                <TextBox IsReadOnly="True" x:Name="OldConsumptionTxt" FontSize="25" BorderBrush="Gray" Width="100"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <Label Content="Transport:" FontSize="25" Width="200"></Label>
+                <Label Margin="10,0,-10,0" VerticalAlignment="Center" Content="Nyt:" FontSize="15"></Label>
+                <TextBox  x:Name="NewTransportTxt" FontSize="25" Margin="20,0,20,0" BorderBrush="Gray" Width="100"/>
+                <Label Margin="0,0,0,0" VerticalAlignment="Center" Content="Nuværende:" FontSize="15"></Label>
+                <TextBox IsReadOnly="True" x:Name="OldTransportTxt" FontSize="25" BorderBrush="Gray" Width="100"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <Label Content="Opsparing:" FontSize="25" Width="200"></Label>
+                <Label Margin="10,0,-10,0" VerticalAlignment="Center" Content="Nyt:" FontSize="15"></Label>
+                <TextBox  x:Name="NewSavingsTxt" FontSize="25" Margin="20,0,20,0" BorderBrush="Gray" Width="100"/>
+                <Label Margin="0,0,0,0" VerticalAlignment="Center" Content="Nuværende:" FontSize="15"></Label>
+                <TextBox IsReadOnly="True" x:Name="OldSavingsTxt" FontSize="25" BorderBrush="Gray" Width="100"/>
+            </StackPanel>
+            <Label Name="ConsumpError" Content="Indtast venligst et tal" FontSize="20" Foreground="Red" Visibility="Hidden"></Label>
+            <Label Name="TransportError" Content="Indtast venligst et tal" FontSize="20" Foreground="Red" Visibility="Hidden"></Label>
+            <Label Name="SavingsError" Content="Indtast venligst et tal" FontSize="20" Foreground="Red" Visibility="Hidden"></Label>
+            <Button x:Name="TilfoejButton" Content="Opret" FontSize="30" Margin="248,0,247.6,10" Background="Azure" HorizontalAlignment="Center" RenderTransformOrigin="0.634,-2.424" Click="TilfoejButton_Click"/>
+
+        </StackPanel>
+
+
+
+    </Grid>
+</Window>

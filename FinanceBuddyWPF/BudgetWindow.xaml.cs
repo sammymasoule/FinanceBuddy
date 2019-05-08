@@ -1,25 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using FinanceBuddyWPF.Controllers;
 
 namespace FinanceBuddyWPF {
     /// <summary>
     /// Interaction logic for BudgetWindow.xaml
     /// </summary>
     public partial class BudgetWindow : Window {
+
+        private DatabaseActions dbActions = new DatabaseActions();
+
         public BudgetWindow() {
             InitializeComponent();
-            WindowState = WindowState.Maximized;    
+            WindowState = WindowState.Maximized;
+            string userName = MainWindow.username;
+            LoadBudgetValues(userName);
+        }
+
+        private void LoadBudgetValues(string userName)
+        {
+            List<float> limits = dbActions.GetBudgetLimits(userName);
+            //var month = comboBox.Index || comboBox.Text
+            List<KeyValuePair<string, float>> expenses = dbActions.GetExpenses(userName, "2019/04/01", "2019/04/30");
+            
         }
 
         private void LogOutMenuItemClick(object sender, RoutedEventArgs e)

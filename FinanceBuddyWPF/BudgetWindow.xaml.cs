@@ -31,7 +31,6 @@ namespace FinanceBuddyWPF {
 
             List<float> limits = dbActions.GetBudgetLimits(userName);
             List<KeyValuePair<string, float>> expenses = dbActions.GetExpenses(userName, startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"));
-            List<KeyValuePair<string, float>> valuelist = new List<KeyValuePair<string, float>>();
             var myResults = expenses.GroupBy(p => p.Key)
                 .ToDictionary(g => g.Key, g => g.Sum(p => p.Value));
 

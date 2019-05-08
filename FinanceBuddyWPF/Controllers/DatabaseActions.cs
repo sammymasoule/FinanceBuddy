@@ -7,8 +7,7 @@ namespace FinanceBuddyWPF.Controllers
 {
     class DatabaseActions
     {
-
-        SqlConnectionStringBuilder builder =
+        readonly SqlConnectionStringBuilder builder =
             new SqlConnectionStringBuilder
             {
                 DataSource = "samsamjon.database.windows.net",
@@ -17,7 +16,7 @@ namespace FinanceBuddyWPF.Controllers
                 InitialCatalog = "samjonDB"
             };
 
-        public bool CreateIncome(float amount, String date, string userName, string description)
+        public bool CreateIncome(float amount, string date, string userName, string description)
         {
             try
             {

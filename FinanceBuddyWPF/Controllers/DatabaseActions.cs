@@ -269,6 +269,96 @@ namespace FinanceBuddyWPF.Controllers
 
             return -1;
         }
+        public float GetTest(string userName, string cat)
+        {
+            try
+            {
+                float amount;
+                SqlConnectionStringBuilder builder =
+                    new SqlConnectionStringBuilder
+                    {
+                        DataSource = "samsamjon.database.windows.net",
+                        UserID = "samsamjon",
+                        Password = "Test1234",
+                        InitialCatalog = "samjonDB"
+                    };
+
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    connection.Open();
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("select AVG(Amount) from TransItem where userName NOT '" + userName + "'" +
+                              " AND Category = '" + cat + "'");
+                    string sql = sb.ToString();
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        var value = command.ExecuteScalar();
+                        if (!String.IsNullOrEmpty(value.ToString()))
+                        {
+                            amount = float.Parse(value.ToString());
+                        }
+                        else
+                        {
+                            return 0;
+                        }
+                    }
+                }
+
+                return amount;
+            }
+            catch (SqlException exception)
+            {
+                Console.WriteLine(exception.ToString());
+            }
+
+            return -1;
+        }
+        public float GetTest2(string userName, string cat)
+        {
+            try
+            {
+                float amount;
+                SqlConnectionStringBuilder builder =
+                    new SqlConnectionStringBuilder
+                    {
+                        DataSource = "samsamjon.database.windows.net",
+                        UserID = "samsamjon",
+                        Password = "Test1234",
+                        InitialCatalog = "samjonDB"
+                    };
+
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    connection.Open();
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("select AVG(Amount) from TransItem where userName = '" + userName + "'" +
+                              " AND Category = '" + cat + "'");
+                    string sql = sb.ToString();
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        var value = command.ExecuteScalar();
+                        if (!String.IsNullOrEmpty(value.ToString()))
+                        {
+                            amount = float.Parse(value.ToString());
+                        }
+                        else
+                        {
+                            return 0;
+                        }
+                    }
+                }
+
+                return amount;
+            }
+            catch (SqlException exception)
+            {
+                Console.WriteLine(exception.ToString());
+            }
+
+            return -1;
+        }
 
         public List<KeyValuePair<string, float>> GetExpenses(string userName)
         {
@@ -305,5 +395,6 @@ namespace FinanceBuddyWPF.Controllers
 
             return new List<KeyValuePair<string, float>>();
         }
+
     }
 }

@@ -27,8 +27,8 @@ namespace FinanceBuddyWPF
         {
             InitializeComponent();
             WindowState = WindowState.Maximized;
-            DateTime date = DateTime.Now;
-            string month = new DateTime(2015, date.Month, 1).ToString("MMMM", CultureInfo.CreateSpecificCulture("dk"));
+            string month = new DateTime(2015, DateTime.Now.Month, 1)
+                .ToString("MMMM", CultureInfo.CreateSpecificCulture("dk"));
             LoadPieChart();
             LoadBarChart(expenses, month);
         }
@@ -38,11 +38,8 @@ namespace FinanceBuddyWPF
         List<KeyValuePair<string, float>> expenses = new List<KeyValuePair<string, float>>();
         private readonly string userName = MainWindow.username;
         private readonly DataUtilites DataU = new DataUtilites();
-        private string catSelected = "Husholdning";
         private static DateTime date = DateTime.Now;
-        private string month = new DateTime(2015, date.Month, 1).ToString("MMMM", CultureInfo.CreateSpecificCulture("dk"));
-        //private readonly DataUtilites DataU = new DataUtilites();
-
+       
         private void LoadPieChart()
         {
             var tmpdate = DataU.GetCurrentMonth();
@@ -63,20 +60,6 @@ namespace FinanceBuddyWPF
             pieChart.DataContext = valueList;
         }
 
-        private void LoadSidePieChart()
-        {
-            /*var tmpdate = DataU.GetCurrentMonth();
-            var stringdate = tmpdate.Split(' '); */
-            var yourAmount = dbActions.GetAvgExpenses(userName, catSelected, "fix", "fix");
-            var othersAmount = dbActions.GetAvgExpensesOthers(userName, catSelected, "fix", "fix");
-            List<KeyValuePair<string, float>> valueList = new List<KeyValuePair<string, float>>
-            {
-                new KeyValuePair<string, float>("Dine udgifter", yourAmount),
-                new KeyValuePair<string, float>("Andres udgifter", othersAmount),
-            };
-            pieChart2.DataContext = valueList;
-        }
-
             private void LoadBarChart(List<KeyValuePair<string, float>> list, string month)
             {
                 List<KeyValuePair<string, float>> valuelist = new List<KeyValuePair<string, float>>();
@@ -85,22 +68,6 @@ namespace FinanceBuddyWPF
 
                 Series.Title = month;
                 BarChart.DataContext = myResults;
-            }
-
-            private void LogOutMenuItemClick(object sender, RoutedEventArgs e)
-            {
-                MainWindow.username = null;
-                MainWindow window = new MainWindow();
-                window.Show();
-                Close();
-            }
-
-            private void IndkomstItemClick(object sender, RoutedEventArgs e)
-            {
-
-                IncomeWindow window = new IncomeWindow();
-                window.Show();
-                Close();
             }
 
             private void LoadBarChartByDate(string firstDay, string lastDay, string month)
@@ -115,7 +82,7 @@ namespace FinanceBuddyWPF
 
             }
 
-            private void Button_Click(object sender, RoutedEventArgs e)
+            private void LoadChart_Click(object sender, RoutedEventArgs e)
             {
                 DateTime? datefrom = DateFrom.SelectedDate;
                 DateTime? dateto = DateTo.SelectedDate;
@@ -134,26 +101,52 @@ namespace FinanceBuddyWPF
                 }
             }
 
-            private void OutcomeWindow(object sender, RoutedEventArgs e)
-            {
-                OutcomeWindow window = new OutcomeWindow();
-                window.Show();
-                Close();
-            }
-
             private void SidePieButton_Click(object sender, RoutedEventArgs e)
             {
-                catSelected = katComboBox.SelectedItem.ToString().Split(new string[] {": "}, StringSplitOptions.None)
-                    .Last();
                 DateTime? datefrom = DateFromSidePie.SelectedDate;
                 DateTime? dateto = DateToSidePie.SelectedDate;
 
-                LoadSidePieChart();
+                LoadSidePieChart(datefrom, dateto);
             }
+
+            private void LoadSidePieChart(DateTime? firstDay, DateTime? lastDay)
+            {
+                var tmpdate = DataU.GetDateFormat(firstDay, lastDay);
+                var date = tmpdate.Split(' ');
+                var yourAmount = dbActions.GetAvgExpenses(userName, catComboBox.Text, date[0], date[1]);
+                var othersAmount = dbActions.GetAvgExpensesOthers(userName, catComboBox.Text, date[0], date[1]);
+                List<KeyValuePair<string, float>> valueList = new List<KeyValuePair<string, float>>
+                {
+                    new KeyValuePair<string, float>("Dine udgifter", yourAmount),
+                    new KeyValuePair<string, float>("Andres udgifter", othersAmount),
+                };
+                
+                pieChart2.DataContext = valueList;
+            }
+
+        private void OutcomeWindow(object sender, RoutedEventArgs e) {
+            OutcomeWindow window = new OutcomeWindow();
+            window.Show();
+            Close();
+        }
 
         private void Budget_click(object sender, RoutedEventArgs e)
         {
             BudgetWindow window = new BudgetWindow();
+            window.Show();
+            Close();
+        }
+
+        private void LogOutMenuItemClick(object sender, RoutedEventArgs e) {
+            MainWindow.username = null;
+            MainWindow window = new MainWindow();
+            window.Show();
+            Close();
+        }
+
+        private void IndkomstItemClick(object sender, RoutedEventArgs e) {
+
+            IncomeWindow window = new IncomeWindow();
             window.Show();
             Close();
         }

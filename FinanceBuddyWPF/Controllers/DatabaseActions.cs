@@ -360,7 +360,7 @@ namespace FinanceBuddyWPF.Controllers
             return -1;
         }
 
-        public List<KeyValuePair<string, float>> GetExpenses(string userName)
+        public List<KeyValuePair<string, float>> GetExpenses(string userName, string firstDay, string lastDay)
         {
             try
             {

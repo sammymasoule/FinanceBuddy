@@ -16,12 +16,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using FinanceBuddyWPF.Controllers;
 
-namespace FinanceBuddyWPF {
+namespace FinanceBuddyWPF
+{
     /// <summary>
     /// Interaction logic for OverviewWindow.xaml
     /// </summary>
-    public partial class OverviewWindow : Window {
-        public OverviewWindow() {
+    public partial class OverviewWindow : Window
+    {
+        public OverviewWindow()
+        {
             InitializeComponent();
             WindowState = WindowState.Maximized;
             DateTime date = DateTime.Now;
@@ -35,10 +38,9 @@ namespace FinanceBuddyWPF {
         List<KeyValuePair<string, float>> expenses = new List<KeyValuePair<string, float>>();
         private readonly string userName = MainWindow.username;
         private readonly DataUtilites DataU = new DataUtilites();
-        string userName = MainWindow.username;
-        string katSelected = "Husholdning";
-        static DateTime date = DateTime.Now;
-        string month = new DateTime(2015, date.Month, 1).ToString("MMMM", CultureInfo.CreateSpecificCulture("dk"));
+        private string catSelected = "Husholdning";
+        private static DateTime date = DateTime.Now;
+        private string month = new DateTime(2015, date.Month, 1).ToString("MMMM", CultureInfo.CreateSpecificCulture("dk"));
         //private readonly DataUtilites DataU = new DataUtilites();
 
         private void LoadPieChart()
@@ -60,96 +62,103 @@ namespace FinanceBuddyWPF {
 
             pieChart.DataContext = valueList;
         }
+
         private void LoadSidePieChart()
         {
             /*var tmpdate = DataU.GetCurrentMonth();
             var stringdate = tmpdate.Split(' '); */
-            var yourAmount = dbActions.GetAvgExpenses(userName, katSelected, "fix", "fix");
-            var othersAmount = dbActions.GetAvgExpensesOthers(userName, katSelected, "fix", "fix");
+            var yourAmount = dbActions.GetAvgExpenses(userName, catSelected, "fix", "fix");
+            var othersAmount = dbActions.GetAvgExpensesOthers(userName, catSelected, "fix", "fix");
             List<KeyValuePair<string, float>> valueList = new List<KeyValuePair<string, float>>
             {
                 new KeyValuePair<string, float>("Dine udgifter", yourAmount),
                 new KeyValuePair<string, float>("Andres udgifter", othersAmount),
             };
-
-        private void LoadBarChart(List<KeyValuePair<string, float>> list, string month)
-        {
-            List<KeyValuePair<string, float>> valuelist = new List<KeyValuePair<string, float>>();
-            var myResults = list.GroupBy(p => p.Key)
-                .ToDictionary(g => g.Key, g => g.Sum(p => p.Value));
-
-            Series.Title = month;
-            BarChart.DataContext = myResults;
+            pieChart2.DataContext = valueList;
         }
 
-        private void LogOutMenuItemClick(object sender, RoutedEventArgs e)
-        {
-            MainWindow.username = null;
-            MainWindow window = new MainWindow();
-            window.Show();
-            Close();
-        }
-
-        private void IndkomstItemClick(object sender, RoutedEventArgs e)
-        {
-
-            IncomeWindow window = new IncomeWindow();
-            window.Show();
-            Close();
-        }
-
-        private void LoadBarChartByDate(string firstDay, string lastDay, string month)
-        {
-            var list = dbActions.GetExpenses(userName, firstDay, lastDay);
-            List<KeyValuePair<string, float>> valuelist = new List<KeyValuePair<string, float>>();
-            var myResults = list.GroupBy(p => p.Key)
-                .ToDictionary(g => g.Key, g => g.Sum(p => p.Value));
-
-            Series.Title = month;
-            BarChart.DataContext = myResults;
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            DateTime? datefrom = DateFrom.SelectedDate;
-            DateTime? dateto = DateTo.SelectedDate;
-
-            if (datefrom != null && dateto !=null)
+            private void LoadBarChart(List<KeyValuePair<string, float>> list, string month)
             {
-                var tmpdate = DataU.GetDateFormat(datefrom, dateto);
-                var stringdatefrom = tmpdate.Split(' ');
+                List<KeyValuePair<string, float>> valuelist = new List<KeyValuePair<string, float>>();
+                var myResults = list.GroupBy(p => p.Key)
+                    .ToDictionary(g => g.Key, g => g.Sum(p => p.Value));
 
-                var month = DataU.getMonth(datefrom, dateto);
-                LoadBarChartByDate(stringdatefrom[0], stringdatefrom[1], month);
+                Series.Title = month;
+                BarChart.DataContext = myResults;
             }
-            else
+
+            private void LogOutMenuItemClick(object sender, RoutedEventArgs e)
             {
-                MessageBox.Show("Indtast venligst en dato");
+                MainWindow.username = null;
+                MainWindow window = new MainWindow();
+                window.Show();
+                Close();
             }
-        }
 
-        private void OutcomeWindow(object sender, RoutedEventArgs e) {
-            OutcomeWindow window = new OutcomeWindow();
-            window.Show();
-            Close();
-        }
-       
-        private void SidePieButton_Click(object sender, RoutedEventArgs e)
+            private void IndkomstItemClick(object sender, RoutedEventArgs e)
+            {
+
+                IncomeWindow window = new IncomeWindow();
+                window.Show();
+                Close();
+            }
+
+            private void LoadBarChartByDate(string firstDay, string lastDay, string month)
+            {
+                var list = dbActions.GetExpenses(userName, firstDay, lastDay);
+                List<KeyValuePair<string, float>> valuelist = new List<KeyValuePair<string, float>>();
+                var myResults = list.GroupBy(p => p.Key)
+                    .ToDictionary(g => g.Key, g => g.Sum(p => p.Value));
+
+                Series.Title = month;
+                BarChart.DataContext = myResults;
+
+            }
+
+            private void Button_Click(object sender, RoutedEventArgs e)
+            {
+                DateTime? datefrom = DateFrom.SelectedDate;
+                DateTime? dateto = DateTo.SelectedDate;
+
+                if (datefrom != null && dateto != null)
+                {
+                    var tmpdate = DataU.GetDateFormat(datefrom, dateto);
+                    var stringdatefrom = tmpdate.Split(' ');
+
+                    var month = DataU.getMonth(datefrom, dateto);
+                    LoadBarChartByDate(stringdatefrom[0], stringdatefrom[1], month);
+                }
+                else
+                {
+                    MessageBox.Show("Indtast venligst en dato");
+                }
+            }
+
+            private void OutcomeWindow(object sender, RoutedEventArgs e)
+            {
+                OutcomeWindow window = new OutcomeWindow();
+                window.Show();
+                Close();
+            }
+
+            private void SidePieButton_Click(object sender, RoutedEventArgs e)
+            {
+                catSelected = katComboBox.SelectedItem.ToString().Split(new string[] {": "}, StringSplitOptions.None)
+                    .Last();
+                DateTime? datefrom = DateFromSidePie.SelectedDate;
+                DateTime? dateto = DateToSidePie.SelectedDate;
+
+                LoadSidePieChart();
+            }
+
+        private void Budget_click(object sender, RoutedEventArgs e)
         {
-            katSelected = katComboBox.SelectedItem.ToString().Split(new string[] { ": " }, StringSplitOptions.None).Last();
-            DateTime? datefrom = DateFromSidePie.SelectedDate;
-            DateTime? dateto = DateToSidePie.SelectedDate;
-
-            LoadSidePieChart();
-        }
-    }
-
-        private void Budget_click(object sender, RoutedEventArgs e) {
             BudgetWindow window = new BudgetWindow();
             window.Show();
             Close();
         }
     }
-    }
+}
+   
+
 

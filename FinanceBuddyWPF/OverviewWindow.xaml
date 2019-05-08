@@ -15,7 +15,7 @@
             <TextBlock Margin="10" TextWrapping="Wrap" Foreground="White">
                 Nedenfor kan en kategori vælges, derefter vises en sammenligning mellem dit forbrug og andre brugere 
             </TextBlock>
-            <ComboBox Margin="5" Name="katComboBox">
+            <ComboBox Margin="5" Name="catComboBox">
                 <ComboBoxItem>Bolig</ComboBoxItem>
                 <ComboBoxItem IsSelected="True">Husholdning</ComboBoxItem>
                 <ComboBoxItem>Personlig pleje</ComboBoxItem>

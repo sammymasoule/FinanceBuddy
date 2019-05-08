@@ -269,7 +269,7 @@ namespace FinanceBuddyWPF.Controllers
 
             return -1;
         }
-        public float GetTest(string userName, string cat)
+        public float GetExpensesAVG(string userName, string cat, String firstDay, String lastDay)
         {
             try
             {
@@ -288,7 +288,7 @@ namespace FinanceBuddyWPF.Controllers
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
                     sb.Append("select AVG(Amount) from TransItem where userName NOT '" + userName + "'" +
-                              " AND Category = '" + cat + "'");
+                              " AND Category = '" + cat + "' AND Date between '" + firstDay + "' AND '" + lastDay + "'");
                     string sql = sb.ToString();
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
@@ -314,7 +314,7 @@ namespace FinanceBuddyWPF.Controllers
 
             return -1;
         }
-        public float GetTest2(string userName, string cat)
+        public float GetOthersExpensiveAVG(string userName, string cat, string firstDay, string lastDay)
         {
             try
             {
@@ -333,7 +333,7 @@ namespace FinanceBuddyWPF.Controllers
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
                     sb.Append("select AVG(Amount) from TransItem where userName = '" + userName + "'" +
-                              " AND Category = '" + cat + "'");
+                              " AND Category = '" + cat + "' Date between '" + firstDay + "' AND '" + lastDay + "'");
                     string sql = sb.ToString();
 
                     using (SqlCommand command = new SqlCommand(sql, connection))

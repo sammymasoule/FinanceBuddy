@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,7 +30,9 @@ namespace FinanceBuddyWPF {
         private readonly DatabaseActions dbActions = new DatabaseActions();
         string userName = MainWindow.username;
         string katSelected = "Husholdning";
-        bool handle = true;
+        static DateTime date = DateTime.Now;
+        string month = new DateTime(2015, date.Month, 1).ToString("MMMM", CultureInfo.CreateSpecificCulture("dk"));
+        //private readonly DataUtilites DataU = new DataUtilites();
 
         private void LoadPieChart()
         {
@@ -48,8 +51,10 @@ namespace FinanceBuddyWPF {
         }
         private void LoadSidePieChart()
         {
-            var yourAmount = dbActions.GetTest2(userName, katSelected);
-            var othersAmount = dbActions.GetTest(userName, katSelected);
+            /*var tmpdate = DataU.GetCurrentMonth();
+            var stringdate = tmpdate.Split(' '); */
+            var yourAmount = dbActions.GetOthersExpensiveAVG(userName, katSelected, "fix", "fix");
+            var othersAmount = dbActions.GetExpensesAVG(userName, katSelected, "fix", "fix");
             List<KeyValuePair<string, float>> valueList = new List<KeyValuePair<string, float>>
             {
                 new KeyValuePair<string, float>("Dine udgifter", yourAmount),
@@ -87,6 +92,9 @@ namespace FinanceBuddyWPF {
         private void SidePieButton_Click(object sender, RoutedEventArgs e)
         {
             katSelected = katComboBox.SelectedItem.ToString().Split(new string[] { ": " }, StringSplitOptions.None).Last();
+            DateTime? datefrom = DateFromSidePie.SelectedDate;
+            DateTime? dateto = DateToSidePie.SelectedDate;
+
             LoadSidePieChart();
         }
     }

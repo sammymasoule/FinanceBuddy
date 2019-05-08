@@ -26,6 +26,12 @@
                 <ComboBoxItem>Transport</ComboBoxItem>
                 
             </ComboBox>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Fra:" Margin="50,0,0,0"></Label>
+                <DatePicker Name="DateFromSidePie" HorizontalAlignment="Center" Margin="10,0,0,0"  VerticalAlignment="Top"/>
+                <Label Content="Til:"></Label>
+                <DatePicker Name="DateToSidePie" HorizontalAlignment="Center" Margin="10,0,0,0" VerticalAlignment="Top"/>
+            </StackPanel>
             <Button Content ="Ok"  Name="SidePieButton" Height="20" Width="20" HorizontalAlignment="Center" VerticalAlignment="Center" Click="SidePieButton_Click"></Button>
             <dvc:Chart  x:Name="pieChart2" BorderThickness="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" Height="300" Width="300">
                 <dvc:PieSeries DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding}" IsSelectionEnabled="True" />

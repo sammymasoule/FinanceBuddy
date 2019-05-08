@@ -39,15 +39,92 @@
             <MenuItem Header="Budget" HorizontalAlignment="Center" Margin="0,20" BorderBrush="White">
 
             </MenuItem>
-
+           
             <Menu.ItemsPanel>
 
                 <ItemsPanelTemplate>
+                    
 
                     <VirtualizingStackPanel Orientation="Vertical"/>
 
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
         </Menu>
+        <StackPanel Margin="81,70,10,20" HorizontalAlignment="Center">
+            <Label Content="Dit budget" HorizontalAlignment="Center" FontSize="30"></Label>
+            <ComboBox Width="145" Margin="5" Name="catComboBox">
+                <ComboBoxItem IsSelected="True">Januar</ComboBoxItem>
+                <ComboBoxItem>Februar</ComboBoxItem>
+                <ComboBoxItem>Marts</ComboBoxItem>
+                <ComboBoxItem>April</ComboBoxItem>
+                <ComboBoxItem>Maj</ComboBoxItem>
+                <ComboBoxItem>Juni</ComboBoxItem>
+                <ComboBoxItem>Juli</ComboBoxItem>
+                <ComboBoxItem>August</ComboBoxItem>
+                <ComboBoxItem>September</ComboBoxItem>
+                <ComboBoxItem>Oktober</ComboBoxItem>
+                <ComboBoxItem>November</ComboBoxItem>
+                <ComboBoxItem>December</ComboBoxItem>
+            </ComboBox>
+            <Button Name="BudgetMonth" Width="30" Height="20" Content="Vælg" Click="BudgetMonth_Click"></Button>
+            <Separator></Separator>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
+                <Label Content="Lån &amp; Regninger" FontSize="20" Width="165"></Label>
+                <Label Margin="0,0,-10,0" VerticalAlignment="Center" Content="Din sats:" FontSize="15"></Label>
+                <TextBox  x:Name="loanMax" FontSize="25" Margin="10,0,10,0" BorderBrush="Gray" Width="100"/>
+                <Label Margin="0,0,0,0" VerticalAlignment="Center" Content="Brugt:" FontSize="15"></Label>
+                <TextBox IsReadOnly="True" x:Name="curLoan" FontSize="25" BorderBrush="Gray" Width="100"/>
+                <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="Resterende:" FontSize="15"></Label>
+                <TextBox IsReadOnly="True" x:Name="diffLoan" FontSize="25" BorderBrush="Gray" Width="100"/>
+                
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
+                <Label Content="Indkøb" FontSize="20" Width="165"></Label>
+                <Label Margin="0,0,-10,0" VerticalAlignment="Center" Content="Din sats:" FontSize="15"></Label>
+                <TextBox  x:Name="indMax" FontSize="25" Margin="10,0,10,0" BorderBrush="Gray" Width="100"/>
+                <Label Margin="0,0,0,0" VerticalAlignment="Center" Content="Brugt:" FontSize="15"></Label>
+                <TextBox IsReadOnly="True" x:Name="curInd" FontSize="25" BorderBrush="Gray" Width="100"/>
+                <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="Resterende:" FontSize="15"></Label>
+                <TextBox IsReadOnly="True" x:Name="diffInd" FontSize="25" BorderBrush="Gray" Width="100"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
+                <Label Content="Husholdning" FontSize="20" Width="165"></Label>
+                <Label Margin="0,0,-10,0" VerticalAlignment="Center" Content="Din sats:" FontSize="15"></Label>
+                <TextBox  x:Name="householdMax" FontSize="25" Margin="10,0,10,0" BorderBrush="Gray" Width="100"/>
+                <Label Margin="0,0,0,0" VerticalAlignment="Center" Content="Brugt:" FontSize="15"></Label>
+                <TextBox IsReadOnly="True" x:Name="curHousehold" FontSize="25" BorderBrush="Gray" Width="100"/>
+                <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="Resterende:" FontSize="15"></Label>
+                <TextBox IsReadOnly="True" x:Name="diffHousehold" FontSize="25" BorderBrush="Gray" Width="100"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"  Margin="0,10,0,10">
+                <Label Content="Forbrug" FontSize="20" Width="165"></Label>
+                <Label Margin="0,0,-10,0" VerticalAlignment="Center" Content="Din sats:" FontSize="15"></Label>
+                <TextBox  x:Name="consmpMax" FontSize="25" Margin="10,0,10,0" BorderBrush="Gray" Width="100"/>
+                <Label Margin="0,0,0,0" VerticalAlignment="Center" Content="Brugt:" FontSize="15"></Label>
+                <TextBox IsReadOnly="True" x:Name="curConsmp" FontSize="25" BorderBrush="Gray" Width="100"/>
+                <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="Resterende:" FontSize="15"></Label>
+                <TextBox IsReadOnly="True" x:Name="diffConsmp" FontSize="25" BorderBrush="Gray" Width="100"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,10" >
+                <Label Content="Transport" FontSize="20" Width="165"></Label>
+                <Label Margin="0,0,-10,0" VerticalAlignment="Center" Content="Din sats:" FontSize="15"></Label>
+                <TextBox  x:Name="transMax" FontSize="25" Margin="10,0,10,0" BorderBrush="Gray" Width="100"/>
+                <Label Margin="0,0,0,0" VerticalAlignment="Center" Content="Brugt:" FontSize="15"></Label>
+                <TextBox IsReadOnly="True" x:Name="curTrans" FontSize="25" BorderBrush="Gray" Width="100"/>
+                <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="Resterende:" FontSize="15"></Label>
+                <TextBox IsReadOnly="True" x:Name="diffTrans" FontSize="25" BorderBrush="Gray" Width="100"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,10" >
+                <Label Content="Opsparing" FontSize="20" Width="165"></Label>
+                <Label Margin="0,0,-10,0" VerticalAlignment="Center" Content="Din sats:" FontSize="15"></Label>
+                <TextBox  x:Name="opsMax" FontSize="25" Margin="10,0,10,0" BorderBrush="Gray" Width="100"/>
+                <Label Margin="0,0,0,0" VerticalAlignment="Center" Content="Brugt:" FontSize="15"></Label>
+                <TextBox IsReadOnly="True" x:Name="curOps" FontSize="25" BorderBrush="Gray" Width="100"/>
+                <Label Margin="10,0,0,0" VerticalAlignment="Center" Content="Resterende:" FontSize="15"></Label>
+                <TextBox IsReadOnly="True" x:Name="diffOps" FontSize="25" BorderBrush="Gray" Width="100"/>
+            </StackPanel>
+            
+
+        </StackPanel>
     </Grid>
 </Window>

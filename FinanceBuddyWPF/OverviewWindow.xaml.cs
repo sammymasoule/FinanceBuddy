@@ -53,8 +53,8 @@ namespace FinanceBuddyWPF {
         {
             /*var tmpdate = DataU.GetCurrentMonth();
             var stringdate = tmpdate.Split(' '); */
-            var yourAmount = dbActions.GetOthersExpensiveAVG(userName, katSelected, "fix", "fix");
-            var othersAmount = dbActions.GetExpensesAVG(userName, katSelected, "fix", "fix");
+            var yourAmount = dbActions.GetAvgExpenses(userName, katSelected, "fix", "fix");
+            var othersAmount = dbActions.GetAvgExpensesOthers(userName, katSelected, "fix", "fix");
             List<KeyValuePair<string, float>> valueList = new List<KeyValuePair<string, float>>
             {
                 new KeyValuePair<string, float>("Dine udgifter", yourAmount),

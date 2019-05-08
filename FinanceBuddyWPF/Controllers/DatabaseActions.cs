@@ -269,7 +269,7 @@ namespace FinanceBuddyWPF.Controllers
 
             return -1;
         }
-        public float GetExpensesAVG(string userName, string cat, String firstDay, String lastDay)
+        public float GetAvgExpensesOthers(string userName, string cat, String firstDay, String lastDay)
         {
             try
             {
@@ -314,7 +314,7 @@ namespace FinanceBuddyWPF.Controllers
 
             return -1;
         }
-        public float GetOthersExpensiveAVG(string userName, string cat, string firstDay, string lastDay)
+        public float GetAvgExpenses(string userName, string cat, string firstDay, string lastDay)
         {
             try
             {

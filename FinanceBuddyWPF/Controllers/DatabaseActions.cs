@@ -157,14 +157,14 @@ namespace FinanceBuddyWPF.Controllers
                 {
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
-                    sb.Append("select AVG(Amount) from TransItem where userName NOT IN ('" + userName + "')" +
+                    sb.Append("select SUM(Amount) / COUNT(Distinct userName) from TransItem where userName NOT IN ('" + userName + "')" +
                               " AND Category = '" + cat + "' AND Date between '" + firstDay + "' AND '" + lastDay + "'");
                     string sql = sb.ToString();
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         var value = command.ExecuteScalar();
-                        if (!String.IsNullOrEmpty(value.ToString()))
+                        if (!string.IsNullOrEmpty(value.ToString()))
                         {
                             amount = float.Parse(value.ToString());
                         }

@@ -23,10 +23,12 @@ namespace FinanceBuddyWPF.Controllers
         }
 
         public string getMonth(DateTime? firstDate, DateTime? lastDate) {
-            var monthfrom = new DateTime(2015, firstDate.Value.Month, 1).ToString("MMMM", CultureInfo.CreateSpecificCulture("da")).ToUpper();
-            var monthto = new DateTime(2015, lastDate.Value.Month, 1).ToString("MMMM", CultureInfo.CreateSpecificCulture("da")).ToUpper();
-            if (monthfrom.Equals(monthto)) {
-                return monthfrom;
+            var monthfrom = new DateTime(2015, firstDate.Value.Month, 1).ToString("MMMM", CultureInfo.CreateSpecificCulture("da"));
+            var monthto = new DateTime(2015, lastDate.Value.Month, 1).ToString("MMMM", CultureInfo.CreateSpecificCulture("da"));
+            if (monthfrom.Equals(monthto))
+            {
+                string final = monthfrom.Substring(0, 1).ToUpper() + monthfrom.Substring(1);
+                return final;
 
             }
             string month = monthfrom + "-" + monthto;

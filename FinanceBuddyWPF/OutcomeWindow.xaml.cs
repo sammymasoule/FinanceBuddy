@@ -81,7 +81,7 @@ namespace FinanceBuddyWPF {
             }
         }
 
-        private void Overblik_click(object sender, RoutedEventArgs e) {
+        private void Overview_click(object sender, RoutedEventArgs e) {
             OverviewWindow window = new OverviewWindow();
             window.Show();
             Close();
@@ -93,8 +93,18 @@ namespace FinanceBuddyWPF {
             Close();
         }
 
-        private void Indkomst_click(object sender, RoutedEventArgs e) {
+        private void Income_Click(object sender, RoutedEventArgs e) {
             IncomeWindow window = new IncomeWindow();
+            window.Show();
+            Close();
+        }
+
+        private void OverviewRedirect_Click(object sender, RoutedEventArgs e) {
+            Overview_click(sender, e);
+        }
+
+        private void Budget_Click(object sender, RoutedEventArgs e) {
+            BudgetWindow window = new BudgetWindow();
             window.Show();
             Close();
         }

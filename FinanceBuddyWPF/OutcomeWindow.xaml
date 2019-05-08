@@ -19,8 +19,8 @@
 
         </Menu>
         <Menu Foreground="White" Height="70" VerticalAlignment="Top" Margin="70,0,0,5" HorizontalAlignment="Stretch" Background="#41AADE" BorderThickness="1">
-            <MenuItem Header="Overblik" VerticalAlignment="Center" Margin="20" BorderBrush="White" Click="Overblik_click"></MenuItem>
-            <MenuItem Header="Indkomst" VerticalAlignment="Center" Margin="20" BorderBrush="White" Click="Indkomst_click"></MenuItem>
+            <MenuItem Header="Overblik" VerticalAlignment="Center" Margin="20" BorderBrush="White" Click="Overview_click"></MenuItem>
+            <MenuItem Header="Indkomst" VerticalAlignment="Center" Margin="20" BorderBrush="White" Click="Income_Click"></MenuItem>
             <MenuItem Header="Udgifter" VerticalAlignment="Center" Margin="20" BorderBrush="White"></MenuItem>
             <Menu.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -32,11 +32,11 @@
 
               Background="#1392D3" BorderThickness="1">
 
-            <MenuItem Header="Overblik" HorizontalAlignment="Center" Margin="0,20" BorderBrush="White">
+            <MenuItem Header="Overblik" HorizontalAlignment="Center" Margin="0,20" BorderBrush="White" Click="OverviewRedirect_Click">
 
             </MenuItem>
 
-            <MenuItem Header="Budget" HorizontalAlignment="Center" Margin="0,20" BorderBrush="White">
+            <MenuItem Header="Budget" HorizontalAlignment="Center" Margin="0,20" BorderBrush="White" Click="Budget_Click">
 
             </MenuItem>
 

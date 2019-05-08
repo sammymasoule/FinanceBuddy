@@ -94,5 +94,21 @@ namespace FinanceBuddyWPF {
                 }
             }
         }
+
+        private void UpdateBudget_Click(object sender, RoutedEventArgs e) {
+            UpdateBudgetWindow window = new UpdateBudgetWindow();
+            window.Show();
+            Close();
+        }
+
+        private void Overview_Click(object sender, RoutedEventArgs e) {
+            OverviewWindow window = new OverviewWindow();
+            window.Show();
+            Close();
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e) {
+            BudgetWindow_click(sender, e);
+        }
     }
 }

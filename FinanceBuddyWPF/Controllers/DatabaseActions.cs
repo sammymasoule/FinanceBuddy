@@ -306,13 +306,14 @@ namespace FinanceBuddyWPF.Controllers
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString)) {
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
-                    sb.Append("select LoanLimit, HouseHoldLimit, ConsumptionLimit, TransportationLimit, SavingsLimit from Budget where userName = '" + userName +"'");
+                    sb.Append("select LoanLimit, GroceryLimit, HouseHoldLimit, ConsumptionLimit, TransportationLimit, SavingsLimit from Budget where userName = '" + userName +"'");
                     string sql = sb.ToString();
 
                     using (SqlCommand command = new SqlCommand(sql, connection)) {
                         using (SqlDataReader reader = command.ExecuteReader()) {
                             while (reader.Read()) {
                                 limits.Add(float.Parse(reader["LoanLimit"].ToString()));
+                                limits.Add(float.Parse(reader["GroceryLimit"].ToString()));
                                 limits.Add(float.Parse(reader["HouseHoldLimit"].ToString()));
                                 limits.Add(float.Parse(reader["ConsumptionLimit"].ToString()));
                                 limits.Add(float.Parse(reader["TransportationLimit"].ToString()));

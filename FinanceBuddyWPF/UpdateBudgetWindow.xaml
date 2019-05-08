@@ -22,7 +22,7 @@
         </Menu>
         <Menu Foreground="White" Height="70" VerticalAlignment="Top" Margin="70,0,0,5" HorizontalAlignment="Stretch" Background="#41AADE" BorderThickness="1">
             <MenuItem Header="Budget" VerticalAlignment="Center" Margin="20" BorderBrush="White" Click="BudgetWindow_click"></MenuItem>
-            <MenuItem Header="Opret Budget" VerticalAlignment="Center" Margin="20" BorderBrush="White"></MenuItem>
+            <MenuItem Header="Opret Budget" VerticalAlignment="Center" Margin="20" BorderBrush="White" Click="CreateBudget_Click"></MenuItem>
             <MenuItem Header="Ændr Budget" VerticalAlignment="Center" Margin="20" BorderBrush="White"></MenuItem>
             <Menu.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -32,11 +32,11 @@
         </Menu>
         <Menu Width="70" Margin="0,70,5,0" HorizontalAlignment="Left" VerticalAlignment="Stretch" Foreground="White" Background="#1392D3" BorderThickness="1">
 
-            <MenuItem Header="Overblik" HorizontalAlignment="Center" Margin="0,20" BorderBrush="White">
+            <MenuItem Header="Overblik" HorizontalAlignment="Center" Margin="0,20" BorderBrush="White" Click="Overview_Click">
 
             </MenuItem>
 
-            <MenuItem Header="Budget" HorizontalAlignment="Center" Margin="0,20" BorderBrush="White">
+            <MenuItem Header="Budget" HorizontalAlignment="Center" Margin="0,20" BorderBrush="White" Click="BudgetWindowRedirect_Click">
 
             </MenuItem>
 

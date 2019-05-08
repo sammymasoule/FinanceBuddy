@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,11 +24,17 @@ namespace FinanceBuddyWPF {
         public OverviewWindow() {
             InitializeComponent();
             WindowState = WindowState.Maximized;
+            DateTime date = DateTime.Now;
+            string month = new DateTime(2015, date.Month, 1).ToString("MMMM", CultureInfo.CreateSpecificCulture("dk"));
             LoadPieChart();
-            LoadSidePieChart();
+            LoadBarChart(expenses, month);
         }
 
+
         private readonly DatabaseActions dbActions = new DatabaseActions();
+        List<KeyValuePair<string, float>> expenses = new List<KeyValuePair<string, float>>();
+        private readonly string userName = MainWindow.username;
+        private readonly DataUtilites DataU = new DataUtilites();
         string userName = MainWindow.username;
         string katSelected = "Husholdning";
         static DateTime date = DateTime.Now;
@@ -36,9 +43,14 @@ namespace FinanceBuddyWPF {
 
         private void LoadPieChart()
         {
-            var income = dbActions.GetIncome(userName);
-            var expenses = dbActions.GetExpenses(userName);
+            var tmpdate = DataU.GetCurrentMonth();
+            var stringdate = tmpdate.Split(' ');
+
+            var income = dbActions.GetIncome(userName, stringdate[0], stringdate[1]);
+            expenses = dbActions.GetExpenses(userName, stringdate[0], stringdate[1]);
+
             var totalExpenses = expenses.Sum(x => x.Value);
+
 
             List<KeyValuePair<string, float>> valueList = new List<KeyValuePair<string, float>>
             {
@@ -47,7 +59,6 @@ namespace FinanceBuddyWPF {
             };
 
             pieChart.DataContext = valueList;
-            LoadBarChart(expenses);
         }
         private void LoadSidePieChart()
         {
@@ -61,15 +72,13 @@ namespace FinanceBuddyWPF {
                 new KeyValuePair<string, float>("Andres udgifter", othersAmount),
             };
 
-            pieChart2.DataContext = valueList;
-        }
-
-        private void LoadBarChart(List<KeyValuePair<string, float>> list)
+        private void LoadBarChart(List<KeyValuePair<string, float>> list, string month)
         {
             List<KeyValuePair<string, float>> valuelist = new List<KeyValuePair<string, float>>();
             var myResults = list.GroupBy(p => p.Key)
                 .ToDictionary(g => g.Key, g => g.Sum(p => p.Value));
 
+            Series.Title = month;
             BarChart.DataContext = myResults;
         }
 
@@ -88,6 +97,43 @@ namespace FinanceBuddyWPF {
             window.Show();
             Close();
         }
+
+        private void LoadBarChartByDate(string firstDay, string lastDay, string month)
+        {
+            var list = dbActions.GetExpenses(userName, firstDay, lastDay);
+            List<KeyValuePair<string, float>> valuelist = new List<KeyValuePair<string, float>>();
+            var myResults = list.GroupBy(p => p.Key)
+                .ToDictionary(g => g.Key, g => g.Sum(p => p.Value));
+
+            Series.Title = month;
+            BarChart.DataContext = myResults;
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime? datefrom = DateFrom.SelectedDate;
+            DateTime? dateto = DateTo.SelectedDate;
+
+            if (datefrom != null && dateto !=null)
+            {
+                var tmpdate = DataU.GetDateFormat(datefrom, dateto);
+                var stringdatefrom = tmpdate.Split(' ');
+
+                var month = DataU.getMonth(datefrom, dateto);
+                LoadBarChartByDate(stringdatefrom[0], stringdatefrom[1], month);
+            }
+            else
+            {
+                MessageBox.Show("Indtast venligst en dato");
+            }
+        }
+
+        private void OutcomeWindow(object sender, RoutedEventArgs e) {
+            OutcomeWindow window = new OutcomeWindow();
+            window.Show();
+            Close();
+        }
        
         private void SidePieButton_Click(object sender, RoutedEventArgs e)
         {
@@ -99,4 +145,11 @@ namespace FinanceBuddyWPF {
         }
     }
 
-}
+        private void Budget_click(object sender, RoutedEventArgs e) {
+            BudgetWindow window = new BudgetWindow();
+            window.Show();
+            Close();
+        }
+    }
+    }
+

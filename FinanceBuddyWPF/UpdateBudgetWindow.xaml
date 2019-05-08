@@ -49,7 +49,7 @@
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
         </Menu>
-        <StackPanel Margin="100,70,100,20">
+        <StackPanel Margin="100,70,100,20" HorizontalAlignment="Center">
             <Label Content="Opdater/slet dit budget" HorizontalAlignment="Center" FontSize="30"></Label>
             <Separator></Separator>
             <StackPanel Orientation="Horizontal">

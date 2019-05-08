@@ -16,15 +16,13 @@
                 Nedenfor kan en kategori vælges, derefter vises en sammenligning mellem dit forbrug og andre brugere 
             </TextBlock>
             <ComboBox Margin="5" Name="catComboBox">
-                <ComboBoxItem>Bolig</ComboBoxItem>
-                <ComboBoxItem IsSelected="True">Husholdning</ComboBoxItem>
-                <ComboBoxItem>Personlig pleje</ComboBoxItem>
+                <ComboBoxItem IsSelected="True">Lån &amp; Regninger</ComboBoxItem>
+                <ComboBoxItem>Husholdning</ComboBoxItem>
                 <ComboBoxItem>Indkøb</ComboBoxItem>
-                <ComboBoxItem>Lån &amp; Regninger</ComboBoxItem>
-                <ComboBoxItem>Underholdning</ComboBoxItem>
                 <ComboBoxItem>Forbrug</ComboBoxItem>
                 <ComboBoxItem>Transport</ComboBoxItem>
-                
+                <ComboBoxItem>Opsparing</ComboBoxItem>
+     
             </ComboBox>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Fra:" Margin="50,0,0,0"></Label>

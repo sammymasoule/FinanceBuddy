@@ -44,5 +44,10 @@ namespace FinanceBuddyWPF {
             window.Show();
             Close();
         }
+
+        private void BudgetMonth_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

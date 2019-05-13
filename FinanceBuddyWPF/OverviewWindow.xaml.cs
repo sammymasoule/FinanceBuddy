@@ -28,7 +28,9 @@ namespace FinanceBuddyWPF
         private readonly string userName = MainWindow.username;
         private readonly DataUtilites DataU = new DataUtilites();
         private static DateTime date = DateTime.Now;
-       
+        /// <summary>
+        /// Method for loading the data into the pieChart in the center region.
+        /// </summary>
         private void LoadPieChart()
         {
             var tmpdate = DataU.GetCurrentMonth();
@@ -48,8 +50,12 @@ namespace FinanceBuddyWPF
 
             pieChart.DataContext = valueList;
         }
-
-            private void LoadBarChart(List<KeyValuePair<string, float>> list, string month)
+        /// <summary>
+        /// Method for loading the data into the barChart in the center region upon initialize.
+        /// </summary>
+        /// <param name="list"></param> list for adding data to the barchart.
+        /// <param name="month"></param> the month picked by the user.
+        private void LoadBarChart(List<KeyValuePair<string, float>> list, string month)
             {
                 List<KeyValuePair<string, float>> valuelist = new List<KeyValuePair<string, float>>();
                 var myResults = list.GroupBy(p => p.Key)
@@ -58,8 +64,13 @@ namespace FinanceBuddyWPF
                 Series.Title = month;
                 BarChart.DataContext = myResults;
             }
-
-            private void LoadBarChartByDate(string firstDay, string lastDay, string month)
+        /// <summary>
+        /// Method for loading the data into the pieChart in the center region and updating it when the user enters dates.
+        /// </summary>
+        /// <param name="firstDay"></param> First date picked by the user in the datePicker.
+        /// <param name="lastDay"></param> Last date picked by the user in the datePicker.
+        /// <param name="month"></param> the month picked by the user.
+        private void LoadBarChartByDate(string firstDay, string lastDay, string month)
             {
                 var list = dbActions.GetExpenses(userName, firstDay, lastDay);
                 List<KeyValuePair<string, float>> valuelist = new List<KeyValuePair<string, float>>();
@@ -70,8 +81,10 @@ namespace FinanceBuddyWPF
                 BarChart.DataContext = myResults;
 
             }
-
-            private void LoadChart_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Method for the buttonclick that updates the bar chart with the new dates.
+        /// </summary>
+        private void LoadChart_Click(object sender, RoutedEventArgs e)
             {
                 DateTime? datefrom = DateFrom.SelectedDate;
                 DateTime? dateto = DateTo.SelectedDate;
@@ -89,16 +102,23 @@ namespace FinanceBuddyWPF
                     MessageBox.Show("Indtast venligst en dato");
                 }
             }
+        /// <summary>
+        /// Method for the buttonclick that updates the sidePieChart with the new dates.
+        /// </summary>
 
-            private void SidePieButton_Click(object sender, RoutedEventArgs e)
+        private void SidePieButton_Click(object sender, RoutedEventArgs e)
             {
                 DateTime? datefrom = DateFromSidePie.SelectedDate;
                 DateTime? dateto = DateToSidePie.SelectedDate;
 
                 LoadSidePieChart(datefrom, dateto);
             }
-
-            private void LoadSidePieChart(DateTime? firstDay, DateTime? lastDay)
+        /// <summary>
+        /// Method for loading the data into the pieChart in the right sidebar.
+        /// </summary>
+        /// <param name="firstDay"></param> First date picked by the user in the datePicker.
+        /// <param name="lastDay"></param> Last date picked by the user in the datePicker.
+        private void LoadSidePieChart(DateTime? firstDay, DateTime? lastDay)
             {
                 var tmpdate = DataU.GetDateFormat(firstDay, lastDay);
                 var date = tmpdate.Split(' ');

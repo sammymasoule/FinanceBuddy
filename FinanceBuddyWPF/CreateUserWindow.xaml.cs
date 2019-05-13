@@ -28,7 +28,10 @@ namespace FinanceBuddyWPF {
         Boolean userNameBool = false;
         Boolean passwordBool = false;
         DatabaseActions dbActions = new DatabaseActions();
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Method for checking if inputs are valid and then createing the user if so.
+        /// </summary>
+        private void CreateUserButton_Click(object sender, RoutedEventArgs e)
         {   
             FirstNameTXT.BorderBrush = new SolidColorBrush(Colors.Gray);
             LastNameTXT.BorderBrush = new SolidColorBrush(Colors.Gray);

@@ -59,6 +59,7 @@
                 <Label Margin="0,0,0,0" VerticalAlignment="Center" Content="Nuværende:" FontSize="15"></Label>
                 <TextBox IsReadOnly="True" x:Name="OldLoanTxt" FontSize="25" BorderBrush="Gray" Width="100"/>
             </StackPanel>
+            <Label Content="Indtast venligst et tal" Name="loanCheckError" FontSize="15" Foreground="Red" Visibility="Hidden"/>
             <StackPanel Orientation="Horizontal" >
                 <Label Content="Husholdning:" FontSize="25" Width="200"></Label>
                 <Label Margin="10,0,-10,0" VerticalAlignment="Center" Content="Nyt:" FontSize="15"></Label>
@@ -66,6 +67,7 @@
                 <Label Margin="0,0,0,0" VerticalAlignment="Center" Content="Nuværende:" FontSize="15"></Label>
                 <TextBox IsReadOnly="True" x:Name="OldHouseholdTxt" FontSize="25" BorderBrush="Gray" Width="100"/>
             </StackPanel>
+            <Label  Content="Indtast venligst et tal" Name="householdCheckError" FontSize="15" Foreground="Red" Visibility="Hidden"/>
             <StackPanel Orientation="Horizontal" >
                 <Label Content="Forbrug:" FontSize="25" Width="200"></Label>
                 <Label Margin="10,0,-10,0" VerticalAlignment="Center" Content="Nyt:" FontSize="15"></Label>
@@ -73,6 +75,7 @@
                 <Label Margin="0,0,0,0" VerticalAlignment="Center" Content="Nuværende:" FontSize="15"></Label>
                 <TextBox IsReadOnly="True" x:Name="OldConsumptionTxt" FontSize="25" BorderBrush="Gray" Width="100"/>
             </StackPanel>
+            <Label  Content="Indtast venligst et tal" Name="consumpCheckError" FontSize="15" Foreground="Red" Visibility="Hidden"/>
             <StackPanel Orientation="Horizontal" >
                 <Label Content="Transport:" FontSize="25" Width="200"></Label>
                 <Label Margin="10,0,-10,0" VerticalAlignment="Center" Content="Nyt:" FontSize="15"></Label>
@@ -80,6 +83,7 @@
                 <Label Margin="0,0,0,0" VerticalAlignment="Center" Content="Nuværende:" FontSize="15"></Label>
                 <TextBox IsReadOnly="True" x:Name="OldTransportTxt" FontSize="25" BorderBrush="Gray" Width="100"/>
             </StackPanel>
+            <Label  Content="Indtast venligst et tal"  Name="transportCheckError" FontSize="15" Foreground="Red" Visibility="Hidden"/>
             <StackPanel Orientation="Horizontal" >
                 <Label Content="Opsparing:" FontSize="25" Width="200"></Label>
                 <Label Margin="10,0,-10,0" VerticalAlignment="Center" Content="Nyt:" FontSize="15"></Label>
@@ -87,9 +91,8 @@
                 <Label Margin="0,0,0,0" VerticalAlignment="Center" Content="Nuværende:" FontSize="15"></Label>
                 <TextBox IsReadOnly="True" x:Name="OldSavingsTxt" FontSize="25" BorderBrush="Gray" Width="100"/>
             </StackPanel>
-            <Label Name="ConsumpError" Content="Indtast venligst et tal" FontSize="20" Foreground="Red" Visibility="Hidden"></Label>
-            <Label Name="TransportError" Content="Indtast venligst et tal" FontSize="20" Foreground="Red" Visibility="Hidden"></Label>
-            <Label Name="SavingsError" Content="Indtast venligst et tal" FontSize="20" Foreground="Red" Visibility="Hidden"></Label>
+            <Label  Content="Indtast venligst et tal" Name="savingsCheckError" FontSize="15" Foreground="Red" Visibility="Hidden"/>
+            
             <Button x:Name="TilfoejButton" Content="Opret" FontSize="30" Margin="248,0,247.6,10" Background="Azure" HorizontalAlignment="Center" RenderTransformOrigin="0.634,-2.424" Click="TilfoejButton_Click"/>
 
         </StackPanel>

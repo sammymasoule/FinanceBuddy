@@ -29,6 +29,9 @@ namespace FinanceBuddyWPF {
        
         private readonly DatabaseActions dbActions = new DatabaseActions();
         public static string username;
+        /// <summary>
+        /// Method for validating credintials and loggin the user in if validated.
+        /// </summary>
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             username = UsernameTXT.Text;

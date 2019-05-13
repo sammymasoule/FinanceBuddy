@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Border Background="#2DCEF3">
-        <StackPanel Margin="25">
+        <StackPanel Margin="200,100,200,50">
             <Label Content="Login" HorizontalAlignment="Center" FontSize="40"></Label>
          <Separator></Separator>
          <Label Content="Brugernavn:" FontSize="25"></Label>

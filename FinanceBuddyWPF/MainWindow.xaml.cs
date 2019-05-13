@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,10 +29,17 @@ namespace FinanceBuddyWPF {
        
         private readonly DatabaseActions dbActions = new DatabaseActions();
         public static string username;
+        /// <summary>
+        /// Method for validating credintials and loggin the user in if validated.
+        /// </summary>
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             username = UsernameTXT.Text;
-            if (dbActions.UserLogin(UsernameTXT.Text, PasswordTXT.Password))
+
+            DataUtilites dataUtil = new DataUtilites();
+            string hashedPassword = dataUtil.HashPassword(PasswordTXT.Password);
+            
+            if (dbActions.UserLogin(UsernameTXT.Text, hashedPassword))
             {
                 username = UsernameTXT.Text;
                 UsernameTXT.BorderBrush = new SolidColorBrush(Colors.Gray);
@@ -66,5 +74,6 @@ namespace FinanceBuddyWPF {
                 LoginButton_Click(sender, e);
             }
         }
+        
     }
 }

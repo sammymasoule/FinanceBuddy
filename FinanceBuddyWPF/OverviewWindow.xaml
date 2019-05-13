@@ -8,6 +8,32 @@
         mc:Ignorable="d"
         Title="OverviewWindow" Height="800" Width="800">
     <Grid Background="#88D1F1">
+        <StackPanel Background="#1392D3" VerticalAlignment="Stretch" Margin="0,70,0,0" HorizontalAlignment="Right"  Width="400">
+            <TextBlock Margin="5" TextWrapping="Wrap" Foreground="White" FontSize="15">
+                Sammenlign dit forbrug med andres
+            </TextBlock>
+            <TextBlock Margin="10" TextWrapping="Wrap" Foreground="White">
+                Nedenfor kan en kategori vælges, derefter vises en sammenligning mellem dit forbrug og andre brugere 
+            </TextBlock>
+            <ComboBox Margin="5" Name="catComboBox">
+                <ComboBoxItem IsSelected="True">Lån &amp; Regninger</ComboBoxItem>
+                <ComboBoxItem>Husholdning</ComboBoxItem>
+                <ComboBoxItem>Indkøb</ComboBoxItem>
+                <ComboBoxItem>Forbrug</ComboBoxItem>
+                <ComboBoxItem>Transport</ComboBoxItem>
+                <ComboBoxItem>Opsparing</ComboBoxItem>
+            </ComboBox>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Fra:" Margin="50,0,0,0"></Label>
+                <DatePicker Name="DateFromSidePie" HorizontalAlignment="Center" Margin="10,0,0,0"  VerticalAlignment="Top"/>
+                <Label Content="Til:"></Label>
+                <DatePicker Name="DateToSidePie" HorizontalAlignment="Center" Margin="10,0,0,0" VerticalAlignment="Top"/>
+            </StackPanel>
+            <Button Content ="Ok"  Name="SidePieButton" Height="20" Width="20" HorizontalAlignment="Center" VerticalAlignment="Center" Click="SidePieButton_Click"></Button>
+            <dvc:Chart  x:Name="pieChart2" BorderThickness="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" Height="300" Width="300">
+                <dvc:PieSeries DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding}" IsSelectionEnabled="True" />
+            </dvc:Chart>
+        </StackPanel>
         <Menu VerticalAlignment="Top" HorizontalAlignment="Left" Background="White">
             <MenuItem>
                 <MenuItem.Header>
@@ -23,7 +49,7 @@
         <Menu Foreground="White" Height="70" VerticalAlignment="Top" Margin="70,0,0,5" HorizontalAlignment="Stretch" Background="#41AADE" BorderThickness="1">
             <MenuItem Header="Overblik" VerticalAlignment="Center" Margin="20" BorderBrush="White"></MenuItem>
             <MenuItem Header="Indkomst" VerticalAlignment="Center" Margin="20" BorderBrush="White" Click="IndkomstItemClick"></MenuItem>
-            <MenuItem Header="Udgifter" VerticalAlignment="Center" Margin="20" BorderBrush="White"></MenuItem>
+            <MenuItem Header="Udgifter" VerticalAlignment="Center" Margin="20" BorderBrush="White" Click="OutcomeWindow"></MenuItem>
             <Menu.ItemsPanel>
                 <ItemsPanelTemplate>
                     <VirtualizingStackPanel Orientation="Horizontal"></VirtualizingStackPanel>
@@ -38,7 +64,7 @@
 
             </MenuItem>
 
-            <MenuItem Header="Budget" HorizontalAlignment="Center" Margin="0,20" BorderBrush="White">
+            <MenuItem Header="Budget" HorizontalAlignment="Center" Margin="0,20" BorderBrush="White" Click="Budget_click">
 
             </MenuItem>
 
@@ -54,16 +80,21 @@
         </Menu>
         <dvc:Chart  Name="pieChart" BorderThickness="0" 
 
-		VerticalAlignment="top" HorizontalAlignment="Left" Margin="75,75,0,0" Height="350" Width="350">
+        VerticalAlignment="top" HorizontalAlignment="Left" Margin="75,75,0,0" Height="350" Width="350">
             <dvc:PieSeries DependentValuePath="Value" 
 
-		IndependentValuePath="Key" ItemsSource="{Binding}" 
+        IndependentValuePath="Key" ItemsSource="{Binding}" 
 
-		IsSelectionEnabled="True" />
+        IsSelectionEnabled="True" />
         </dvc:Chart>
-        <dvc:Chart Margin="75,0,0,0" Width="600" Height="370" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="BarChart" Title="Udgifter" BorderThickness="0">
-            <dvc:ColumnSeries DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding}">
+        <dvc:Chart Margin="75,0,0,0.4" Width="600" Height="370" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="BarChart" Title="Udgifter" BorderThickness="0">
+            <dvc:ColumnSeries Name="Series"  Title="Marts" DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding}">
             </dvc:ColumnSeries>
         </dvc:Chart>
+        <DatePicker Name="DateFrom" HorizontalAlignment="Left" Margin="573,469,0,0" VerticalAlignment="Top"/>
+        <Label Content="Fra" HorizontalAlignment="Left" Margin="595,438,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.583,-0.875"/>
+        <Label Content="Til" HorizontalAlignment="Left" Margin="595,498,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.111,-0.823"/>
+        <DatePicker Name="DateTo" HorizontalAlignment="Left" Margin="573,524,0,0" VerticalAlignment="Top"/>
+        <Button Content="Vælg" HorizontalAlignment="Left" Margin="573,553,0,0" VerticalAlignment="Top" Width="75" Click="LoadChart_Click"/>
     </Grid>
 </Window>

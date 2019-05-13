@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,7 +28,10 @@ namespace FinanceBuddyWPF {
         Boolean userNameBool = false;
         Boolean passwordBool = false;
         DatabaseActions dbActions = new DatabaseActions();
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Method for checking if inputs are valid and then createing the user if so.
+        /// </summary>
+        private void CreateUserButton_Click(object sender, RoutedEventArgs e)
         {   
             FirstNameTXT.BorderBrush = new SolidColorBrush(Colors.Gray);
             LastNameTXT.BorderBrush = new SolidColorBrush(Colors.Gray);
@@ -82,9 +86,11 @@ namespace FinanceBuddyWPF {
             {
                 if (firstName && lastName && userNameBool && passwordBool)
                 {
-                    if (dbActions.CreateUser(LastNameTXT.Text, FirstNameTXT.Text, UserNameTXT.Text, PasswordTXT.Password))
+                    DataUtilites dataUtil = new DataUtilites();
+
+                    string hashedPassword = dataUtil.HashPassword(PasswordTXT.Password); 
+                    if (dbActions.CreateUser(LastNameTXT.Text, FirstNameTXT.Text, UserNameTXT.Text, hashedPassword))
                     {
-                        //dbActions.UserLogin(UserNameTXT.Text, PasswordTXT.Password)
                         userNameError.Visibility = Visibility.Hidden;
                         passwordError.Visibility = Visibility.Hidden;
                         MainWindow main = new MainWindow();
@@ -109,5 +115,13 @@ namespace FinanceBuddyWPF {
                 
             }
         }
+
+        private void BackButton(object sender, RoutedEventArgs e)
+        {
+            MainWindow main = new MainWindow();
+            main.Show();
+            Close();
+        }
+        
     }
 }

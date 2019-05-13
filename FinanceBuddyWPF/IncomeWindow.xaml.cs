@@ -23,15 +23,20 @@ namespace FinanceBuddyWPF
         public IncomeWindow()
         {
             InitializeComponent();
-            
-           
+            WindowState = WindowState.Maximized;
+
+
         }
         string dato;
         
         DatabaseActions dbActions = new DatabaseActions();
         string userName = MainWindow.username;
-        
-        //string userName = ((MainWindow)Application.Current.MainWindow)?.UsernameTXT.Text;
+
+
+
+        /// <summary>
+        ///  Method for validating income variables and if validated create new income for the user.
+        /// </summary>
 
         private void Income_Click(object sender, RoutedEventArgs e)
         {
@@ -56,7 +61,7 @@ namespace FinanceBuddyWPF
             {
                 if (dbActions.CreateIncome(amount, dato, userName, BeskrivelseTXT.Text))
                 {
-                    MessageBox.Show("Sucess");
+                    MessageBox.Show("Din indkomst er blevet oprettet");
                     IndtejningFejl.Visibility = Visibility.Hidden;
                     DatoFejl.Visibility = Visibility.Hidden;
 
@@ -97,9 +102,25 @@ namespace FinanceBuddyWPF
           
         }
 
-        private void Overblik_click(object sender, RoutedEventArgs e)
+        private void Overview_Click(object sender, RoutedEventArgs e)
         {
             OverviewWindow window = new OverviewWindow();
+            window.Show();
+            Close();
+        }
+
+        private void OverviewRedirect_Click(object sender, RoutedEventArgs e) {
+            Overview_Click(sender, e);
+        }
+
+        private void Expenses_Click(object sender, RoutedEventArgs e) {
+            OutcomeWindow window = new OutcomeWindow();
+            window.Show();
+            Close();
+        }
+
+        private void BudgetOverview_Click(object sender, RoutedEventArgs e) {
+            BudgetWindow window = new BudgetWindow();
             window.Show();
             Close();
         }

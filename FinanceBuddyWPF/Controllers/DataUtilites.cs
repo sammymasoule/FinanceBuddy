@@ -60,6 +60,12 @@ namespace FinanceBuddyWPF.Controllers
 
             return firstDay + " " + lastDay;
         }
+
+        /// <summary>
+        /// Method for hasing user passwords.
+        /// </summary>
+        /// <param name="ipnut"></param> user password.
+       
         public string Sha255Hash(string input)
         {
             using (SHA256 sha256Hash = SHA256.Create())

@@ -32,7 +32,7 @@
         </Menu>
         <Menu Width="70" Margin="0,70,5,0" HorizontalAlignment="Left" VerticalAlignment="Stretch" Foreground="White" Background="#1392D3" BorderThickness="1">
 
-            <MenuItem Header="Overblik" HorizontalAlignment="Center" Margin="0,20" BorderBrush="White">
+            <MenuItem Header="Overblik" HorizontalAlignment="Center" Margin="0,20" BorderBrush="White" Click="Overview_Click">
 
             </MenuItem>
 
@@ -52,7 +52,7 @@
         </Menu>
         <StackPanel Margin="81,70,10,20" HorizontalAlignment="Center">
             <Label Content="Dit budget" HorizontalAlignment="Center" FontSize="30"></Label>
-            <ComboBox Width="145" Margin="5" Name="catComboBox">
+            <ComboBox Width="145" Margin="5" Name="monthComboBox">
                 <ComboBoxItem IsSelected="True">Januar</ComboBoxItem>
                 <ComboBoxItem>Februar</ComboBoxItem>
                 <ComboBoxItem>Marts</ComboBoxItem>

@@ -92,7 +92,7 @@ namespace FinanceBuddyWPF
                     var tmpdate = DataU.GetDateFormat(datefrom, dateto);
                     var stringdatefrom = tmpdate.Split(' ');
 
-                    var month = DataU.getMonth(datefrom, dateto);
+                    var month = DataU.GetMonth(datefrom, dateto);
                     LoadBarChartByDate(stringdatefrom[0], stringdatefrom[1], month);
                 }
                 else

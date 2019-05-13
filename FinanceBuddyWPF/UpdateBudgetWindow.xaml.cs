@@ -36,19 +36,7 @@ namespace FinanceBuddyWPF
 
         }
 
-        private void Logout_click(object sender, RoutedEventArgs e)
-        {
-            MainWindow window = new MainWindow();
-            window.Show();
-            Close();
-        }
 
-        private void BudgetWindow_click(object sender, RoutedEventArgs e)
-        {
-            BudgetWindow window = new BudgetWindow();
-            window.Show();
-            Close();
-        }
 
         private void TilfoejButton_Click(object sender, RoutedEventArgs e)
         {
@@ -67,6 +55,34 @@ namespace FinanceBuddyWPF
 
 
 
+        }
+
+        private void Logout_click(object sender, RoutedEventArgs e) {
+            MainWindow window = new MainWindow();
+            window.Show();
+            Close();
+        }
+
+        private void BudgetWindow_click(object sender, RoutedEventArgs e) {
+            BudgetWindow window = new BudgetWindow();
+            window.Show();
+            Close();
+        }
+
+        private void CreateBudget_Click(object sender, RoutedEventArgs e) {
+            CreateBudgetWindow window = new CreateBudgetWindow();
+            window.Show();
+            Close();
+        }
+
+        private void BudgetWindowRedirect_Click(object sender, RoutedEventArgs e) {
+            BudgetWindow_click(sender, e);
+        }
+
+        private void Overview_Click(object sender, RoutedEventArgs e) {
+            OverviewWindow window = new OverviewWindow();
+            window.Show();
+            Close();
         }
     }
 }

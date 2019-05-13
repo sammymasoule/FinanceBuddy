@@ -29,6 +29,7 @@ namespace FinanceBuddyWPF {
        
         private readonly DatabaseActions dbActions = new DatabaseActions();
         public static string username;
+
         /// <summary>
         /// Method for validating credintials and loggin the user in if validated.
         /// </summary>
@@ -59,6 +60,7 @@ namespace FinanceBuddyWPF {
             }
             
         }
+
 
         private void Label_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {

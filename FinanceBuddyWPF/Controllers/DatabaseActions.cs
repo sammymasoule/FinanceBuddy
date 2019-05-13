@@ -347,10 +347,12 @@ namespace FinanceBuddyWPF.Controllers
                     }
                 }
             }
+
             catch (SqlException exception) {
                 Console.WriteLine(exception.ToString());
             }
             return false;
         }
+       
     }
 }

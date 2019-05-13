@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -82,7 +83,10 @@ namespace FinanceBuddyWPF {
             {
                 if (firstName && lastName && userNameBool && passwordBool)
                 {
-                    if (dbActions.CreateUser(LastNameTXT.Text, FirstNameTXT.Text, UserNameTXT.Text, PasswordTXT.Password))
+                    DataUtilites dataUtil = new DataUtilites();
+
+                    string hashedPassword = dataUtil.Sha255Hash(PasswordTXT.Password); 
+                    if (dbActions.CreateUser(LastNameTXT.Text, FirstNameTXT.Text, UserNameTXT.Text, hashedPassword))
                     {
                         //dbActions.UserLogin(UserNameTXT.Text, PasswordTXT.Password)
                         userNameError.Visibility = Visibility.Hidden;
@@ -116,5 +120,6 @@ namespace FinanceBuddyWPF {
             main.Show();
             Close();
         }
+        
     }
 }

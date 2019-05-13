@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -31,7 +32,11 @@ namespace FinanceBuddyWPF {
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             username = UsernameTXT.Text;
-            if (dbActions.UserLogin(UsernameTXT.Text, PasswordTXT.Password))
+
+            DataUtilites dataUtil = new DataUtilites();
+            string hashedPassword = dataUtil.Sha255Hash(PasswordTXT.Password);
+            
+            if (dbActions.UserLogin(UsernameTXT.Text, hashedPassword))
             {
                 username = UsernameTXT.Text;
                 UsernameTXT.BorderBrush = new SolidColorBrush(Colors.Gray);
@@ -66,5 +71,6 @@ namespace FinanceBuddyWPF {
                 LoginButton_Click(sender, e);
             }
         }
+        
     }
 }

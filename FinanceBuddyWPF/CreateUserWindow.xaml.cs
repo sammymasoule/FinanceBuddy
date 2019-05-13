@@ -91,7 +91,6 @@ namespace FinanceBuddyWPF {
                     string hashedPassword = dataUtil.HashPassword(PasswordTXT.Password); 
                     if (dbActions.CreateUser(LastNameTXT.Text, FirstNameTXT.Text, UserNameTXT.Text, hashedPassword))
                     {
-                        //dbActions.UserLogin(UserNameTXT.Text, PasswordTXT.Password)
                         userNameError.Visibility = Visibility.Hidden;
                         passwordError.Visibility = Visibility.Hidden;
                         MainWindow main = new MainWindow();

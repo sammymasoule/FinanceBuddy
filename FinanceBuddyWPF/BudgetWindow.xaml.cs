@@ -21,12 +21,19 @@ namespace FinanceBuddyWPF {
             LoadBudgetValues(userName, null, null);
         }
 
-        private void LoadBudgetValues(string userName, string datefrom, string dateto)
+        /// <summary>
+        /// Method for retrieving budget data from the user and displaying it.
+        /// </summary>
+        /// <param name="username"></param> User name of currently logged in user.
+        /// <param name="datefrom"></param> Start date.
+        /// <param name="dateto"></param> End date.
+        /// the users username.
+        private void LoadBudgetValues(string username, string datefrom, string dateto)
         {
             List<KeyValuePair<string, float>> expenses;
             if (datefrom != null && dateto != null)
             {
-                expenses = dbActions.GetExpenses(userName, datefrom, dateto);
+                expenses = dbActions.GetExpenses(username, datefrom, dateto);
             }
             else
             {
@@ -35,11 +42,11 @@ namespace FinanceBuddyWPF {
                 var endDate = startDate.AddMonths(1).AddDays(-1);
                 var month = DataU.GetMonth(startDate, endDate);
                 monthComboBox.Text = month;
-                expenses = dbActions.GetExpenses(userName, startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"));
+                expenses = dbActions.GetExpenses(username, startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"));
             }
 
 
-            List<float> limits = dbActions.GetBudgetLimits(userName);
+            List<float> limits = dbActions.GetBudgetLimits(username);
 
             var myResults = expenses.GroupBy(p => p.Key)
                 .ToDictionary(g => g.Key, g => g.Sum(p => p.Value));

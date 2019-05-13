@@ -13,7 +13,7 @@
                 Sammenlign dit forbrug med andres
             </TextBlock>
             <TextBlock Margin="10" TextWrapping="Wrap" Foreground="White">
-                Nedenfor kan en kategori vælges, derefter vises en sammenligning mellem dit forbrug og andre brugere 
+                Nedenfor kan en kategori vælges, derefter vises en sammenligning mellem dit forbrug og andre brugere
             </TextBlock>
             <ComboBox Margin="5" Name="catComboBox">
                 <ComboBoxItem IsSelected="True">Lån &amp; Regninger</ComboBoxItem>
@@ -30,7 +30,7 @@
                 <DatePicker Name="DateToSidePie" HorizontalAlignment="Center" Margin="10,0,0,0" VerticalAlignment="Top"/>
             </StackPanel>
             <Button Content ="Ok"  Name="SidePieButton" Height="20" Width="20" HorizontalAlignment="Center" VerticalAlignment="Center" Click="SidePieButton_Click"></Button>
-            <dvc:Chart  x:Name="pieChart2" BorderThickness="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" Height="300" Width="300">
+            <dvc:Chart Title="Vælg en tidsperiode" x:Name="pieChart2" BorderThickness="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" Height="300" Width="300">
                 <dvc:PieSeries DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding}" IsSelectionEnabled="True" />
             </dvc:Chart>
         </StackPanel>
@@ -78,16 +78,17 @@
 
             </Menu.ItemsPanel>
         </Menu>
-        <dvc:Chart  Name="pieChart" BorderThickness="0" 
+        <dvc:Chart Title="Indkomst/udgift" Name="pieChart" BorderThickness="0" 
 
         VerticalAlignment="top" HorizontalAlignment="Left" Margin="75,75,0,0" Height="350" Width="350">
             <dvc:PieSeries DependentValuePath="Value" 
-
+        
         IndependentValuePath="Key" ItemsSource="{Binding}" 
 
         IsSelectionEnabled="True" />
         </dvc:Chart>
-        <dvc:Chart Margin="75,0,0,0.4" Width="600" Height="370" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="BarChart" Title="Udgifter" BorderThickness="0">
+
+        <dvc:Chart Margin="75,0,0,0.4" Width="600" Height="370" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="BarChart" Title="Udgifter" BorderThickness="0" >
             <dvc:ColumnSeries Name="Series"  Title="Marts" DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding}">
             </dvc:ColumnSeries>
         </dvc:Chart>

@@ -65,7 +65,6 @@ namespace FinanceBuddyWPF.Controllers
         /// Method for hasing user passwords.
         /// </summary>
         /// <param name="input"></param> user password.
-
         public string HashPassword(string input)
         {
             using (SHA256 sha256Hash = SHA256.Create())

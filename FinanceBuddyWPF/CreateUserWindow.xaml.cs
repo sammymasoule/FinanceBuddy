@@ -88,7 +88,7 @@ namespace FinanceBuddyWPF {
                 {
                     DataUtilites dataUtil = new DataUtilites();
 
-                    string hashedPassword = dataUtil.Sha255Hash(PasswordTXT.Password); 
+                    string hashedPassword = dataUtil.HashPassword(PasswordTXT.Password); 
                     if (dbActions.CreateUser(LastNameTXT.Text, FirstNameTXT.Text, UserNameTXT.Text, hashedPassword))
                     {
                         //dbActions.UserLogin(UserNameTXT.Text, PasswordTXT.Password)

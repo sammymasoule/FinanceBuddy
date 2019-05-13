@@ -64,13 +64,12 @@ namespace FinanceBuddyWPF.Controllers
         /// <summary>
         /// Method for hasing user passwords.
         /// </summary>
-        /// <param name="ipnut"></param> user password.
-       
-        public string Sha255Hash(string input)
+        /// <param name="input"></param> user password.
+        public string HashPassword(string input)
         {
             using (SHA256 sha256Hash = SHA256.Create())
             {
-                // ComputeHash - returns byte array  
+                // ComputeHash - returns byte array 
                 byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
 
                 // Convert byte array to a string   

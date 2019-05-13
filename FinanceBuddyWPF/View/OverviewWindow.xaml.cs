@@ -38,10 +38,16 @@ namespace FinanceBuddyWPF.View
 
             var income = dbActions.GetIncome(userName, stringdate[0], stringdate[1]);
             expenses = dbActions.GetExpenses(userName, stringdate[0], stringdate[1]);
-
+            
             var totalExpenses = expenses.Sum(x => x.Value);
-
-
+            if (income == 0 && totalExpenses == 0)
+            {
+                pieChart.Title = "Ingen data fundet";
+            } else
+            {
+                pieChart.Title = "Indkomst/Udgift";
+            }
+               
             List<KeyValuePair<string, float>> valueList = new List<KeyValuePair<string, float>>
             {
                 new KeyValuePair<string, float>("Indkomst", income),
@@ -60,8 +66,15 @@ namespace FinanceBuddyWPF.View
                 List<KeyValuePair<string, float>> valuelist = new List<KeyValuePair<string, float>>();
                 var myResults = list.GroupBy(p => p.Key)
                     .ToDictionary(g => g.Key, g => g.Sum(p => p.Value));
-
-                Series.Title = month;
+            if (myResults.Count == 0)
+            {
+                BarChart.Title = "Ingen data fundet";
+            }
+            else
+            {
+                pieChart.Title = "Udgifter";
+            }
+            Series.Title = month;
                 BarChart.DataContext = myResults;
             }
         /// <summary>
@@ -76,8 +89,15 @@ namespace FinanceBuddyWPF.View
                 List<KeyValuePair<string, float>> valuelist = new List<KeyValuePair<string, float>>();
                 var myResults = list.GroupBy(p => p.Key)
                     .ToDictionary(g => g.Key, g => g.Sum(p => p.Value));
-
-                Series.Title = month;
+            if (myResults.Count == 0)
+            {
+                BarChart.Title = "Ingen data fundet";
+            }
+            else
+            {
+                pieChart.Title = "Udgifter";
+            }
+            Series.Title = month;
                 BarChart.DataContext = myResults;
 
             }
@@ -112,6 +132,7 @@ namespace FinanceBuddyWPF.View
                 DateTime? dateto = DateToSidePie.SelectedDate;
 
                 LoadSidePieChart(datefrom, dateto);
+
             }
         /// <summary>
         /// Method for loading the data into the pieChart in the right sidebar.
@@ -129,8 +150,17 @@ namespace FinanceBuddyWPF.View
                     new KeyValuePair<string, float>("Dine udgifter", yourAmount),
                     new KeyValuePair<string, float>("Andres udgifter", othersAmount),
                 };
-                
-                pieChart2.DataContext = valueList;
+
+
+            if (yourAmount == 0 && othersAmount == 0)
+            {
+                pieChart2.Title = "Ingen data fundet";
+            }
+            else
+            {
+                pieChart2.Title = "Sammenligning:";
+            }
+            pieChart2.DataContext = valueList;
             }
 
         private void OutcomeWindow(object sender, RoutedEventArgs e) {

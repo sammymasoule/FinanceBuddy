@@ -50,7 +50,7 @@
 
             </Menu.ItemsPanel>
         </Menu>
-        <StackPanel Margin="100,70,100,100">
+        <StackPanel Margin="100,70,100,100" HorizontalAlignment="Center">
             <Label Content="Indtast en ny udgift" HorizontalAlignment="Center" FontSize="30"></Label>
             <Separator></Separator>
             <Label Content="Udgiftsbeløb:" FontSize="25"></Label>

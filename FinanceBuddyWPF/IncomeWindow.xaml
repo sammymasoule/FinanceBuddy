@@ -52,7 +52,7 @@
 
             </Menu.ItemsPanel>
         </Menu>
-        <StackPanel Margin="100,70,100,100">
+        <StackPanel Margin="100,70,100,100" HorizontalAlignment="Center">
             <Label Content="Indtast en ny indkomst" HorizontalAlignment="Center" FontSize="30"></Label>
             <Separator></Separator>
             <Label Content="Indtjening:" FontSize="25"></Label>

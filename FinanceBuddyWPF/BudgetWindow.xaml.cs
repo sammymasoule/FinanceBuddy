@@ -13,24 +13,34 @@ namespace FinanceBuddyWPF {
 
         private DatabaseActions dbActions = new DatabaseActions();
         private DataUtilites DataU = new DataUtilites();
+        string userName = MainWindow.username;
 
         public BudgetWindow() {
             InitializeComponent();
             WindowState = WindowState.Maximized;
-            string userName = MainWindow.username;
-            LoadBudgetValues(userName);
+            LoadBudgetValues(userName, null, null);
         }
 
-        private void LoadBudgetValues(string userName)
+        private void LoadBudgetValues(string userName, string datefrom, string dateto)
         {
-            DateTime dateNow = DateTime.Now;
-            var startDate = new DateTime(dateNow.Year, dateNow.Month, 1);
-            var endDate = startDate.AddMonths(1).AddDays(-1);
-            var month = DataU.GetMonth(startDate, endDate);
-            monthComboBox.Text = month;
+            List<KeyValuePair<string, float>> expenses;
+            if (datefrom != null && dateto != null)
+            {
+                expenses = dbActions.GetExpenses(userName, datefrom, dateto);
+            }
+            else
+            {
+                DateTime dateNow = DateTime.Now;
+                var startDate = new DateTime(dateNow.Year, dateNow.Month, 1);
+                var endDate = startDate.AddMonths(1).AddDays(-1);
+                var month = DataU.GetMonth(startDate, endDate);
+                monthComboBox.Text = month;
+                expenses = dbActions.GetExpenses(userName, startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"));
+            }
+
 
             List<float> limits = dbActions.GetBudgetLimits(userName);
-            List<KeyValuePair<string, float>> expenses = dbActions.GetExpenses(userName, startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd"));
+
             var myResults = expenses.GroupBy(p => p.Key)
                 .ToDictionary(g => g.Key, g => g.Sum(p => p.Value));
 
@@ -101,6 +111,9 @@ namespace FinanceBuddyWPF {
 
         private void BudgetMonth_Click(object sender, RoutedEventArgs e)
         {
+            var month = monthComboBox.Text;
+            var tmpmonth = DataU.GetMonthByName(month).Split(' ');
+            LoadBudgetValues(userName, tmpmonth[0], tmpmonth[1]);
 
         }
 

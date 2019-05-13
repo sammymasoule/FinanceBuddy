@@ -95,60 +95,60 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BudgetWindow.xaml.cs">
+    <Compile Include="View\BudgetWindow.xaml.cs">
       <DependentUpon>BudgetWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controllers\DatabaseActions.cs" />
     <Compile Include="Controllers\DataUtilites.cs" />
-    <Compile Include="CreateBudgetWindow.xaml.cs">
+    <Compile Include="View\CreateBudgetWindow.xaml.cs">
       <DependentUpon>CreateBudgetWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CreateUserWindow.xaml.cs">
+    <Compile Include="View\CreateUserWindow.xaml.cs">
       <DependentUpon>CreateUserWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="database_firewall_rules.cs">
+    <Compile Include="Model\database_firewall_rules.cs">
       <DependentUpon>FinanceBuddyDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="FinanceBuddyDB.cs">
+    <Compile Include="Model\FinanceBuddyDB.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FinanceBuddyDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="IncomeWindow.xaml.cs">
+    <Compile Include="View\IncomeWindow.xaml.cs">
       <DependentUpon>IncomeWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OutcomeWindow.xaml.cs">
+    <Compile Include="View\OutcomeWindow.xaml.cs">
       <DependentUpon>OutcomeWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OverviewWindow.xaml.cs">
+    <Compile Include="View\OverviewWindow.xaml.cs">
       <DependentUpon>OverviewWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Person.cs">
+    <Compile Include="Model\Person.cs">
       <DependentUpon>FinanceBuddyDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="TransItem.cs">
+    <Compile Include="Model\TransItem.cs">
       <DependentUpon>FinanceBuddyDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="UpdateBudgetWindow.xaml.cs">
+    <Compile Include="View\UpdateBudgetWindow.xaml.cs">
       <DependentUpon>UpdateBudgetWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="BudgetWindow.xaml">
+    <Page Include="View\BudgetWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CreateBudgetWindow.xaml">
+    <Page Include="View\CreateBudgetWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CreateUserWindow.xaml">
+    <Page Include="View\CreateUserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="IncomeWindow.xaml">
+    <Page Include="View\IncomeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -156,29 +156,29 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="FinanceBuddyDB.Context.cs">
+    <Compile Include="Model\FinanceBuddyDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FinanceBuddyDB.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="FinanceBuddyDB.Designer.cs">
+    <Compile Include="Model\FinanceBuddyDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FinanceBuddyDB.edmx</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="OutcomeWindow.xaml">
+    <Page Include="View\OutcomeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="OverviewWindow.xaml">
+    <Page Include="View\OverviewWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UpdateBudgetWindow.xaml">
+    <Page Include="View\UpdateBudgetWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -201,11 +201,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="FinanceBuddyDB.edmx">
+    <EntityDeploy Include="Model\FinanceBuddyDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>FinanceBuddyDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="FinanceBuddyDB.edmx.diagram">
+    <None Include="Model\FinanceBuddyDB.edmx.diagram">
       <DependentUpon>FinanceBuddyDB.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -218,12 +218,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="FinanceBuddyDB.Context.tt">
+    <Content Include="Model\FinanceBuddyDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>FinanceBuddyDB.Context.cs</LastGenOutput>
       <DependentUpon>FinanceBuddyDB.edmx</DependentUpon>
     </Content>
-    <Content Include="FinanceBuddyDB.tt">
+    <Content Include="Model\FinanceBuddyDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>FinanceBuddyDB.edmx</DependentUpon>
       <LastGenOutput>FinanceBuddyDB.cs</LastGenOutput>

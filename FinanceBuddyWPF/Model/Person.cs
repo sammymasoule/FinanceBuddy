@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FinanceBuddyWPF
+namespace FinanceBuddyWPF.Model
 {
     using System;
     using System.Collections.Generic;

@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using System.Windows.Documents;
 using FinanceBuddyWPF.Controllers;
 
-namespace FinanceBuddyWPF {
+namespace FinanceBuddyWPF.View {
     /// <summary>
     /// Interaction logic for BudgetWindow.xaml
     /// </summary>

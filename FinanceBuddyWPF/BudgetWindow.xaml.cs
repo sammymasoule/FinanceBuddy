@@ -26,7 +26,7 @@ namespace FinanceBuddyWPF {
             DateTime dateNow = DateTime.Now;
             var startDate = new DateTime(dateNow.Year, dateNow.Month, 1);
             var endDate = startDate.AddMonths(1).AddDays(-1);
-            var month = DataU.getMonth(startDate, endDate);
+            var month = DataU.GetMonth(startDate, endDate);
             monthComboBox.Text = month;
 
             List<float> limits = dbActions.GetBudgetLimits(userName);

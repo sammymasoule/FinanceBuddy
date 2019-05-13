@@ -9,6 +9,11 @@ namespace FinanceBuddyWPF.Controllers
 {
     class DataUtilites
     {
+        /// <summary>
+        /// Method for refactoring the format of dates. Used to fit into database and charts.
+        /// </summary>
+        /// <param name="datefrom"></param> Start date.
+        /// <param name="dateto"></param> End date.
         public string GetDateFormat(DateTime? datefrom, DateTime? dateto)
         {
                 if (datefrom.Value > dateto.Value) {
@@ -22,7 +27,12 @@ namespace FinanceBuddyWPF.Controllers
                 return from + " " + to;
         }
 
-        public string getMonth(DateTime? firstDate, DateTime? lastDate) {
+        /// <summary>
+        /// Method for retreiving name of the month in Danish. Used for charts.
+        /// </summary>
+        /// <param name="firstDate"></param> Start date.
+        /// <param name="lastDate"></param> End date.
+        public string GetMonth(DateTime? firstDate, DateTime? lastDate) {
             var monthfrom = new DateTime(2015, firstDate.Value.Month, 1).ToString("MMMM", CultureInfo.CreateSpecificCulture("da"));
             var monthto = new DateTime(2015, lastDate.Value.Month, 1).ToString("MMMM", CultureInfo.CreateSpecificCulture("da"));
             if (monthfrom.Equals(monthto))
@@ -35,6 +45,9 @@ namespace FinanceBuddyWPF.Controllers
             return month;
         }
 
+        /// <summary>
+        /// Method for getting the first and last day of current month. Used for charts.
+        /// </summary>
         public string GetCurrentMonth()
         {
             var date = DateTime.Now;

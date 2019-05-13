@@ -60,11 +60,11 @@ namespace FinanceBuddyWPF.Controllers
 
             return firstDay + " " + lastDay;
         }
-        public string Sha255Hash(string input)
+        public string HashPassword(string input)
         {
             using (SHA256 sha256Hash = SHA256.Create())
             {
-                // ComputeHash - returns byte array  
+                // ComputeHash - returns byte array 
                 byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
 
                 // Convert byte array to a string   

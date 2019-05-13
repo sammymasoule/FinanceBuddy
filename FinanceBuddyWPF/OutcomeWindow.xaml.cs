@@ -28,7 +28,9 @@ namespace FinanceBuddyWPF {
         string date;
         DataUtilites DataU = new DataUtilites();
 
-
+        /// <summary>
+        /// Method for the datepicker to automatically update the date variable on date changed in the datePicker.
+        /// </summary>
         private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             var picker = sender as DatePicker;
@@ -39,7 +41,9 @@ namespace FinanceBuddyWPF {
                 this.date = date.Value.ToString("yyyy-MM-dd");
             }
         }
-
+        /// <summary>
+        /// Method for validating expenses variables and if validated create new expense for the user.
+        /// </summary>
         private void Expense_Click(object sender, RoutedEventArgs e)
         {
             float amount = 0;

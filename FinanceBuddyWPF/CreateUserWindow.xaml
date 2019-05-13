@@ -31,7 +31,7 @@
             <Label Content="Indtast kodeord igen:" FontSize="20"/>
             <PasswordBox x:Name="PasswordConfTXT" FontSize="20"/>
             <Label x:Name="passwordCheckError" FontSize="15" Foreground="Red" Visibility="Hidden"/>
-            <Button x:Name="CreateUserButton" Content="Opret bruger" FontSize="30" Margin="30 10" Background="Azure"  HorizontalAlignment="Center" Click="LoginButton_Click"/>
+            <Button x:Name="CreateUserButton" Content="Opret bruger" FontSize="30" Margin="30 10" Background="Azure"  HorizontalAlignment="Center" Click="CreateUserButton_Click"/>
         </StackPanel>
     </Border>
 </Window>

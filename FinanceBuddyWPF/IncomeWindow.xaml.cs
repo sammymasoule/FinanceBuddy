@@ -31,8 +31,12 @@ namespace FinanceBuddyWPF
         
         DatabaseActions dbActions = new DatabaseActions();
         string userName = MainWindow.username;
-        
-        //string userName = ((MainWindow)Application.Current.MainWindow)?.UsernameTXT.Text;
+
+
+
+        /// <summary>
+        ///  Method for validating income variables and if validated create new income for the user.
+        /// </summary>
 
         private void Income_Click(object sender, RoutedEventArgs e)
         {

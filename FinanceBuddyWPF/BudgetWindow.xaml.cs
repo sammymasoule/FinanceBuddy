@@ -20,7 +20,10 @@ namespace FinanceBuddyWPF {
             string userName = MainWindow.username;
             LoadBudgetValues(userName);
         }
-
+        /// <summary>
+        /// Method for retrieving budget data from the user and displaying it.
+        /// </summary>
+        /// <param name="userName"></param> the users username.
         private void LoadBudgetValues(string userName)
         {
             DateTime dateNow = DateTime.Now;

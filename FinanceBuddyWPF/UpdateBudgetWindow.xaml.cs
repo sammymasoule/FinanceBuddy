@@ -40,19 +40,64 @@ namespace FinanceBuddyWPF
 
         private void TilfoejButton_Click(object sender, RoutedEventArgs e)
         {
-            var loanlimit = float.Parse(NewLoanTxt.Text);
-            var householdLimit = float.Parse(NewHouseholdTxt.Text);
-            var consumptionLimit = float.Parse(NewConsumptionTxt.Text);
-            var transportLimit = float.Parse(NewTransportTxt.Text);
-            var savingsLimit = float.Parse(NewSavingsTxt.Text);
+            bool checkParsing = true;
+            if (!float.TryParse(NewLoanTxt.Text, out var loan))
+            {
+                loanCheckError.Visibility = Visibility.Visible;
+                checkParsing = false;
+            }
 
-            dbActions.UpdateBudget(username, loanlimit, householdLimit, consumptionLimit, transportLimit, savingsLimit);
-            OldConsumptionTxt.Text = consumptionLimit.ToString();
-            OldHouseholdTxt.Text = householdLimit.ToString();
-            OldSavingsTxt.Text = savingsLimit.ToString();
-            OldLoanTxt.Text = loanlimit.ToString();
-            OldTransportTxt.Text = transportLimit.ToString();
+            if (!float.TryParse(NewHouseholdTxt.Text, out var houseHold))
+            {
+                householdCheckError.Visibility = Visibility.Visible;
+                checkParsing = false;
 
+            }
+
+            if (!float.TryParse(NewConsumptionTxt.Text, out var consumption))
+            {
+                consumpCheckError.Visibility = Visibility.Visible;
+                checkParsing = false;
+
+            }
+
+            if (!float.TryParse(NewTransportTxt.Text, out var transport))
+            {
+                transportCheckError.Visibility = Visibility.Visible;
+                checkParsing = false;
+
+            }
+
+            if (!float.TryParse(NewSavingsTxt.Text, out var savings))
+            {
+                savingsCheckError.Visibility = Visibility.Visible;
+                checkParsing = false;
+
+            }
+
+            if (checkParsing)
+            {
+
+                loanCheckError.Visibility = Visibility.Hidden;
+                householdCheckError.Visibility = Visibility.Hidden;
+                consumpCheckError.Visibility = Visibility.Hidden;
+                transportCheckError.Visibility = Visibility.Hidden;
+                savingsCheckError.Visibility = Visibility.Hidden;
+               
+
+                var loanlimit = loan;
+                var householdLimit = houseHold;
+                var consumptionLimit = consumption;
+                var transportLimit = transport;
+                var savingsLimit = savings;
+
+                dbActions.UpdateBudget(username, loanlimit, householdLimit, consumptionLimit, transportLimit, savingsLimit);
+                OldConsumptionTxt.Text = consumptionLimit.ToString();
+                OldHouseholdTxt.Text = householdLimit.ToString();
+                OldSavingsTxt.Text = savingsLimit.ToString();
+                OldLoanTxt.Text = loanlimit.ToString();
+                OldTransportTxt.Text = transportLimit.ToString();
+            }
 
 
         }

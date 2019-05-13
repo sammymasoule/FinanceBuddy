@@ -39,7 +39,10 @@ namespace FinanceBuddyWPF {
             window.Show();
             Close();
         }
-
+        /// <summary>
+        /// Method for validating budget variables and if validated create new budget for the user.
+        /// </summary>
+        
         private void TilfoejButton_Click(object sender, RoutedEventArgs e)
         {
             bool checkParsing = true;

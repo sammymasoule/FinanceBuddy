@@ -118,18 +118,76 @@ namespace FinanceBuddyWPFTests.Controllers {
 
         [TestMethod()]
         public void GetBudgetLimitsTest() {
+            var lastName = "Testing";
+            var firstName = "Unit";
+            var userName = "UnitTesting";
+            var password = "mypassword";
+            dbActions.CreateUser(lastName, firstName, userName, password);
 
+            var username = "UnitTesting";
+            float loanLimit = 3000;
+            float groceryLimit = 3000;
+            float houseHoldLimit = 3000;
+            float consumptionLimit = 3000;
+            float transportLimit = 3000;
+            float savingsLimit = 3000;
+            dbActions.CreateBudget(username, loanLimit, groceryLimit, houseHoldLimit, consumptionLimit, transportLimit, savingsLimit);
+
+            var actual = dbActions.GetBudgetLimits(username);
+            dbCleaning.DeleteBudgetTests(username);
+            dbCleaning.DeleteUserTests(username);
+            Assert.AreEqual(actual, true);
+           
         }
 
         [TestMethod()]
         public void UpdateBudgetTest() {
-            Assert.Fail();
+            var lastName = "Testing";
+            var firstName = "Unit";
+            var userName = "UnitTesting";
+            var password = "mypassword";
+            dbActions.CreateUser(lastName, firstName, userName, password);
+
+            var username = "UnitTesting";
+            float loanLimit = 3000;
+            float groceryLimit = 3000;
+            float houseHoldLimit = 3000;
+            float consumptionLimit = 3000;
+            float transportLimit = 3000;
+            float savingsLimit = 3000;
+            dbActions.CreateBudget(username, loanLimit, groceryLimit, houseHoldLimit, consumptionLimit, transportLimit, savingsLimit);
+
+            var actual = dbActions.UpdateBudget(username, 2000, 2000, 2000, 2000, 2000, 2000);
+
+            dbCleaning.DeleteBudgetTests(username);
+            dbCleaning.DeleteUserTests(username);
+            Assert.AreEqual(actual, true);
+
         }
 
 
         [TestMethod()]
         public void GetIncomeTest() {
-            Assert.Fail();
+            var lastName = "Testing";
+            var firstName = "Unit";
+            var userName = "UnitTesting";
+            var password = "mypassword";
+            dbActions.CreateUser(lastName, firstName, userName, password);
+
+            float amount = 1000;
+            var date = "2019-04-02";
+            var username = "sama";
+            var description = "UnitTesting";
+            dbActions.CreateIncome(amount, date, username, description);
+            var expected = 1000;
+
+            var dayfrom = "2019-04-01";
+            var dayto = "2019-04-03";
+            var actual = dbActions.GetIncome(userName, dayfrom, dayto);
+
+            dbCleaning.DeleteBudgetTests(username);
+            dbCleaning.DeleteUserTests(username);
+            Assert.AreEqual(actual, expected);
         }
 
         [TestMethod()]

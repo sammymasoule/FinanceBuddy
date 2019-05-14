@@ -55,6 +55,9 @@
             <Label Content="Lån &amp; Regninger:" FontSize="25"></Label>
             <TextBox  x:Name="LoanTxt" FontSize="25" BorderBrush="Gray"/>
             <Label Name="LoanError" Content="Indtast venligst et tal" FontSize="20" Foreground="Red" Visibility="Hidden"></Label>
+            <Label Content="Indkøb:" FontSize="25"></Label>
+            <TextBox  x:Name="GroceryTxt" FontSize="25" BorderBrush="Gray"/>
+            <Label Name="GroceryError" Content="Indtast venligst et tal" FontSize="20" Foreground="Red" Visibility="Hidden"></Label>
             <Label Content="Husholdning:" FontSize="25" ></Label>
             <TextBox  x:Name="HouseholdTxt" FontSize="25" BorderBrush="Gray"/>
             <Label Name="HouseholdError" Content="Indtast venligst et tal" FontSize="20" Foreground="Red" Visibility="Hidden"></Label>

@@ -342,13 +342,13 @@ namespace FinanceBuddyWPF.Controllers
         /// <param name="consumptionLimit"></param> Budget limit that the user wishes to have for consumption expenses.
         /// <param name="transportLimit"></param> Budget limit that the user wishes to have for transportation expenses.
         /// <param name="savingsLimit"></param> Budget limit that the user wishes to have for savings expenses.
-        public bool CreateBudget(string username, float loanLimit, float houseHoldLimit, float consumptionLimit, float transportLimit, float savingsLimit) {
+        public bool CreateBudget(string username, float loanLimit, float groceryLimit, float houseHoldLimit, float consumptionLimit, float transportLimit, float savingsLimit) {
             try {
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString)) {
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
-                    sb.Append("INSERT INTO Budget ([userName], [LoanLimit], [HouseHoldLimit], [ConsumptionLimit], [TransportationLimit], [SavingsLimit])");
-                    sb.Append(" VALUES ('"  + username + "', '" + loanLimit + "', '" + houseHoldLimit+ "', '" + consumptionLimit+ "', '" + transportLimit+ "', '" + savingsLimit+ "')");
+                    sb.Append("INSERT INTO Budget ([userName], [LoanLimit], [GroceryLimit], [HouseHoldLimit], [ConsumptionLimit], [TransportationLimit], [SavingsLimit])");
+                    sb.Append(" VALUES ('"  + username + "', '" + loanLimit + "', '" + groceryLimit + "', '" + houseHoldLimit+ "', '" + consumptionLimit+ "', '" + transportLimit+ "', '" + savingsLimit+ "')");
                     //sb.Append("VALUES ('{0}', '{1}', '{2}', '{3}')", lastName, firstName, userName, password);
 
                     string sql = sb.ToString();

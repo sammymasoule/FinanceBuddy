@@ -27,13 +27,18 @@ namespace FinanceBuddyWPF
             InitializeComponent();
             WindowState = WindowState.Maximized;
             List<float> limits = dbActions.GetBudgetLimits(username);
-            OldLoanTxt.Text = limits[0] + " kr.";
-            OldGroceryTxt.Text = limits[1] + " kr.";
-            OldHouseholdTxt.Text = limits[2] + " kr.";
-            OldConsumptionTxt.Text = limits[3] + " kr.";
-            OldTransportTxt.Text = limits[4] + " kr.";
-            OldSavingsTxt.Text = limits[5] + " kr.";
-
+            if(limits != null && limits.Count != 0) { 
+                OldLoanTxt.Text = limits[0] + " kr.";
+                OldGroceryTxt.Text = limits[1] + " kr.";
+                OldHouseholdTxt.Text = limits[2] + " kr.";
+                OldConsumptionTxt.Text = limits[3] + " kr.";
+                OldTransportTxt.Text = limits[4] + " kr.";
+                OldSavingsTxt.Text = limits[5] + " kr.";
+            } 
+           
+               
+             
+      
 
         }
 

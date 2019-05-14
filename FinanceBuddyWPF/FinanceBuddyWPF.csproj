@@ -106,14 +106,6 @@
     <Compile Include="View\CreateUserWindow.xaml.cs">
       <DependentUpon>CreateUserWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\database_firewall_rules.cs">
-      <DependentUpon>FinanceBuddyDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\FinanceBuddyDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FinanceBuddyDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="View\IncomeWindow.xaml.cs">
       <DependentUpon>IncomeWindow.xaml</DependentUpon>
     </Compile>
@@ -122,12 +114,6 @@
     </Compile>
     <Compile Include="View\OverviewWindow.xaml.cs">
       <DependentUpon>OverviewWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Person.cs">
-      <DependentUpon>FinanceBuddyDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\TransItem.cs">
-      <DependentUpon>FinanceBuddyDB.tt</DependentUpon>
     </Compile>
     <Compile Include="View\UpdateBudgetWindow.xaml.cs">
       <DependentUpon>UpdateBudgetWindow.xaml</DependentUpon>
@@ -155,16 +141,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Model\FinanceBuddyDB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FinanceBuddyDB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\FinanceBuddyDB.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FinanceBuddyDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -201,13 +177,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Model\FinanceBuddyDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>FinanceBuddyDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Model\FinanceBuddyDB.edmx.diagram">
-      <DependentUpon>FinanceBuddyDB.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -218,16 +187,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model\FinanceBuddyDB.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>FinanceBuddyDB.Context.cs</LastGenOutput>
-      <DependentUpon>FinanceBuddyDB.edmx</DependentUpon>
-    </Content>
-    <Content Include="Model\FinanceBuddyDB.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>FinanceBuddyDB.edmx</DependentUpon>
-      <LastGenOutput>FinanceBuddyDB.cs</LastGenOutput>
-    </Content>
     <Resource Include="Images\backarrow.png" />
     <Resource Include="Images\user_icon.png" />
   </ItemGroup>

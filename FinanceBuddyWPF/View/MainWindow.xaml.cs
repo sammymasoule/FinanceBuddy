@@ -1,22 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using FinanceBuddyWPF.Controllers;
 
-namespace FinanceBuddyWPF {
+namespace FinanceBuddyWPF.View {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -38,7 +25,7 @@ namespace FinanceBuddyWPF {
             username = UsernameTXT.Text;
 
             DataUtilites dataUtil = new DataUtilites();
-            string hashedPassword = dataUtil.Sha255Hash(PasswordTXT.Password);
+            string hashedPassword = dataUtil.HashPassword(PasswordTXT.Password);
             
             if (dbActions.UserLogin(UsernameTXT.Text, hashedPassword))
             {

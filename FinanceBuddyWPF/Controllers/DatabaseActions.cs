@@ -9,8 +9,7 @@ namespace FinanceBuddyWPF.Controllers
     /// <summary>
     /// Class that handles all actions connected to the database.
     /// </summary>
-
-    class DatabaseActions
+    public class DatabaseActions
     {
         readonly SqlConnectionStringBuilder builder =
             new SqlConnectionStringBuilder
@@ -32,7 +31,6 @@ namespace FinanceBuddyWPF.Controllers
         {
             try
             {
-
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                 {
                     connection.Open();
@@ -47,7 +45,6 @@ namespace FinanceBuddyWPF.Controllers
                         {
                             return true;
                         }
-
                     }
                 }
             }
@@ -55,7 +52,6 @@ namespace FinanceBuddyWPF.Controllers
             {
                 Console.WriteLine(exception.ToString());
             }
-
             return false;
         }
 
@@ -75,17 +71,13 @@ namespace FinanceBuddyWPF.Controllers
                     sb.Append("INSERT INTO Person ([LastName], [FirstName], [UserName], [Password])");
                     sb.Append(
                         "VALUES ('" + lastName + "', '" + firstName + "', '" + userName + "', '" + password + "')");
-                    //sb.Append("VALUES ('{0}', '{1}', '{2}', '{3}')", lastName, firstName, userName, password);
-
                     string sql = sb.ToString();
-
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         if (command.ExecuteNonQuery() > 0)
                         {
                             return true;
                         }
-
                     }
                 }
             }
@@ -93,7 +85,6 @@ namespace FinanceBuddyWPF.Controllers
             {
                 Console.WriteLine(exception.ToString());
             }
-
             return false;
         }
 
@@ -112,9 +103,7 @@ namespace FinanceBuddyWPF.Controllers
                     StringBuilder sb = new StringBuilder();
                     sb.Append("select COUNT(1) from Person where UserName ='" + userName + "' AND Password= '" +
                               password + "'");
-
                     string sql = sb.ToString();
-
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         int count = Convert.ToInt32(command.ExecuteScalar());
@@ -122,7 +111,6 @@ namespace FinanceBuddyWPF.Controllers
                         {
                             return true;
                         }
-
                     }
                 }
             }
@@ -130,7 +118,6 @@ namespace FinanceBuddyWPF.Controllers
             {
                 Console.WriteLine(exception.ToString());
             }
-
             return false;
         }
 
@@ -166,14 +153,12 @@ namespace FinanceBuddyWPF.Controllers
                         }
                     }
                 }
-
                 return amount;
             }
             catch (SqlException exception)
             {
                 Console.WriteLine(exception.ToString());
             }
-
             return -1;
         }
 
@@ -196,7 +181,6 @@ namespace FinanceBuddyWPF.Controllers
                     sb.Append("select SUM(Amount) / COUNT(Distinct userName) from TransItem where userName NOT IN ('" + userName + "')" +
                               " AND Category = '" + cat + "' AND Date between '" + firstDay + "' AND '" + lastDay + "'");
                     string sql = sb.ToString();
-
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         var value = command.ExecuteScalar();
@@ -210,14 +194,12 @@ namespace FinanceBuddyWPF.Controllers
                         }
                     }
                 }
-
                 return amount;
             }
             catch (SqlException exception)
             {
                 Console.WriteLine(exception.ToString());
             }
-
             return -1;
         }
 
@@ -254,14 +236,12 @@ namespace FinanceBuddyWPF.Controllers
                         }
                     }
                 }
-
                 return amount;
             }
             catch (SqlException exception)
             {
                 Console.WriteLine(exception.ToString());
             }
-
             return -1;
         }
 
@@ -296,7 +276,6 @@ namespace FinanceBuddyWPF.Controllers
             catch (SqlException exception) {
                 Console.WriteLine(exception.ToString());
             }
-
             return new List<KeyValuePair<string, float>>();
         }
 
@@ -315,10 +294,8 @@ namespace FinanceBuddyWPF.Controllers
                     StringBuilder sb = new StringBuilder();
                     sb.Append("INSERT INTO TransItem ([Category], [Description], [Date], [userName], [Amount])");
                     sb.Append("VALUES ('" + category + "', '" + description+ "', '" + date + "', '" + userName+ "', '" + amount + "')");
-                    //sb.Append("VALUES ('{0}', '{1}', '{2}', '{3}')", lastName, firstName, userName, password);
-
+                    //sb.Append("VALUES ('{0}', '{1}', '{2}', '{3}')", lastName, firstName, userName, password
                     string sql = sb.ToString();
-
                     using (SqlCommand command = new SqlCommand(sql, connection)) {
                         if (command.ExecuteNonQuery() > 0) {
                             return true;
@@ -329,7 +306,6 @@ namespace FinanceBuddyWPF.Controllers
             catch (SqlException exception) {
                 Console.WriteLine(exception.ToString());
             }
-
             return false;
         }
 
@@ -350,9 +326,7 @@ namespace FinanceBuddyWPF.Controllers
                     sb.Append("INSERT INTO Budget ([userName], [LoanLimit], [GroceryLimit], [HouseHoldLimit], [ConsumptionLimit], [TransportationLimit], [SavingsLimit])");
                     sb.Append(" VALUES ('"  + username + "', '" + loanLimit + "', '" + groceryLimit + "', '" + houseHoldLimit+ "', '" + consumptionLimit+ "', '" + transportLimit+ "', '" + savingsLimit+ "')");
                     //sb.Append("VALUES ('{0}', '{1}', '{2}', '{3}')", lastName, firstName, userName, password);
-
                     string sql = sb.ToString();
-
                     using (SqlCommand command = new SqlCommand(sql, connection)) {
                         if (command.ExecuteNonQuery() > 0) {
                             return true;
@@ -370,7 +344,6 @@ namespace FinanceBuddyWPF.Controllers
         /// Method for retreiving the budget limits for each category.
         /// </summary>
         /// <param name="userName"></param> User name of current logged in user.
-
         public List<float> GetBudgetLimits(string userName) {
             try {
                 List<float> limits = new List<float>();
@@ -379,7 +352,6 @@ namespace FinanceBuddyWPF.Controllers
                     StringBuilder sb = new StringBuilder();
                     sb.Append("select LoanLimit, GroceryLimit, HouseHoldLimit, ConsumptionLimit, TransportationLimit, SavingsLimit from Budget where userName = '" + userName +"'");
                     string sql = sb.ToString();
-
                     using (SqlCommand command = new SqlCommand(sql, connection)) {
                         using (SqlDataReader reader = command.ExecuteReader()) {
                             while (reader.Read()) {
@@ -399,9 +371,9 @@ namespace FinanceBuddyWPF.Controllers
             catch (SqlException exception) {
                 Console.WriteLine(exception.ToString());
             }
-
             return null;
         }
+
         /// <summary>
         /// Method for changing/updating a current budget for a specific user.
         /// </summary>
@@ -428,12 +400,10 @@ namespace FinanceBuddyWPF.Controllers
                     }
                 }
             }
-
             catch (SqlException exception) {
                 Console.WriteLine(exception.ToString());
             }
             return false;
         }
-       
     }
 }

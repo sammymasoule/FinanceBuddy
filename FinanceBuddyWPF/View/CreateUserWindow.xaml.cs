@@ -1,20 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using FinanceBuddyWPF.Controllers;
 
-namespace FinanceBuddyWPF {
+namespace FinanceBuddyWPF.View {
     /// <summary>
     /// Interaction logic for CreateUserWindow.xaml
     /// </summary>
@@ -88,10 +77,9 @@ namespace FinanceBuddyWPF {
                 {
                     DataUtilites dataUtil = new DataUtilites();
 
-                    string hashedPassword = dataUtil.Sha255Hash(PasswordTXT.Password); 
+                    string hashedPassword = dataUtil.HashPassword(PasswordTXT.Password); 
                     if (dbActions.CreateUser(LastNameTXT.Text, FirstNameTXT.Text, UserNameTXT.Text, hashedPassword))
                     {
-                        //dbActions.UserLogin(UserNameTXT.Text, PasswordTXT.Password)
                         userNameError.Visibility = Visibility.Hidden;
                         passwordError.Visibility = Visibility.Hidden;
                         MainWindow main = new MainWindow();

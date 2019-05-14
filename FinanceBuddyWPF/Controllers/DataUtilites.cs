@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace FinanceBuddyWPF.Controllers
 {
@@ -61,16 +58,67 @@ namespace FinanceBuddyWPF.Controllers
             return firstDay + " " + lastDay;
         }
 
+
+        /// <summary>
+        /// Method for retreiving first and last day of specific month. Used for charts.
+        /// </summary>
+        /// <param name="month"></param> Name of the month
+        /// Start date.
+        public string GetMonthByName(string month)
+        {
+            switch (month)
+            {
+                case "Januar":
+                    return "2019-01-01 2019-01-31";
+
+                case "Februar":
+                    if(DateTime.IsLeapYear(DateTime.Now.Year))
+                        return "2019-02-01 2019-02-29";
+                    return "2019-02-01 2019-02-28";
+
+                case "Marts":
+                    return "2019-03-01 2019-03-31";
+
+                case "April":
+                    return "2019-04-01 2019-04-30";
+
+                case "Maj":
+                    return "2019-05-01 2019-05-31";
+
+                case "Juni":
+                    return "2019-06-01 2019-06-30";
+
+                case "Juli":
+                    return "2019-07-01 2019-07-31";
+
+                case "August":
+                    return "2019-08-01 2019-08-31";
+
+                case "September":
+                    return "2019-09-01 2019-09-30";
+
+                case "Oktober":
+                    return "2019-10-01 2019-10-31";
+
+                case "November":
+                    return "2019-11-01 2019-03-30";
+
+                case "December":
+                    return "2019-12-01 2019-12-31";
+            }
+
+            return "";
+        }
+
         /// <summary>
         /// Method for hasing user passwords.
         /// </summary>
-        /// <param name="ipnut"></param> user password.
-       
-        public string Sha255Hash(string input)
+        /// <param name="input"></param> user password.
+        public string HashPassword(string input)
         {
             using (SHA256 sha256Hash = SHA256.Create())
             {
-                // ComputeHash - returns byte array  
+                // ComputeHash - returns byte array 
                 byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
 
                 // Convert byte array to a string   

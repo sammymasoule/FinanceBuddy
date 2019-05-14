@@ -4,7 +4,8 @@ using System.Linq;
 using System.Windows;
 using FinanceBuddyWPF.Controllers;
 
-namespace FinanceBuddyWPF {
+namespace FinanceBuddyWPF.View
+{
     /// <summary>
     /// Interaction logic for BudgetWindow.xaml
     /// </summary>

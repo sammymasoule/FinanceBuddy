@@ -105,11 +105,12 @@ namespace FinanceBuddyWPFTests.Controllers {
 
             var username = "UnitTesting";
             float loanLimit = 3000;
+            float groceryLimit = 3000;
             float houseHoldLimit= 3000;
             float consumptionLimit = 3000;
             float transportLimit = 3000;
             float savingsLimit= 3000;
-            var actual = dbActions.CreateBudget(username, loanLimit, houseHoldLimit, consumptionLimit, transportLimit, savingsLimit);
+            var actual = dbActions.CreateBudget(username, loanLimit, groceryLimit, houseHoldLimit, consumptionLimit, transportLimit, savingsLimit);
             dbCleaning.DeleteBudgetTests(username);
             dbCleaning.DeleteUserTests(username);
             Assert.AreEqual(actual, true);

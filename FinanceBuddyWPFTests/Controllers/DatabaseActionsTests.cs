@@ -49,11 +49,13 @@ namespace FinanceBuddyWPFTests.Controllers {
 
         [TestMethod()]
         public void CreateIncomeUserTest() {
+
             var lastName = "Testing";
             var firstName = "Unit";
             var userName = "UnitTesting";
             var password = "mypassword";
             dbActions.CreateUser(lastName, firstName, userName, password);
+
             float amount = 1000;
             var date = DateTime.Now.ToString("yyyy-MM-dd");
             var description = "UnitTesting";

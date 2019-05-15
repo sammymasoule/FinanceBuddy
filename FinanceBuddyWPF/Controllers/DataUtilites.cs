@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FinanceBuddyWPF.Controllers
 {
-    class DataUtilites
+    public class DataUtilites
     {
         /// <summary>
         /// Method for refactoring the format of dates. Used to fit into database and charts.

@@ -39,6 +39,32 @@ namespace FinanceBuddyWPFTests.Controllers {
             }
             return false;
         }
+        public bool DeleteExpensesTests()
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    connection.Open();
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("DELETE FROM TRANSITEM WHERE UserName = UnitTesting");
+                    string sql = sb.ToString();
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        if (command.ExecuteNonQuery() > 0)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            catch (SqlException exception)
+            {
+                Console.WriteLine(exception.ToString());
+            }
+            return false;
+        }
 
         /// <summary>
         /// Method to delete all user test data in database.

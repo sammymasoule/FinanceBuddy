@@ -24,7 +24,7 @@ namespace FinanceBuddyWPFTests.Controllers {
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString)) {
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
-                    sb.Append("DELETE FROM INCOME WHERE userName = UnitTesting");
+                    sb.Append("DELETE FROM INCOME WHERE userName = 'UnitTesting'");
                     string sql = sb.ToString();
 
                     using (SqlCommand command = new SqlCommand(sql, connection)) {
@@ -69,12 +69,12 @@ namespace FinanceBuddyWPFTests.Controllers {
         /// <summary>
         /// Method to delete all user test data in database.
         /// </summary>
-        public bool DeleteUserTests(string username) {
+        public bool DeleteUserTests() {
             try {
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString)) {
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
-                    sb.Append("DELETE FROM Person WHERE userName ='" + username + "'");
+                    sb.Append("DELETE FROM Person WHERE userName ='UnitTesting'");
                     string sql = sb.ToString();
 
                     using (SqlCommand command = new SqlCommand(sql, connection)) {
@@ -93,12 +93,12 @@ namespace FinanceBuddyWPFTests.Controllers {
         /// <summary>
         /// Method to delete all user test data in database.
         /// </summary>
-        public bool DeleteBudgetTests(string username) {
+        public bool DeleteBudgetTests() {
             try {
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString)) {
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
-                    sb.Append("DELETE FROM Budget WHERE userName ='" + username +"'");
+                    sb.Append("DELETE FROM Budget WHERE userName ='UnitTesting'");
                     string sql = sb.ToString();
 
                     using (SqlCommand command = new SqlCommand(sql, connection)) {

@@ -31,7 +31,7 @@ namespace FinanceBuddyWPFTests.Controllers {
             var password = "mypassword";
             
             var actual = dbActions.CreateUser(lastName, firstName, userName, password);
-            dbCleaning.DeleteUserTests(userName);
+            dbCleaning.DeleteUserTests();
             Assert.AreEqual(actual, true);
         }
 
@@ -59,7 +59,7 @@ namespace FinanceBuddyWPFTests.Controllers {
             var description = "UnitTesting";
             var actual = dbActions.CreateIncome(amount, date, userName, description);
             dbCleaning.DeleteIncomeTests();
-            dbCleaning.DeleteUserTests(userName);
+            dbCleaning.DeleteUserTests();
             Assert.AreEqual(actual, true);
         }
 
@@ -97,7 +97,7 @@ namespace FinanceBuddyWPFTests.Controllers {
             float amount = 1000;
             var actual = dbActions.CreateExpense(category, description, date, userName, amount);
             dbCleaning.DeleteExpensesTests();
-            dbCleaning.DeleteUserTests(userName);
+            dbCleaning.DeleteUserTests();
             Assert.AreEqual(actual, true);
         }
 
@@ -129,8 +129,8 @@ namespace FinanceBuddyWPFTests.Controllers {
             float transportLimit = 3000;
             float savingsLimit= 3000;
             var actual = dbActions.CreateBudget(username, loanLimit, groceryLimit, houseHoldLimit, consumptionLimit, transportLimit, savingsLimit);
-            dbCleaning.DeleteBudgetTests(username);
-            dbCleaning.DeleteUserTests(username);
+            dbCleaning.DeleteBudgetTests();
+            dbCleaning.DeleteUserTests();
             Assert.AreEqual(actual, true);
         }
 
@@ -153,8 +153,8 @@ namespace FinanceBuddyWPFTests.Controllers {
             float totalLimit = 18000;
             List<float> actual = dbActions.GetBudgetLimits(userName);
             var actualSum = actual.Sum();
-            dbCleaning.DeleteBudgetTests(userName);
-            dbCleaning.DeleteUserTests(userName);
+            dbCleaning.DeleteBudgetTests();
+            dbCleaning.DeleteUserTests();
             Assert.AreEqual(actualSum, totalLimit);
            
         }
@@ -178,8 +178,8 @@ namespace FinanceBuddyWPFTests.Controllers {
 
             var actual = dbActions.UpdateBudget(username, 2000, 2000, 2000, 2000, 2000, 2000);
 
-            dbCleaning.DeleteBudgetTests(username);
-            dbCleaning.DeleteUserTests(username);
+            dbCleaning.DeleteBudgetTests();
+            dbCleaning.DeleteUserTests();
             Assert.AreEqual(actual, true);
 
         }
@@ -203,7 +203,7 @@ namespace FinanceBuddyWPFTests.Controllers {
             var dayto = "2019-04-03";
             var actual = dbActions.GetIncome(userName, dayfrom, dayto);
             dbCleaning.DeleteIncomeTests();
-            dbCleaning.DeleteUserTests(userName);
+            dbCleaning.DeleteUserTests();
             Assert.AreEqual(actual, expected);
         }
 
@@ -226,12 +226,12 @@ namespace FinanceBuddyWPFTests.Controllers {
             dbActions.CreateExpense(category, description, date, userName, amount);
             var dayfrom = "2019-04-01";
             var dayto = "2019-04-03";
-            float expenseAVG = amount + amount;
+            float expenseAvg = amount + amount;
             float actualExpense = dbActions.GetAvgExpenses(userName, category, dayfrom, dayto);
 
             dbCleaning.DeleteExpensesTests();
-            dbCleaning.DeleteUserTests(userName);
-            Assert.AreEqual(actualExpense, expenseAVG);
+            dbCleaning.DeleteUserTests();
+            Assert.AreEqual(actualExpense, expenseAvg);
 
         }
 
@@ -258,7 +258,7 @@ namespace FinanceBuddyWPFTests.Controllers {
             myResults.TryGetValue(category, out float actual);
 
             dbCleaning.DeleteExpensesTests();
-            dbCleaning.DeleteUserTests(userName);
+            dbCleaning.DeleteUserTests();
             Assert.AreEqual(expected, actual);
         }
     }

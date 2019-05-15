@@ -47,7 +47,7 @@ namespace FinanceBuddyWPFTests.Controllers {
                 {
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
-                    sb.Append("DELETE FROM TransItem WHERE userName = UnitTesting");
+                    sb.Append("DELETE FROM TransItem WHERE userName = 'UnitTesting'");
                     string sql = sb.ToString();
 
                     using (SqlCommand command = new SqlCommand(sql, connection))

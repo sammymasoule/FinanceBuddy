@@ -39,7 +39,7 @@ namespace FinanceBuddyWPF.View
             var income = dbActions.GetIncome(userName, stringdate[0], stringdate[1]);
             expenses = dbActions.GetExpenses(userName, stringdate[0], stringdate[1]);
             
-            var totalExpenses = expenses.Sum(x => x.Value);
+                var totalExpenses = expenses.Sum(x => x.Value);
             if (income == 0 && totalExpenses == 0)
             {
                 pieChart.Title = "Ingen data fundet";

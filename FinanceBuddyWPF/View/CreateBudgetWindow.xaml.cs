@@ -14,6 +14,7 @@ namespace FinanceBuddyWPF.View {
 
         DatabaseActions dbActions = new DatabaseActions();
         string userName = MainWindow.username;
+        BudgetController BC = new BudgetController();
 
         private void Logout_click(object sender, RoutedEventArgs e)
         {
@@ -71,7 +72,7 @@ namespace FinanceBuddyWPF.View {
 
             if (checkParsing)
             {
-                if (dbActions.CreateBudget(userName, loan, houseHold, consumption, transport, savings))
+                if (BC.CreateBudget(userName, loan, 2000, houseHold, consumption, transport, savings).Result)
                 {
                     LoanError.Visibility = Visibility.Hidden;
                     HouseholdError.Visibility = Visibility.Hidden;

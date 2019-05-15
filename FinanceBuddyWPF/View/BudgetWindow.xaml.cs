@@ -13,6 +13,7 @@ namespace FinanceBuddyWPF.View {
         private DatabaseActions dbActions = new DatabaseActions();
         private DataUtilites DataU = new DataUtilites();
         string userName = MainWindow.username;
+        private BudgetController BC = new BudgetController();
 
         public BudgetWindow() {
             InitializeComponent();
@@ -45,7 +46,7 @@ namespace FinanceBuddyWPF.View {
             }
 
 
-            List<float> limits = dbActions.GetBudgetLimits(username);
+            var limits= BC.GetBudget(username);
 
             var myResults = expenses.GroupBy(p => p.Key)
                 .ToDictionary(g => g.Key, g => g.Sum(p => p.Value));
@@ -57,14 +58,14 @@ namespace FinanceBuddyWPF.View {
             var transMaxValue = 0.0;
             var savingsMaxValue = 0.0;
 
-            if (limits != null)
+            if (limits.Result.Count!=0)
             {
-                loanMaxValue = limits[0];
-                indMaxValue = limits[1];
-                householdMaxValue = limits[2];
-                consmpMaxValue = limits[3];
-                transMaxValue= limits[4];
-                savingsMaxValue= limits[5];
+                loanMaxValue = limits.Result[0];
+                indMaxValue = limits.Result[1];
+                householdMaxValue = limits.Result[2];
+                consmpMaxValue = limits.Result[3];
+                transMaxValue= limits.Result[4];
+                savingsMaxValue= limits.Result[5];
             }
             
             myResults.TryGetValue("Lån & Regninger", out var currentLoan);

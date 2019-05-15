@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 using FinanceBuddyWPF.Controllers;
 
@@ -9,13 +10,13 @@ namespace FinanceBuddyWPF.View
     /// </summary>
     public partial class UpdateBudgetWindow : Window
     {
-        DatabaseActions dbActions = new DatabaseActions();
+        BudgetController BC = new BudgetController();
         string username = MainWindow.username;
         public UpdateBudgetWindow()
         {
             InitializeComponent();
             WindowState = WindowState.Maximized;
-            List<float> limits = dbActions.GetBudgetLimits(username);
+            var limits = BC.GetBudget(username);
             OldLoanTxt.Text = limits[0] + " kr.";
             OldGroceryTxt.Text = limits[1] + " kr.";
             OldHouseholdTxt.Text = limits[2] + " kr.";
@@ -28,7 +29,7 @@ namespace FinanceBuddyWPF.View
 
 
 
-        private void TilfoejButton_Click(object sender, RoutedEventArgs e)
+        private async Task TilfoejButton_Click(object sender, RoutedEventArgs e)
         {
             bool checkParsing = true;
             if (!float.TryParse(NewLoanTxt.Text, out var loan))
@@ -88,7 +89,7 @@ namespace FinanceBuddyWPF.View
                 var savingsLimit = savings;
                 var groceryLimit = grocery;
 
-                dbActions.UpdateBudget(username, loanlimit, groceryLimit ,householdLimit, consumptionLimit, transportLimit, savingsLimit);
+                await BC.UpdateBudget(username, loanlimit, groceryLimit, householdLimit, consumptionLimit, transportLimit, savingsLimit);
                 OldConsumptionTxt.Text = consumptionLimit.ToString();
                 OldHouseholdTxt.Text = householdLimit.ToString();
                 OldSavingsTxt.Text = savingsLimit.ToString();

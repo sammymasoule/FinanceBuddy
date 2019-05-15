@@ -197,8 +197,8 @@ namespace FinanceBuddyWPFTests.Controllers {
             var dayfrom = "2019-04-01";
             var dayto = "2019-04-03";
             var actual = dbActions.GetIncome(userName, dayfrom, dayto);
-            dbCleaning.DeleteUserTests(userName);
             dbCleaning.DeleteIncomeTests();
+            dbCleaning.DeleteUserTests(userName);
             Assert.AreEqual(actual, expected);
         }
 
@@ -224,8 +224,8 @@ namespace FinanceBuddyWPFTests.Controllers {
             float expenseAVG = amount + amount;
             float actualExpense = dbActions.GetAvgExpenses(userName, category, dayfrom, dayto);
 
-            dbCleaning.DeleteUserTests(userName);
             dbCleaning.DeleteExpensesTests();
+            dbCleaning.DeleteUserTests(userName);
             Assert.AreEqual(actualExpense, expenseAVG);
 
         }
@@ -252,8 +252,8 @@ namespace FinanceBuddyWPFTests.Controllers {
             var myResults = actualExpense.GroupBy(p => p.Key).ToDictionary(g => g.Key, g => g.Sum(p => p.Value));
             myResults.TryGetValue(category, out float actual);
 
-            dbCleaning.DeleteUserTests(userName);
             dbCleaning.DeleteExpensesTests();
+            dbCleaning.DeleteUserTests(userName);
             Assert.AreEqual(expected, actual);
         }
     }

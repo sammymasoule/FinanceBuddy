@@ -24,7 +24,7 @@ namespace FinanceBuddyWPFTests.Controllers {
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString)) {
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
-                    sb.Append("DELETE FROM INCOME WHERE Description = UnitTesting");
+                    sb.Append("DELETE FROM INCOME WHERE userName = UnitTesting");
                     string sql = sb.ToString();
 
                     using (SqlCommand command = new SqlCommand(sql, connection)) {
@@ -47,7 +47,7 @@ namespace FinanceBuddyWPFTests.Controllers {
                 {
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
-                    sb.Append("DELETE FROM TRANSITEM WHERE UserName = UnitTesting");
+                    sb.Append("DELETE FROM TransItem WHERE userName = UnitTesting");
                     string sql = sb.ToString();
 
                     using (SqlCommand command = new SqlCommand(sql, connection))

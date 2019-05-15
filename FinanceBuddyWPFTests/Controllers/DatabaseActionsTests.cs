@@ -49,12 +49,19 @@ namespace FinanceBuddyWPFTests.Controllers {
 
         [TestMethod()]
         public void CreateIncomeUserTest() {
+
+            var lastName = "Testing";
+            var firstName = "Unit";
+            var userName = "UnitTesting";
+            var password = "mypassword";
+            dbActions.CreateUser(lastName, firstName, userName, password);
+
             float amount = 1000;
             var date = DateTime.Now.ToString("yyyy-MM-dd");
-            var username = "sama";
             var description = "UnitTesting";
-            var actual = dbActions.CreateIncome(amount, date, username, description);
+            var actual = dbActions.CreateIncome(amount, date, userName, description);
             dbCleaning.DeleteIncomeTests();
+            dbCleaning.DeleteUserTests(userName);
             Assert.AreEqual(actual, true);
         }
 

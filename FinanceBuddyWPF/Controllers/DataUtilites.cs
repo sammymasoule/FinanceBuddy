@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace FinanceBuddyWPF.Controllers
 {
-    class DataUtilites
+    public class DataUtilites
     {
         /// <summary>
         /// Method for refactoring the format of dates. Used to fit into database and charts.

@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using FinanceBuddyWPF.Controllers;
 
-namespace FinanceBuddyWPF
+namespace FinanceBuddyWPF.View
 {
     /// <summary>
     /// Interaction logic for UpdateBudgetWindow.xaml
@@ -27,12 +16,18 @@ namespace FinanceBuddyWPF
             InitializeComponent();
             WindowState = WindowState.Maximized;
             List<float> limits = dbActions.GetBudgetLimits(username);
-            OldLoanTxt.Text = limits[0] + " kr.";
-            OldHouseholdTxt.Text = limits[1] + " kr.";
-            OldConsumptionTxt.Text = limits[2] + " kr.";
-            OldTransportTxt.Text = limits[3] + " kr.";
-            OldSavingsTxt.Text = limits[4] + " kr.";
-
+            if(limits != null && limits.Count != 0) { 
+                OldLoanTxt.Text = limits[0] + " kr.";
+                OldGroceryTxt.Text = limits[1] + " kr.";
+                OldHouseholdTxt.Text = limits[2] + " kr.";
+                OldConsumptionTxt.Text = limits[3] + " kr.";
+                OldTransportTxt.Text = limits[4] + " kr.";
+                OldSavingsTxt.Text = limits[5] + " kr.";
+            } 
+           
+               
+             
+      
 
         }
 
@@ -44,6 +39,11 @@ namespace FinanceBuddyWPF
             if (!float.TryParse(NewLoanTxt.Text, out var loan))
             {
                 loanCheckError.Visibility = Visibility.Visible;
+                checkParsing = false;
+            }
+            if (!float.TryParse(NewGroceryTxt.Text, out var grocery))
+            {
+                groceryCheckError.Visibility = Visibility.Visible;
                 checkParsing = false;
             }
 
@@ -83,6 +83,7 @@ namespace FinanceBuddyWPF
                 consumpCheckError.Visibility = Visibility.Hidden;
                 transportCheckError.Visibility = Visibility.Hidden;
                 savingsCheckError.Visibility = Visibility.Hidden;
+                groceryCheckError.Visibility = Visibility.Hidden;
                
 
                 var loanlimit = loan;
@@ -90,13 +91,15 @@ namespace FinanceBuddyWPF
                 var consumptionLimit = consumption;
                 var transportLimit = transport;
                 var savingsLimit = savings;
+                var groceryLimit = grocery;
 
-                dbActions.UpdateBudget(username, loanlimit, householdLimit, consumptionLimit, transportLimit, savingsLimit);
+                dbActions.UpdateBudget(username, loanlimit, groceryLimit ,householdLimit, consumptionLimit, transportLimit, savingsLimit);
                 OldConsumptionTxt.Text = consumptionLimit.ToString();
                 OldHouseholdTxt.Text = householdLimit.ToString();
                 OldSavingsTxt.Text = savingsLimit.ToString();
                 OldLoanTxt.Text = loanlimit.ToString();
                 OldTransportTxt.Text = transportLimit.ToString();
+                OldGroceryTxt.Text = groceryLimit.ToString();
             }
 
 

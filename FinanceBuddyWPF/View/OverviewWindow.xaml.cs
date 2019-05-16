@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows;
 using FinanceBuddyWPF.Controllers;
 
-namespace FinanceBuddyWPF
+namespace FinanceBuddyWPF.View
 {
     /// <summary>
     /// Interaction logic for OverviewWindow.xaml
@@ -38,10 +38,16 @@ namespace FinanceBuddyWPF
 
             var income = dbActions.GetIncome(userName, stringdate[0], stringdate[1]);
             expenses = dbActions.GetExpenses(userName, stringdate[0], stringdate[1]);
-
+            
             var totalExpenses = expenses.Sum(x => x.Value);
-
-
+            if (income == 0 && totalExpenses == 0)
+            {
+                pieChart.Title = "Ingen data fundet";
+            } else
+            {
+                pieChart.Title = "Indkomst/Udgift";
+            }
+               
             List<KeyValuePair<string, float>> valueList = new List<KeyValuePair<string, float>>
             {
                 new KeyValuePair<string, float>("Indkomst", income),
@@ -60,8 +66,15 @@ namespace FinanceBuddyWPF
                 List<KeyValuePair<string, float>> valuelist = new List<KeyValuePair<string, float>>();
                 var myResults = list.GroupBy(p => p.Key)
                     .ToDictionary(g => g.Key, g => g.Sum(p => p.Value));
-
-                Series.Title = month;
+            if (myResults.Count == 0)
+            {
+                BarChart.Title = "Ingen data fundet";
+            }
+            else
+            {
+                pieChart.Title = "Udgifter";
+            }
+            Series.Title = month;
                 BarChart.DataContext = myResults;
             }
         /// <summary>
@@ -76,8 +89,15 @@ namespace FinanceBuddyWPF
                 List<KeyValuePair<string, float>> valuelist = new List<KeyValuePair<string, float>>();
                 var myResults = list.GroupBy(p => p.Key)
                     .ToDictionary(g => g.Key, g => g.Sum(p => p.Value));
-
-                Series.Title = month;
+            if (myResults.Count == 0)
+            {
+                BarChart.Title = "Ingen data fundet";
+            }
+            else
+            {
+                pieChart.Title = "Udgifter";
+            }
+            Series.Title = month;
                 BarChart.DataContext = myResults;
 
             }
@@ -112,6 +132,7 @@ namespace FinanceBuddyWPF
                 DateTime? dateto = DateToSidePie.SelectedDate;
 
                 LoadSidePieChart(datefrom, dateto);
+
             }
         /// <summary>
         /// Method for loading the data into the pieChart in the right sidebar.
@@ -120,17 +141,32 @@ namespace FinanceBuddyWPF
         /// <param name="lastDay"></param> Last date picked by the user in the datePicker.
         private void LoadSidePieChart(DateTime? firstDay, DateTime? lastDay)
             {
-                var tmpdate = DataU.GetDateFormat(firstDay, lastDay);
-                var date = tmpdate.Split(' ');
-                var yourAmount = dbActions.GetAvgExpenses(userName, catComboBox.Text, date[0], date[1]);
-                var othersAmount = dbActions.GetAvgExpensesOthers(userName, catComboBox.Text, date[0], date[1]);
-                List<KeyValuePair<string, float>> valueList = new List<KeyValuePair<string, float>>
+
+                if (firstDay != null && lastDay != null)
                 {
-                    new KeyValuePair<string, float>("Dine udgifter", yourAmount),
-                    new KeyValuePair<string, float>("Andres udgifter", othersAmount),
-                };
-                
-                pieChart2.DataContext = valueList;
+                    var tmpdate = DataU.GetDateFormat(firstDay, lastDay);
+                    var date = tmpdate.Split(' ');
+                    var yourAmount = dbActions.GetAvgExpenses(userName, catComboBox.Text, date[0], date[1]);
+                    var othersAmount = dbActions.GetAvgExpensesOthers(userName, catComboBox.Text, date[0], date[1]);
+                    List<KeyValuePair<string, float>> valueList = new List<KeyValuePair<string, float>>
+                    {
+                        new KeyValuePair<string, float>("Dine udgifter", yourAmount),
+                        new KeyValuePair<string, float>("Andres udgifter", othersAmount),
+                    };
+
+
+                    if (Math.Abs(yourAmount) < 0.1 && Math.Abs(othersAmount) < 0.1) {
+                        pieChart2.Title = "Ingen data fundet";
+                    }
+                    else {
+                        pieChart2.Title = "Sammenligning:";
+                    }
+                    pieChart2.DataContext = valueList;
+            }
+                else
+                {
+                    MessageBox.Show("Indtast venligst en dato");
+                }
             }
 
         private void OutcomeWindow(object sender, RoutedEventArgs e) {

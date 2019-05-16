@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using System.Windows.Documents;
 using FinanceBuddyWPF.Controllers;
 
-namespace FinanceBuddyWPF {
+namespace FinanceBuddyWPF.View
+{
     /// <summary>
     /// Interaction logic for BudgetWindow.xaml
     /// </summary>
@@ -14,7 +14,6 @@ namespace FinanceBuddyWPF {
         private DatabaseActions dbActions = new DatabaseActions();
         private DataUtilites DataU = new DataUtilites();
         string userName = MainWindow.username;
-
         public BudgetWindow() {
             InitializeComponent();
             WindowState = WindowState.Maximized;
@@ -58,7 +57,7 @@ namespace FinanceBuddyWPF {
             var transMaxValue = 0.0;
             var savingsMaxValue = 0.0;
 
-            if (limits != null)
+            if (limits != null && limits.Count !=0)
             {
                 loanMaxValue = limits[0];
                 indMaxValue = limits[1];
@@ -111,9 +110,19 @@ namespace FinanceBuddyWPF {
         }
 
         private void UpdateBudget_Click(object sender, RoutedEventArgs e) {
+
+            List<float> limits = dbActions.GetBudgetLimits(userName);
             UpdateBudgetWindow window = new UpdateBudgetWindow();
-            window.Show();
-            Close();
+            if (limits != null && limits.Count != 0)
+            {
+         
+                window.Show();
+                Close();
+            } else
+            {
+                MessageBox.Show("Lav venligst et budget først");
+            }
+           
         }
 
         private void BudgetMonth_Click(object sender, RoutedEventArgs e)

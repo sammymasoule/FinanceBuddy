@@ -1,19 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using FinanceBuddyWPF.Controllers;
 
-namespace FinanceBuddyWPF {
+namespace FinanceBuddyWPF.View {
     /// <summary>
     /// Interaction logic for CreateBudgetWindow.xaml
     /// </summary>
@@ -51,6 +41,11 @@ namespace FinanceBuddyWPF {
                 LoanError.Visibility = Visibility.Visible;
                 checkParsing = false;
             }
+            if (!float.TryParse(GroceryTxt.Text, out var Grocery))
+            {
+                GroceryError.Visibility = Visibility.Visible;
+                checkParsing = false;
+            }
 
             if (!float.TryParse(HouseholdTxt.Text, out var houseHold))
             {
@@ -82,7 +77,7 @@ namespace FinanceBuddyWPF {
 
             if (checkParsing)
             {
-                if (dbActions.CreateBudget(userName, loan, houseHold, consumption, transport, savings))
+                if (dbActions.CreateBudget(userName, loan, Grocery, houseHold, consumption, transport, savings))
                 {
                     LoanError.Visibility = Visibility.Hidden;
                     HouseholdError.Visibility = Visibility.Hidden;
@@ -90,6 +85,7 @@ namespace FinanceBuddyWPF {
                     TransportError.Visibility = Visibility.Hidden;
                     SavingsError.Visibility = Visibility.Hidden;
                     LoanTxt.Text = String.Empty;
+                    GroceryTxt.Text = String.Empty;
                     HouseholdTxt.Text = String.Empty;
                     ConsumptionTxt.Text = String.Empty;
                     TransportTxt.Text = String.Empty;
@@ -99,9 +95,18 @@ namespace FinanceBuddyWPF {
         }
 
         private void UpdateBudget_Click(object sender, RoutedEventArgs e) {
+            List<float> limits = dbActions.GetBudgetLimits(userName);
             UpdateBudgetWindow window = new UpdateBudgetWindow();
-            window.Show();
-            Close();
+            if (limits != null && limits.Count != 0)
+            {
+
+                window.Show();
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Lav venligst et budget først");
+            }
         }
 
         private void Overview_Click(object sender, RoutedEventArgs e) {

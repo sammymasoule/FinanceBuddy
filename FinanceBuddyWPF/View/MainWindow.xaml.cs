@@ -1,22 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using FinanceBuddyWPF.Controllers;
 
-namespace FinanceBuddyWPF {
+namespace FinanceBuddyWPF.View {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -29,6 +16,7 @@ namespace FinanceBuddyWPF {
        
         private readonly DatabaseActions dbActions = new DatabaseActions();
         public static string username;
+
         /// <summary>
         /// Method for validating credintials and loggin the user in if validated.
         /// </summary>
@@ -59,6 +47,7 @@ namespace FinanceBuddyWPF {
             }
             
         }
+
 
         private void Label_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
